@@ -6,7 +6,8 @@ import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { readMapData, readMapManifest, resolveAssetPath } from '../src/node/index.mjs';
+import { buildNpmPackagePlan as buildNodePackagePlan, prepareNpmPackages,
+    readMapData, readMapManifest, resolveAssetPath } from '../src/node/index.mjs';
 import { importOverview } from '../scripts/import-overview.mjs';
 import { importScreenshot } from '../scripts/import-screenshot.mjs';
 import { buildNpmPackagePlan } from '../scripts/prepare-npm-packages.mjs';
@@ -52,6 +53,9 @@ test('latest import paths resolve current map data, standard images, and selecte
 
 test('npm map packages are self-contained and do not depend on generation tooling', () => {
     const plan = buildNpmPackagePlan();
+    assert.equal(typeof buildNodePackagePlan, 'function');
+    assert.equal(typeof prepareNpmPackages, 'function');
+    assert.equal(plan.corePackageJson.exports['./node'], './src/node/index.mjs');
     assert.equal(plan.patchPackages.length, plan.manifest.patches.length);
     assert.equal(plan.latestPackage.name, '@reino-doce/dota-maps-data-latest');
     assert.equal(plan.latestPackage.patch.id, plan.manifest.currentPatch);
@@ -83,18 +87,147 @@ test('npm map packages are self-contained and do not depend on generation toolin
             './skin-exports/' + currentPatchPackage.id + '/' + skin.id + '.mjs');
         assert.equal(plan.latestPackage.packageJson.exports['./images/latest/' + skin.id],
             './skin-exports/' + currentPatchPackage.id + '/' + skin.id + '.mjs');
+        assert.equal(skin.packageName, `@reino-doce/dota-map-skin-${currentPatchPackage.id}-${skin.id}`);
     }
+    const currentSkinSet = plan.skinSetPackages.find(item => item.patchId === currentPatchPackage.id);
+    assert.ok(currentSkinSet);
+    assert.equal(currentPatchPackage.packageJson.exports['./images/' + currentPatchPackage.id],
+        './skin-exports/' + currentPatchPackage.id + '/index.mjs');
+    assert.equal(plan.latestPackage.packageJson.exports['./images/latest'],
+        './skin-exports/' + currentPatchPackage.id + '/latest.mjs');
+    assert.equal(currentSkinSet.name, `@reino-doce/dota-map-skins-${currentPatchPackage.id}`);
+    assert.deepEqual(Object.keys(currentSkinSet.packageJson.dependencies).sort(),
+        currentPatchPackage.skins.map(skin => skin.packageName).sort());
+    assert.deepEqual(Object.keys(plan.skinsAggregatePackage.packageJson.dependencies).sort(),
+        currentPatchPackage.skins.map(skin => skin.packageName).sort());
+    assert.ok(plan.skinsAggregatePackage.packageJson.files.includes('index.mjs'));
     assert.equal(plan.skinPackages.length, plan.manifest.skinPackages.length);
     assert.equal(plan.skinsAggregatePackage.name, '@reino-doce/dota-map-skins-latest');
     for (const skin of plan.skinPackages) {
         assert.equal(skin.packageJson.dependencies, undefined, skin.name);
-        assert.equal(skin.packageJson.exports['./latest/' + skin.id + '/' + path.posix.basename(skin.image.path)],
+        assert.equal(skin.packageJson.exports['./image/' + path.posix.basename(skin.image.path)],
             './assets/' + skin.image.path);
         assert.ok(skin.image.bytes < 100_000_000, `${skin.name} should remain an independently publishable package`);
     }
     for (const item of plan.patchPackages.filter(entry => entry.id !== plan.manifest.currentPatch)) {
         assert.equal(item.images.some(entry => entry.path.startsWith('img/skins/')), false, item.name);
     }
+});
+
+test('each patch publishes only the terrain skins generated for that patch', t => {
+    const sourceRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'dota-maps-skin-patches-'));
+    t.after(() => fs.rmSync(sourceRoot, { recursive: true, force: true }));
+    const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
+    const manifest = readMapManifest();
+    const olderPatchSkin = {
+        path: 'img/skins/723/dota_frost.png',
+        bytes: 123,
+        sha256: 'f'.repeat(64),
+    };
+    manifest.images.push(olderPatchSkin);
+    manifest.skinPackages.push({
+        id: 'frost',
+        patchId: '723',
+        packageName: '@reino-doce/dota-map-skin-723-frost',
+        file: olderPatchSkin,
+    });
+    manifest.skinSetPackages['723'] = '@reino-doce/dota-map-skins-723';
+    fs.writeFileSync(path.join(sourceRoot, 'package.json'), JSON.stringify(packageJson));
+    fs.writeFileSync(path.join(sourceRoot, 'manifest.json'), JSON.stringify(manifest));
+
+    const plan = buildNpmPackagePlan({ sourceRoot });
+    const olderPatch = plan.patchPackages.find(item => item.id === '723');
+    const olderSkinSet = plan.skinSetPackages.find(item => item.patchId === '723');
+    const currentSkinSet = plan.skinSetPackages.find(item => item.patchId === manifest.currentPatch);
+    assert.equal(olderPatch.skins.length, 1);
+    assert.equal(olderPatch.skins[0].id, 'frost');
+    assert.equal(olderPatch.packageJson.exports['./images/723/frost'], './skin-exports/723/frost.mjs');
+    assert.equal(olderPatch.packageJson.exports['./images/723'], './skin-exports/723/index.mjs');
+    assert.equal(olderPatch.packageJson.exports['./images/latest'], undefined);
+    assert.deepEqual(Object.keys(olderSkinSet.packageJson.dependencies), ['@reino-doce/dota-map-skin-723-frost']);
+    assert.ok(currentSkinSet.skins.every(skin => skin.patchId === manifest.currentPatch));
+    assert.equal(plan.skinsAggregatePackage.skins.some(skin => skin.patchId === '723'), false);
+    assert.equal(plan.skinPackages.find(skin => skin.patchId === '723').packageJson.exports['./latest/frost/dota_frost.png'], undefined);
+});
+
+test('package generation writes separate skin sets and single-image packages per patch', t => {
+    const sourceRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'dota-maps-skin-package-generation-'));
+    t.after(() => fs.rmSync(sourceRoot, { recursive: true, force: true }));
+    const assetRoot = path.join(sourceRoot, 'assets');
+    const outputRoot = path.join(sourceRoot, 'npm-packages');
+    const writeAsset = (assetPath, content) => {
+        const bytes = Buffer.from(content);
+        const filename = path.join(assetRoot, ...assetPath.split('/'));
+        fs.mkdirSync(path.dirname(filename), { recursive: true });
+        fs.writeFileSync(filename, bytes);
+        return { path: assetPath, bytes: bytes.length, sha256: sha256(bytes) };
+    };
+    for (const directory of ['src', 'dist', 'scripts']) fs.mkdirSync(path.join(sourceRoot, directory));
+    fs.mkdirSync(path.join(assetRoot, 'data', 'legacy'), { recursive: true });
+    fs.writeFileSync(path.join(sourceRoot, 'README.md'), '# Package fixture\n');
+
+    const shared = [writeAsset('data/legacy/worlddata.json', '{}')];
+    const oldData = [writeAsset('data/700/mapdata.json', '{}')];
+    const currentData = [writeAsset('data/741f/mapdata.json', '{}')];
+    const images = [
+        writeAsset('img/map_data_700.png', 'old-map-image'),
+        writeAsset('img/map_data_741f.png', 'current-map-image'),
+        writeAsset('img/skins/700/dota_autumn.png', 'old-autumn-skin'),
+        writeAsset('img/skins/741f/dota_reef.png', 'current-reef-skin'),
+    ];
+    const packageJson = {
+        name: '@reino-doce/dota-maps-data',
+        version: '1.2.3',
+        description: 'Fixture package',
+        repository: { type: 'git', url: 'https://github.com/Reino-Doce/dota-maps-data.git' },
+        homepage: 'https://github.com/Reino-Doce/dota-maps-data#readme',
+        type: 'module',
+        files: [],
+        exports: { '.': './src/index.mjs', './node': './src/node/index.mjs', './latest/old.png': './assets/old.png' },
+        scripts: { test: 'node --test' },
+        devDependencies: { fixture: '1.0.0' },
+        dotaMapsData: { currentPatch: '741f' },
+    };
+    const manifest = {
+        schemaVersion: 1,
+        currentPatch: '741f',
+        latestPackage: {
+            packageName: '@reino-doce/dota-maps-data-latest',
+            sourcePatch: '741f',
+            sourcePackageName: '@reino-doce/dota-maps-data-741f',
+        },
+        latestSkinsPackageName: '@reino-doce/dota-map-skins-latest',
+        skinSetPackages: { '700': '@reino-doce/dota-map-skins-700', '741f': '@reino-doce/dota-map-skins-741f' },
+        skinPackages: [
+            { id: 'autumn', patchId: '700', packageName: '@reino-doce/dota-map-skin-700-autumn', file: images[2] },
+            { id: 'reef', patchId: '741f', packageName: '@reino-doce/dota-map-skin-741f-reef', file: images[3] },
+        ],
+        patches: [
+            { id: '700', packageName: '@reino-doce/dota-maps-data-700', files: oldData },
+            { id: '741f', packageName: '@reino-doce/dota-maps-data-741f', files: currentData },
+        ],
+        shared,
+        images,
+    };
+    fs.writeFileSync(path.join(sourceRoot, 'package.json'), JSON.stringify(packageJson));
+    fs.writeFileSync(path.join(sourceRoot, 'manifest.json'), JSON.stringify(manifest));
+
+    prepareNpmPackages({ sourceRoot, destination: outputRoot });
+    const oldPatchDirectory = path.join(outputRoot, 'dota-maps-data-700');
+    const oldSkinDirectory = path.join(outputRoot, 'dota-map-skin-700-autumn');
+    const oldSkinSetDirectory = path.join(outputRoot, 'dota-map-skins-700');
+    const latestSkinSetDirectory = path.join(outputRoot, 'dota-map-skins-latest');
+    assert.ok(fs.existsSync(path.join(oldPatchDirectory, 'skin-exports', '700', 'index.mjs')));
+    assert.ok(fs.readFileSync(path.join(oldPatchDirectory, 'skin-exports', '700', 'autumn.mjs'), 'utf8')
+        .includes('@reino-doce/dota-map-skin-700-autumn'));
+    assert.ok(fs.readFileSync(path.join(oldSkinSetDirectory, 'index.mjs'), 'utf8')
+        .includes('@reino-doce/dota-map-skin-700-autumn/image/dota_autumn.png'));
+    assert.doesNotMatch(fs.readFileSync(path.join(oldSkinSetDirectory, 'index.mjs'), 'utf8'), /741f-reef/u);
+    assert.ok(fs.readFileSync(path.join(latestSkinSetDirectory, 'index.mjs'), 'utf8')
+        .includes('@reino-doce/dota-map-skin-741f-reef/image/dota_reef.png'));
+    assert.doesNotMatch(fs.readFileSync(path.join(latestSkinSetDirectory, 'index.mjs'), 'utf8'), /700-autumn/u);
+    assert.ok(fs.existsSync(path.join(oldSkinDirectory, 'assets', 'img', 'skins', '700', 'dota_autumn.png')));
+    assert.equal(fs.existsSync(path.join(oldPatchDirectory, 'assets', 'img', 'skins')), false);
 });
 
 test('overview and screenshot importers generate an additional explicit patch from prepared sources', t => {

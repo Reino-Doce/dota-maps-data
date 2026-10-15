@@ -7,23 +7,28 @@ maintenance operations.
 
 ## Install and import
 
-Initialize the application submodules before installing the workspace:
+To work on this standalone repository, install its development dependencies
+from the repository root with `npm ci`.
 
-    git submodule update --init --recursive
-    npm ci
-
-Install the library runtime and generation tools with:
+The `@reino-doce/dota-maps-data` registry package contains the extractors,
+runtime rules, and package publisher. It does not bundle every version's map
+assets. Install it only when you need those tools:
 
     npm install @reino-doce/dota-maps-data
 
-Consumers that need only prebuilt map data can install one dependency-free patch package:
+Each prebuilt patch is a separate lightweight data package:
 
     npm install @reino-doce/dota-maps-data-741f
     npm install @reino-doce/dota-maps-data-latest
 
-The stable latest package is rebuilt from the patch selected by currentPatch in package.json. It contains map data and essential overview images, but no generation tools, runtime dependencies, or terrain skins.
+The stable latest package is rebuilt from `currentPatch` in `package.json`. It
+contains map data and essential overview images, but no generation tools,
+runtime dependencies, or terrain skins. Consumers that need only map data can
+install one patch package or the stable latest package; neither installs the
+extractor system.
 
-Use the stable import paths by installing the latest data package under the base package name:
+The data package can be aliased to the import namespace so the requested patch
+paths remain stable:
 
     npm install @reino-doce/dota-maps-data@npm:@reino-doce/dota-maps-data-latest
 
@@ -32,18 +37,38 @@ Then import the map data and standard map image:
     import mapdata from '@reino-doce/dota-maps-data/latest/mapdata.json' with { type: 'json' };
     import mapImage from '@reino-doce/dota-maps-data/latest/dota-map.png';
 
-A patch-specific package can be installed under the same base name. Its exports include both the stable `latest` path and the patch ID path:
+A patch-specific package can be installed under the same namespace. Its exports
+include both the stable `latest` path and the patch ID path:
 
     npm install @reino-doce/dota-maps-data@npm:@reino-doce/dota-maps-data-700
     import mapdata from '@reino-doce/dota-maps-data/700/mapdata.json' with { type: 'json' };
 
-Terrain skins are optional image-only packages. Install the selected patch data and only the skin image the application needs:
+Terrain skins are separate image-only packages. Install the selected patch data
+and only the skin image the application needs:
 
     npm install @reino-doce/dota-maps-data@npm:@reino-doce/dota-maps-data-latest
-    npm install @reino-doce/dota-map-skin-autumn
+    npm install @reino-doce/dota-map-skin-741f-autumn
     import autumn from '@reino-doce/dota-maps-data/images/latest/autumn';
 
-Patch-specific aliases expose the equivalent `@reino-doce/dota-maps-data/images/<patch>/<skin>` import path, such as `/images/741f/autumn`. That subpath is a small re-export wrapper; the PNG remains in the independently installable skin package, so install the matching `@reino-doce/dota-map-skin-<skin>` package as shown. Alternatively, import the PNG directly from that skin package. The source workspace also exposes `@reino-doce/dota-maps-data/latest/<skin>/<image>` and the Node entry point can resolve it with `resolveAssetPath()`.
+The `/images/<patch>/<skin>` and `/images/latest/<skin>` subpaths are small
+re-export wrappers; the PNG remains in its independently installable package.
+Each patch has its own skin set, based on the skins actually generated for that
+patch. For all skins in one import, install the matching aggregate package and
+import the default object or named skins from `/images/<patch>`:
+
+    npm install @reino-doce/dota-map-skins-741f
+    import skins, { autumn, winter } from '@reino-doce/dota-maps-data/images/741f';
+
+For the current patch, `@reino-doce/dota-map-skins-latest` pairs with
+`/images/latest`. Aggregate packages depend on all individual skin packages
+for that patch; the map-data package itself has no skin dependencies. The
+source workspace also exposes image files under `@reino-doce/dota-maps-data/latest/<skin>/<image>` and the Node entry point can resolve them with `resolveAssetPath()`.
+
+If an application needs both the extractor tools and the map namespace alias,
+install the extractor under a second npm alias so npm does not replace the
+namespace package:
+
+    npm install @reino-doce/dota-maps-extractor@npm:@reino-doce/dota-maps-data
 
 Existing consumers of the stable latest package do not change automatically. Run npm update @reino-doce/dota-maps-data-latest, or update the alias target in package.json, to receive newer map data. Consumers of a patch-specific package remain on that patch until they change dependencies.
 
@@ -53,7 +78,7 @@ The repository can also be installed independently:
     npm run build
     npm test
 
-The runtime package exports pure calculations from its root entry, installed-game readers from @reino-doce/dota-maps-data/node, the prebuilt vision simulator from @reino-doce/dota-maps-data/vision, and the full patch and asset inventory from /manifest.json. Its Node asset reader can use an installed version package when a patch is absent from the local source tree.
+The runtime package exports pure calculations from its root entry, installed-game readers and callable map extractors from `@reino-doce/dota-maps-data/node`, the prebuilt vision simulator from `@reino-doce/dota-maps-data/vision`, and the full patch and asset inventory from `@reino-doce/dota-maps-data/manifest.json`. The Node entry also exports `buildNpmPackagePlan()` and `prepareNpmPackages()` for package publishing. Its asset reader can use an installed version package when a patch is absent from the local source tree.
 
 Patch directories retain the existing assets/data/<patch>/ layout. Data files carry source hashes and capture provenance where the importer can establish them. manifest.json records the shipped patch directories and every committed map asset hash.
 
@@ -97,13 +122,20 @@ history.
 
 Before a registry release, run `npm ci`, `npm run manifest`, `npm run build`,
 `npm test`, `npm run packages:prepare`, and `npm run packages:verify`. The CI
-workflow dry-runs publication for the runtime package, every patch package, and
-the stable latest package. Publish from the generated directories so each
-consumer downloads only its selected data:
+workflow dry-runs publication for the runtime package, every patch package,
+the latest alias, every individual skin, and each aggregate skin package.
+Publish individual skin packages before their aggregate packages, and publish
+the data packages independently:
 
 ```sh
 npm publish --access public ./npm-packages/core
-for package in npm-packages/dota-map*; do
+for package in npm-packages/dota-maps-data-*; do
+    npm publish --access public "./$package"
+done
+for package in npm-packages/dota-map-skin-*; do
+    npm publish --access public "./$package"
+done
+for package in npm-packages/dota-map-skins-*; do
     npm publish --access public "./$package"
 done
 ```

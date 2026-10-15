@@ -16,3 +16,4 @@ export { importScreenshot, createScreenshotMetadata } from '../../scripts/import
 export { importSkin, scanTerrainSkin, captureTerrainSkin, prepareSkinControls, runMapSkinCommand } from '../../scripts/map-skins.mjs';
 export { captureGameGrid } from '../../scripts/capture-game-grid.mjs';
 export { generateLegacyGeoJSON } from '../../scripts/generate-legacy-geojson.mjs';
+export { buildNpmPackagePlan, prepareNpmPackages } from '../../scripts/prepare-npm-packages.mjs';

@@ -7,10 +7,14 @@
     "sourcePackageName": "@reino-doce/dota-maps-data-741f"
   },
   "latestSkinsPackageName": "@reino-doce/dota-map-skins-latest",
+  "skinSetPackages": {
+    "741f": "@reino-doce/dota-map-skins-741f"
+  },
   "skinPackages": [
     {
       "id": "autumn",
-      "packageName": "@reino-doce/dota-map-skin-autumn",
+      "patchId": "741f",
+      "packageName": "@reino-doce/dota-map-skin-741f-autumn",
       "file": {
         "path": "img/skins/741f/dota_autumn.png",
         "bytes": 26251485,
@@ -19,7 +23,8 @@
     },
     {
       "id": "cavern",
-      "packageName": "@reino-doce/dota-map-skin-cavern",
+      "patchId": "741f",
+      "packageName": "@reino-doce/dota-map-skin-741f-cavern",
       "file": {
         "path": "img/skins/741f/dota_cavern.png",
         "bytes": 26900811,
@@ -28,7 +33,8 @@
     },
     {
       "id": "coloseum",
-      "packageName": "@reino-doce/dota-map-skin-coloseum",
+      "patchId": "741f",
+      "packageName": "@reino-doce/dota-map-skin-741f-coloseum",
       "file": {
         "path": "img/skins/741f/dota_coloseum.png",
         "bytes": 26823622,
@@ -37,7 +43,8 @@
     },
     {
       "id": "desert",
-      "packageName": "@reino-doce/dota-map-skin-desert",
+      "patchId": "741f",
+      "packageName": "@reino-doce/dota-map-skin-741f-desert",
       "file": {
         "path": "img/skins/741f/dota_desert.png",
         "bytes": 26043462,
@@ -46,7 +53,8 @@
     },
     {
       "id": "journey",
-      "packageName": "@reino-doce/dota-map-skin-journey",
+      "patchId": "741f",
+      "packageName": "@reino-doce/dota-map-skin-741f-journey",
       "file": {
         "path": "img/skins/741f/dota_journey.png",
         "bytes": 25938304,
@@ -55,7 +63,8 @@
     },
     {
       "id": "jungle",
-      "packageName": "@reino-doce/dota-map-skin-jungle",
+      "patchId": "741f",
+      "packageName": "@reino-doce/dota-map-skin-741f-jungle",
       "file": {
         "path": "img/skins/741f/dota_jungle.png",
         "bytes": 27685364,
@@ -64,7 +73,8 @@
     },
     {
       "id": "reef",
-      "packageName": "@reino-doce/dota-map-skin-reef",
+      "patchId": "741f",
+      "packageName": "@reino-doce/dota-map-skin-741f-reef",
       "file": {
         "path": "img/skins/741f/dota_reef.png",
         "bytes": 30190852,
@@ -73,7 +83,8 @@
     },
     {
       "id": "spring",
-      "packageName": "@reino-doce/dota-map-skin-spring",
+      "patchId": "741f",
+      "packageName": "@reino-doce/dota-map-skin-741f-spring",
       "file": {
         "path": "img/skins/741f/dota_spring.png",
         "bytes": 25471513,
@@ -82,7 +93,8 @@
     },
     {
       "id": "summer",
-      "packageName": "@reino-doce/dota-map-skin-summer",
+      "patchId": "741f",
+      "packageName": "@reino-doce/dota-map-skin-741f-summer",
       "file": {
         "path": "img/skins/741f/dota_summer.png",
         "bytes": 25346940,
@@ -91,7 +103,8 @@
     },
     {
       "id": "ti10",
-      "packageName": "@reino-doce/dota-map-skin-ti10",
+      "patchId": "741f",
+      "packageName": "@reino-doce/dota-map-skin-741f-ti10",
       "file": {
         "path": "img/skins/741f/dota_ti10.png",
         "bytes": 24211829,
@@ -100,7 +113,8 @@
     },
     {
       "id": "winter",
-      "packageName": "@reino-doce/dota-map-skin-winter",
+      "patchId": "741f",
+      "packageName": "@reino-doce/dota-map-skin-741f-winter",
       "file": {
         "path": "img/skins/741f/dota_winter.png",
         "bytes": 25374637,
@@ -109,7 +123,8 @@
     },
     {
       "id": "base",
-      "packageName": "@reino-doce/dota-map-skin-base",
+      "patchId": "741f",
+      "packageName": "@reino-doce/dota-map-skin-741f-base",
       "file": {
         "path": "img/skins/741f/dota.png",
         "bytes": 23793134,

@@ -34,12 +34,21 @@ if (!patches.some(patch => patch.id === currentPatch)) {
 const shared = filesIn(path.join(dataRoot, 'legacy')).map(hashFile);
 const images = filesIn(path.join(assets, 'img')).map(hashFile);
 const skinPackages = images
-    .filter(entry => entry.path.startsWith(`img/skins/${currentPatch}/`))
+    .filter(entry => entry.path.startsWith('img/skins/'))
     .map(entry => {
+        const [, patchId] = entry.path.match(/^img\/skins\/([^/]+)\//u) ?? [];
+        if (!patchId) throw new Error(`Could not identify the patch for skin image ${entry.path}.`);
         const filename = path.posix.basename(entry.path, '.png');
         const id = filename === 'dota' ? 'base' : filename.replace(/^dota_/u, '');
-        return { id, packageName: `@reino-doce/dota-map-skin-${id}`, file: entry };
+        return {
+            id,
+            patchId,
+            packageName: `@reino-doce/dota-map-skin-${patchId}-${id}`,
+            file: entry,
+        };
     });
+const skinSetPackages = Object.fromEntries([...new Set(skinPackages.map(skin => skin.patchId))]
+    .map(patchId => [patchId, `@reino-doce/dota-map-skins-${patchId}`]));
 const manifest = {
     schemaVersion: 1,
     currentPatch,
@@ -49,6 +58,7 @@ const manifest = {
         sourcePackageName: `@reino-doce/dota-maps-data-${currentPatch}`,
     },
     latestSkinsPackageName: '@reino-doce/dota-map-skins-latest',
+    skinSetPackages,
     skinPackages,
     patches,
     shared,
@@ -77,9 +87,13 @@ for (const [alias, assetPath] of imageAliases) {
         latestExports['./latest/' + alias] = './assets/' + assetPath;
     }
 }
-for (const skin of skinPackages) {
+for (const skin of skinPackages.filter(entry => entry.patchId === currentPatch)) {
     latestExports['./latest/' + skin.id + '/' + path.posix.basename(skin.file.path)] = './assets/' + skin.file.path;
 }
-packageJson.exports = { ...packageJson.exports, ...latestExports };
+packageJson.exports = {
+    ...Object.fromEntries(Object.entries(packageJson.exports)
+        .filter(([subpath]) => !subpath.startsWith('./latest/'))),
+    ...latestExports,
+};
 fs.writeFileSync(path.join(root, 'package.json'), JSON.stringify(packageJson, null, 2) + '\n');
 fs.writeFileSync(path.join(root, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');

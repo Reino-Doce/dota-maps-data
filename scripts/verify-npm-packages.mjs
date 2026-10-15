@@ -58,6 +58,19 @@ for (const item of plan.packages) {
         assert.equal(item.packageJson.dependencies, undefined,
             `${item.name} must leave optional skin packages to the consumer`);
     }
+    if (item.skins.length > 0) {
+        assert.equal(item.packageJson.exports['./images/' + item.patch.id],
+            './skin-exports/' + item.patch.id + '/index.mjs');
+        const allSkinsWrapper = path.join(packageDirectory, 'skin-exports', item.patch.id, 'index.mjs');
+        assert.equal(fs.existsSync(allSkinsWrapper), true, `${item.name} omitted its all-skins wrapper`);
+        const set = plan.skinSetPackages.find(skinSet => skinSet.patchId === item.patch.id);
+        assert.ok(set, `${item.name} has skins but no matching all-skins package`);
+        assert.ok(fs.readFileSync(allSkinsWrapper, 'utf8').includes(set.name));
+        if (item.patch.id === plan.manifest.currentPatch) {
+            assert.equal(item.packageJson.exports['./images/latest'],
+                './skin-exports/' + item.patch.id + '/latest.mjs');
+        }
+    }
 }
 
 assert.equal(plan.manifest.latestPackage.sourcePackageName,
@@ -89,7 +102,22 @@ for (const item of plan.skinPackages) {
 
 const aggregate = readJson(path.join(outputDirectory,
     plan.skinsAggregatePackage.name.slice('@reino-doce/'.length), 'package.json'));
-assert.deepEqual(Object.keys(aggregate.dependencies).sort(), plan.skinPackages.map(item => item.name).sort());
+assert.deepEqual(Object.keys(aggregate.dependencies).sort(), plan.skinsAggregatePackage.skins.map(item => item.name).sort());
+
+for (const item of plan.skinsAggregatePackages) {
+    const packageDirectory = path.join(outputDirectory, item.name.slice('@reino-doce/'.length));
+    const packageJson = readJson(path.join(packageDirectory, 'package.json'));
+    assert.equal(packageJson.name, item.name);
+    assert.equal(packageJson.exports['.'], './index.mjs');
+    assert.deepEqual(Object.keys(packageJson.dependencies).sort(), item.skins.map(skin => skin.name).sort());
+    assert.deepEqual(filesIn(packageDirectory).filter(file => file.startsWith('assets/')), [],
+        `${item.name} should contain dependency declarations, not duplicate skin image bytes`);
+    const moduleSource = fs.readFileSync(path.join(packageDirectory, 'index.mjs'), 'utf8');
+    for (const skin of item.skins) {
+        assert.ok(moduleSource.includes(skin.name + '/image/' + path.posix.basename(skin.image.path)));
+        assert.ok(moduleSource.includes('as ' + skin.id), `${item.name} must export ${skin.id} by name`);
+    }
+}
 
 const fixtureRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'dota-maps-package-resolution-'));
 try {
@@ -113,7 +141,9 @@ try {
     const mapImageSpecifier = '@reino-doce/dota-maps-data/latest/dota-map.png';
     const versionDataSpecifier = '@reino-doce/dota-maps-data/' + plan.manifest.currentPatch + '/mapdata.json';
     const versionSkinSpecifier = '@reino-doce/dota-maps-data/images/' + plan.manifest.currentPatch + '/' + skin.id;
+    const versionAllSkinsSpecifier = '@reino-doce/dota-maps-data/images/' + plan.manifest.currentPatch;
     const latestSkinSpecifier = '@reino-doce/dota-maps-data/images/latest/' + skin.id;
+    const latestAllSkinsSpecifier = '@reino-doce/dota-maps-data/images/latest';
     const skinImageSpecifier = skin.name + '/latest/' + skin.id + '/' + path.posix.basename(skin.image.path);
     const consumerScript = `
         import assert from 'node:assert/strict';
@@ -122,11 +152,13 @@ try {
         import mapdata from ${JSON.stringify(mapDataSpecifier)} with { type: 'json' };
         import { resolveAssetPath } from './runtime/src/node/map-assets.mjs';
         assert.ok(mapdata && typeof mapdata === 'object');
-        for (const specifier of [${JSON.stringify(mapDataSpecifier)}, ${JSON.stringify(mapImageSpecifier)}, ${JSON.stringify(versionDataSpecifier)}, ${JSON.stringify(versionSkinSpecifier)}, ${JSON.stringify(latestSkinSpecifier)}, ${JSON.stringify(skinImageSpecifier)}]) {
+        for (const specifier of [${JSON.stringify(mapDataSpecifier)}, ${JSON.stringify(mapImageSpecifier)}, ${JSON.stringify(versionDataSpecifier)}, ${JSON.stringify(versionSkinSpecifier)}, ${JSON.stringify(versionAllSkinsSpecifier)}, ${JSON.stringify(latestSkinSpecifier)}, ${JSON.stringify(latestAllSkinsSpecifier)}, ${JSON.stringify(skinImageSpecifier)}]) {
             assert.ok(fs.existsSync(fileURLToPath(import.meta.resolve(specifier))), specifier);
         }
         const skinWrapper = fs.readFileSync(fileURLToPath(import.meta.resolve(${JSON.stringify(latestSkinSpecifier)})), 'utf8');
         assert.ok(skinWrapper.includes(${JSON.stringify(skin.name + '/image/' + path.posix.basename(skin.image.path))}));
+        const allSkinsWrapper = fs.readFileSync(fileURLToPath(import.meta.resolve(${JSON.stringify(versionAllSkinsSpecifier)})), 'utf8');
+        assert.ok(allSkinsWrapper.includes(${JSON.stringify(plan.skinSetPackages.find(item => item.patchId === plan.manifest.currentPatch).name)}));
         for (const assetPath of ['data/latest/mapdata.json', 'latest/dota-map.png', ${JSON.stringify('latest/' + skin.id + '/' + path.posix.basename(skin.image.path))}]) {
             assert.ok(fs.existsSync(resolveAssetPath(assetPath)), assetPath);
         }
@@ -165,4 +197,4 @@ try {
     fs.rmSync(fixtureRoot, { recursive: true, force: true });
 }
 
-console.log(`Verified the runtime package, ${plan.patchPackages.length} version packages, latest data, ${plan.skinPackages.length} optional skin packages, and the skin metapackage.`);
+console.log(`Verified the runtime package, ${plan.patchPackages.length} version packages, latest data, ${plan.skinPackages.length} optional skin packages, and ${plan.skinsAggregatePackages.length} all-skins packages.`);
