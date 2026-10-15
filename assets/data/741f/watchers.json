@@ -1,0 +1,64 @@
+{
+  "unitClass": "npc_dota_lantern",
+  "dayVision": 800,
+  "nightVision": 450,
+  "positions": [
+    [
+      768,
+      -7648,
+      128
+    ],
+    [
+      6528,
+      -6592,
+      137.674957
+    ],
+    [
+      1032.257935,
+      -4260.073242,
+      256
+    ],
+    [
+      7917.524414,
+      -1523.72876,
+      20.97467
+    ],
+    [
+      2717.693359,
+      -657.453369,
+      256
+    ],
+    [
+      -3483.5,
+      34.375,
+      256
+    ],
+    [
+      -7808,
+      1056,
+      17.09375
+    ],
+    [
+      -1527.401855,
+      3925.887939,
+      256
+    ],
+    [
+      -6464,
+      6656,
+      151.25
+    ],
+    [
+      -670.875,
+      7129.75,
+      128
+    ]
+  ],
+  "source": {
+    "gridnavSha256": "be66c5b5ff0d87d69b376622f1161e8f4a6f61433bf0f25f5ff986d70beac77c",
+    "mapEntitiesSha256": "c6b0e8e952b376578fe56e2e316d5ba33d44c42e9e71c83b15deee2ddaa91a18",
+    "unitsSha256": "cbffa0e75f7802bae9d6dccff7d06821588f38e9a51ad53d6a643d75385bb4f4",
+    "entities": "maps/dota/entities/default_ents.vents_c",
+    "units": "scripts/npc/npc_units.txt"
+  }
+}

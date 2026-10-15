@@ -1,0 +1,851 @@
+{
+  "buildings": [
+    {
+      "id": "2699:25335:3",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_goodguys_tower3_bot",
+      "team": "radiant",
+      "position": [
+        -3951.997803,
+        -6112,
+        255.999939
+      ],
+      "dayVision": 1900,
+      "nightVision": 1100,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:25336:3",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_goodguys_tower3_mid",
+      "team": "radiant",
+      "position": [
+        -4639.998535,
+        -4143.998535,
+        256
+      ],
+      "dayVision": 1900,
+      "nightVision": 1100,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:25337:3",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_goodguys_tower3_top",
+      "team": "radiant",
+      "position": [
+        -6592,
+        -3407.997803,
+        256
+      ],
+      "dayVision": 1900,
+      "nightVision": 1100,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:25338:3",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_goodguys_tower2_bot",
+      "team": "radiant",
+      "position": [
+        -359.997803,
+        -6256,
+        128
+      ],
+      "dayVision": 1900,
+      "nightVision": 1100,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:25339:3",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_goodguys_tower1_bot",
+      "team": "radiant",
+      "position": [
+        4859.866211,
+        -6379.263184,
+        128
+      ],
+      "dayVision": 1900,
+      "nightVision": 800,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:25340:3",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_goodguys_tower2_mid",
+      "team": "radiant",
+      "position": [
+        -3190.358887,
+        -2926.25,
+        128
+      ],
+      "dayVision": 1900,
+      "nightVision": 1100,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:25342:3",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_goodguys_tower2_top",
+      "team": "radiant",
+      "position": [
+        -6501,
+        -871.997803,
+        128
+      ],
+      "dayVision": 1900,
+      "nightVision": 1100,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:25343:3",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_goodguys_tower1_top",
+      "team": "radiant",
+      "position": [
+        -6336,
+        1856.002197,
+        128
+      ],
+      "dayVision": 1900,
+      "nightVision": 800,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:25344:3",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_goodguys_tower4",
+      "team": "radiant",
+      "position": [
+        -5711.998535,
+        -4863.998535,
+        255.999878
+      ],
+      "dayVision": 1900,
+      "nightVision": 1100,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:25345:2",
+      "unitClass": "npc_dota_barracks",
+      "name": "npc_dota_goodguys_melee_rax_mid",
+      "team": "radiant",
+      "position": [
+        -4671.996094,
+        -4551.998535,
+        255.999878
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:25346:2",
+      "unitClass": "npc_dota_barracks",
+      "name": "npc_dota_goodguys_range_rax_mid",
+      "team": "radiant",
+      "position": [
+        -5060.000488,
+        -4199.000488,
+        255.999756
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:25347:2",
+      "unitClass": "npc_dota_barracks",
+      "name": "npc_dota_goodguys_melee_rax_bot",
+      "team": "radiant",
+      "position": [
+        -4279.996094,
+        -6360.001953,
+        256
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:25348:2",
+      "unitClass": "npc_dota_barracks",
+      "name": "npc_dota_goodguys_range_rax_bot",
+      "team": "radiant",
+      "position": [
+        -4279.000488,
+        -5853,
+        255.999878
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:25349:2",
+      "unitClass": "npc_dota_barracks",
+      "name": "npc_dota_goodguys_melee_rax_top",
+      "team": "radiant",
+      "position": [
+        -6335.998047,
+        -3757.996094,
+        255.999878
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:25350:2",
+      "unitClass": "npc_dota_barracks",
+      "name": "npc_dota_goodguys_range_rax_top",
+      "team": "radiant",
+      "position": [
+        -6844,
+        -3759.000488,
+        255.999939
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:25351:2",
+      "unitClass": "npc_dota_barracks",
+      "name": "npc_dota_badguys_melee_rax_bot",
+      "team": "dire",
+      "position": [
+        6591.999023,
+        3392.016846,
+        255.999878
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:25352:2",
+      "unitClass": "npc_dota_barracks",
+      "name": "npc_dota_badguys_range_rax_bot",
+      "team": "dire",
+      "position": [
+        6064,
+        3376,
+        256
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:25353:2",
+      "unitClass": "npc_dota_barracks",
+      "name": "npc_dota_badguys_range_rax_mid",
+      "team": "dire",
+      "position": [
+        4336,
+        4183,
+        255.999756
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:25354:2",
+      "unitClass": "npc_dota_barracks",
+      "name": "npc_dota_badguys_melee_rax_mid",
+      "team": "dire",
+      "position": [
+        4702.01123,
+        3824.012451,
+        255.999878
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:25355:2",
+      "unitClass": "npc_dota_barracks",
+      "name": "npc_dota_badguys_melee_rax_top",
+      "team": "dire",
+      "position": [
+        3898.016846,
+        5496.000977,
+        255.999878
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:25356:2",
+      "unitClass": "npc_dota_barracks",
+      "name": "npc_dota_badguys_range_rax_top",
+      "team": "dire",
+      "position": [
+        3894,
+        6025,
+        255.999878
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:25357:4",
+      "unitClass": "npc_dota_fort",
+      "name": "npc_dota_badguys_fort",
+      "team": "dire",
+      "position": [
+        5527.99707,
+        4999.998047,
+        248
+      ],
+      "dayVision": 2600,
+      "nightVision": 2600,
+      "trueSight": 900
+    },
+    {
+      "id": "2699:25358:2",
+      "unitClass": "npc_dota_fort",
+      "name": "npc_dota_goodguys_fort",
+      "team": "radiant",
+      "position": [
+        -5919.993652,
+        -5351.993652,
+        239.999878
+      ],
+      "dayVision": 2600,
+      "nightVision": 2600,
+      "trueSight": 900
+    },
+    {
+      "id": "2699:25394:4",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_badguys_tower4",
+      "team": "dire",
+      "position": [
+        4944,
+        4776,
+        255.999878
+      ],
+      "dayVision": 1900,
+      "nightVision": 1100,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:25395:4",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_badguys_tower2_top",
+      "team": "dire",
+      "position": [
+        -128.000305,
+        6016,
+        128
+      ],
+      "dayVision": 1900,
+      "nightVision": 1100,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:25396:4",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_badguys_tower1_top",
+      "team": "dire",
+      "position": [
+        -5274.558105,
+        6036.044434,
+        128
+      ],
+      "dayVision": 1900,
+      "nightVision": 800,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:25397:4",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_badguys_tower2_mid",
+      "team": "dire",
+      "position": [
+        2495.999756,
+        2111.999756,
+        128
+      ],
+      "dayVision": 1900,
+      "nightVision": 1100,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:25398:4",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_badguys_tower1_mid",
+      "team": "dire",
+      "position": [
+        523.999756,
+        651.999817,
+        128
+      ],
+      "dayVision": 1900,
+      "nightVision": 800,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:25400:4",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_badguys_tower2_bot",
+      "team": "dire",
+      "position": [
+        6400,
+        383.999695,
+        128
+      ],
+      "dayVision": 1900,
+      "nightVision": 1100,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:25401:4",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_badguys_tower3_bot",
+      "team": "dire",
+      "position": [
+        6336,
+        3031.999756,
+        255.999756
+      ],
+      "dayVision": 1900,
+      "nightVision": 1100,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:25402:4",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_badguys_tower3_top",
+      "team": "dire",
+      "position": [
+        3551.999756,
+        5776,
+        256
+      ],
+      "dayVision": 1900,
+      "nightVision": 1100,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:25403:4",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_badguys_tower3_mid",
+      "team": "dire",
+      "position": [
+        4272,
+        3758.999756,
+        256
+      ],
+      "dayVision": 1900,
+      "nightVision": 1100,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:25404:4",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_badguys_tower4",
+      "team": "dire",
+      "position": [
+        5279.999512,
+        4432,
+        255.999878
+      ],
+      "dayVision": 1900,
+      "nightVision": 1100,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:25405:3",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_goodguys_tower4",
+      "team": "radiant",
+      "position": [
+        -5391.998535,
+        -5191.998535,
+        255.999878
+      ],
+      "dayVision": 1900,
+      "nightVision": 1100,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:26399:3",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_goodguys_tower1_mid",
+      "team": "radiant",
+      "position": [
+        -1543.998535,
+        -1407.998413,
+        127.999878
+      ],
+      "dayVision": 1900,
+      "nightVision": 800,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:27780:2",
+      "unitClass": "npc_dota_filler",
+      "name": "npc_dota_goodguys_fillers",
+      "team": "radiant",
+      "position": [
+        -6589.785645,
+        -4206.744141,
+        240
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:27781:2",
+      "unitClass": "npc_dota_filler",
+      "name": "npc_dota_goodguys_fillers",
+      "team": "radiant",
+      "position": [
+        -5838.147461,
+        -4292.375,
+        240
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:27872:2",
+      "unitClass": "npc_dota_filler",
+      "name": "npc_dota_goodguys_fillers",
+      "team": "radiant",
+      "position": [
+        -4752.088867,
+        -6080,
+        240
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:27873:2",
+      "unitClass": "npc_dota_filler",
+      "name": "npc_dota_goodguys_fillers",
+      "team": "radiant",
+      "position": [
+        -5312,
+        -4800,
+        240
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:27874:2",
+      "unitClass": "npc_dota_filler",
+      "name": "npc_dota_goodguys_fillers",
+      "team": "radiant",
+      "position": [
+        -4782.147461,
+        -5268.375,
+        240
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:27877:2",
+      "unitClass": "npc_dota_filler",
+      "name": "npc_dota_badguys_fillers",
+      "team": "dire",
+      "position": [
+        6326.222168,
+        3798.050293,
+        256.038452
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:27878:2",
+      "unitClass": "npc_dota_filler",
+      "name": "npc_dota_badguys_fillers",
+      "team": "dire",
+      "position": [
+        5520.922852,
+        3949.039551,
+        256.038452
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:27879:2",
+      "unitClass": "npc_dota_filler",
+      "name": "npc_dota_badguys_fillers",
+      "team": "dire",
+      "position": [
+        4894.154297,
+        4370.023926,
+        264.294067
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:27880:2",
+      "unitClass": "npc_dota_filler",
+      "name": "npc_dota_badguys_fillers",
+      "team": "dire",
+      "position": [
+        4480.92334,
+        4989.035645,
+        256.038208
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:27881:2",
+      "unitClass": "npc_dota_filler",
+      "name": "npc_dota_badguys_fillers",
+      "team": "dire",
+      "position": [
+        4411.026367,
+        5753.460938,
+        256.038208
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:27962:4",
+      "unitClass": "npc_dota_tower",
+      "name": "npc_dota_badguys_tower1_bot",
+      "team": "dire",
+      "position": [
+        6269.338867,
+        -2240.000244,
+        128
+      ],
+      "dayVision": 1900,
+      "nightVision": 800,
+      "trueSight": 700
+    },
+    {
+      "id": "2699:28123:2",
+      "unitClass": "npc_dota_filler",
+      "name": "npc_dota_badguys_fillers",
+      "team": "dire",
+      "position": [
+        5286.222168,
+        3374.048096,
+        271.130981
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:28124:2",
+      "unitClass": "npc_dota_filler",
+      "name": "npc_dota_badguys_fillers",
+      "team": "dire",
+      "position": [
+        3783.575928,
+        4718.492188,
+        270.517578
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:28125:2",
+      "unitClass": "npc_dota_filler",
+      "name": "npc_dota_goodguys_fillers",
+      "team": "radiant",
+      "position": [
+        -5597.785156,
+        -3710.743896,
+        280
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:28126:2",
+      "unitClass": "npc_dota_filler",
+      "name": "npc_dota_goodguys_fillers",
+      "team": "radiant",
+      "position": [
+        -4265.335938,
+        -5161.847656,
+        256
+      ],
+      "dayVision": 900,
+      "nightVision": 600,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:28289:2",
+      "unitClass": "npc_dota_watch_tower",
+      "name": "npc_dota_watch_tower",
+      "team": "radiant",
+      "position": [
+        -4096,
+        -447.999298,
+        256
+      ],
+      "dayVision": 0,
+      "nightVision": 0,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:28297:2",
+      "unitClass": "npc_dota_watch_tower",
+      "name": "npc_dota_watch_tower",
+      "team": "dire",
+      "position": [
+        3392,
+        -448.000702,
+        256
+      ],
+      "dayVision": 0,
+      "nightVision": 0,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:28316:2",
+      "unitClass": "npc_dota_unit_twin_gate",
+      "name": "npc_dota_unit_twin_gate",
+      "team": "neutral",
+      "position": [
+        -6457.690918,
+        7599.036621,
+        256
+      ],
+      "dayVision": 500,
+      "nightVision": 500,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:28318:2",
+      "unitClass": "npc_dota_unit_twin_gate",
+      "name": "npc_dota_unit_twin_gate",
+      "team": "neutral",
+      "position": [
+        6425.52832,
+        -7313.782715,
+        256
+      ],
+      "dayVision": 500,
+      "nightVision": 500,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:28346:2",
+      "unitClass": "npc_dota_lotus_pool",
+      "name": "npc_dota_lotus_pool",
+      "team": "neutral",
+      "position": [
+        -7548.282227,
+        4209.098633,
+        98
+      ],
+      "dayVision": 500,
+      "nightVision": 500,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:28347:2",
+      "unitClass": "npc_dota_lotus_pool",
+      "name": "npc_dota_lotus_pool",
+      "team": "neutral",
+      "position": [
+        7503.976074,
+        -4404.689941,
+        101
+      ],
+      "dayVision": 500,
+      "nightVision": 500,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:28521",
+      "unitClass": "npc_dota_xp_fountain",
+      "name": "npc_dota_xp_fountain",
+      "team": "neutral",
+      "position": [
+        -8088,
+        768,
+        38.955624
+      ],
+      "dayVision": 0,
+      "nightVision": 0,
+      "trueSight": 0
+    },
+    {
+      "id": "2699:29194",
+      "unitClass": "npc_dota_xp_fountain",
+      "name": "npc_dota_xp_fountain",
+      "team": "neutral",
+      "position": [
+        8167.431641,
+        -1142.111816,
+        37.803406
+      ],
+      "dayVision": 0,
+      "nightVision": 0,
+      "trueSight": 0
+    },
+    {
+      "id": "3010:2300:2",
+      "unitClass": "ent_dota_fountain",
+      "name": "dota_fountain",
+      "team": "radiant",
+      "position": [
+        -7456,
+        -6938,
+        393.301758
+      ],
+      "dayVision": 1800,
+      "nightVision": 1800,
+      "trueSight": 1200
+    },
+    {
+      "id": "3010:5449",
+      "unitClass": "ent_dota_fountain",
+      "name": "dota_fountain",
+      "team": "dire",
+      "position": [
+        7408,
+        6848,
+        377.301758
+      ],
+      "dayVision": 1800,
+      "nightVision": 1800,
+      "trueSight": 1200
+    }
+  ],
+  "source": {
+    "gridnavSha256": "be66c5b5ff0d87d69b376622f1161e8f4a6f61433bf0f25f5ff986d70beac77c",
+    "mapEntitiesSha256": "c6b0e8e952b376578fe56e2e316d5ba33d44c42e9e71c83b15deee2ddaa91a18",
+    "unitsSha256": "cbffa0e75f7802bae9d6dccff7d06821588f38e9a51ad53d6a643d75385bb4f4",
+    "entities": "maps/dota/entities/default_ents.vents_c",
+    "units": "scripts/npc/npc_units.txt"
+  }
+}

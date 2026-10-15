@@ -1,0 +1,6 @@
+node_modules/
+map-captures/
+extracted/
+game-resource-work/
+coverage/
+*.log

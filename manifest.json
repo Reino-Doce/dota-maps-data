@@ -1,0 +1,614 @@
+{
+  "schemaVersion": 1,
+  "patches": [
+    {
+      "id": "688",
+      "files": [
+        {
+          "path": "data/688/mapdata.json",
+          "bytes": 67946,
+          "sha256": "b8a824a4947a2a386148576567ee3e48f761deecec1ae5f43f5d6e1e69186f46"
+        }
+      ]
+    },
+    {
+      "id": "700",
+      "files": [
+        {
+          "path": "data/700/elevation.json",
+          "bytes": 305980,
+          "sha256": "641947b37603766e5e80df74628a3f26a078417269f64d95ed64492440d0664a"
+        },
+        {
+          "path": "data/700/ent_fow_blocker_node.json",
+          "bytes": 9785,
+          "sha256": "9a2ef3492ca6152c3613daa0a926f19b833e0a6d99604e68be517889367d9b75"
+        },
+        {
+          "path": "data/700/mapdata.json",
+          "bytes": 63109,
+          "sha256": "def8c7871624d2780ae27b5d4f1085b4aa7f634e2e7dc9a868f0972a7b44ed63"
+        },
+        {
+          "path": "data/700/no_wards.json",
+          "bytes": 82441,
+          "sha256": "1c199536903cd7305f748dcea0935d851a9d7a76c157f8c2d8056a260ea2328c"
+        },
+        {
+          "path": "data/700/npc_dota_spawner.json",
+          "bytes": 766,
+          "sha256": "4aa30cd5ed504c00d444a03b0e523ad28795da5f6fdcb18807ff7142f88e8b6f"
+        },
+        {
+          "path": "data/700/path_corner.json",
+          "bytes": 1812,
+          "sha256": "185fb1dad58ec1b150f5fcdcdf6e70eb49aeb3db0a41bc893bf59337a9f1e942"
+        }
+      ]
+    },
+    {
+      "id": "706",
+      "files": [
+        {
+          "path": "data/706/elevation.json",
+          "bytes": 305980,
+          "sha256": "641947b37603766e5e80df74628a3f26a078417269f64d95ed64492440d0664a"
+        },
+        {
+          "path": "data/706/ent_fow_blocker_node.json",
+          "bytes": 9785,
+          "sha256": "9a2ef3492ca6152c3613daa0a926f19b833e0a6d99604e68be517889367d9b75"
+        },
+        {
+          "path": "data/706/mapdata.json",
+          "bytes": 63201,
+          "sha256": "65c3b980d68b002d130afdef47002bee1c65be0487b9fe2f463c355dd9f79523"
+        },
+        {
+          "path": "data/706/no_wards.json",
+          "bytes": 82441,
+          "sha256": "66e0965bf78b25c4b063b191e95f3d5fb68fa56acbc50dcda8cc68f7cc75cb50"
+        },
+        {
+          "path": "data/706/npc_dota_spawner.json",
+          "bytes": 766,
+          "sha256": "4aa30cd5ed504c00d444a03b0e523ad28795da5f6fdcb18807ff7142f88e8b6f"
+        },
+        {
+          "path": "data/706/path_corner.json",
+          "bytes": 1831,
+          "sha256": "29dccb908f9dde390b31bdee8a004e54e2c3c95d2eaa2d97c83fe3d0a31cf703"
+        }
+      ]
+    },
+    {
+      "id": "707",
+      "files": [
+        {
+          "path": "data/707/elevation.json",
+          "bytes": 302867,
+          "sha256": "c6a0494d2f7b870f6c4db5e73fffbfc450dd8434ad5e0afc754e222b9d396a8d"
+        },
+        {
+          "path": "data/707/ent_fow_blocker_node.json",
+          "bytes": 9785,
+          "sha256": "9a2ef3492ca6152c3613daa0a926f19b833e0a6d99604e68be517889367d9b75"
+        },
+        {
+          "path": "data/707/mapdata.json",
+          "bytes": 63573,
+          "sha256": "63b3d85cb94219d38eb36bd9032fcc4c22ba18135e6dd4bcf14251cce34f6c95"
+        },
+        {
+          "path": "data/707/no_wards.json",
+          "bytes": 82256,
+          "sha256": "2062e65af4844656e223365ea2b265ab8e2fc5620d901ccc273ae918bc0af4e8"
+        },
+        {
+          "path": "data/707/npc_dota_spawner.json",
+          "bytes": 766,
+          "sha256": "4aa30cd5ed504c00d444a03b0e523ad28795da5f6fdcb18807ff7142f88e8b6f"
+        },
+        {
+          "path": "data/707/path_corner.json",
+          "bytes": 1832,
+          "sha256": "daeee8410a2b33adc93f3e53422f2b163bf428efe5fc534a941dcc9beb08578b"
+        }
+      ]
+    },
+    {
+      "id": "709",
+      "files": [
+        {
+          "path": "data/709/elevation.json",
+          "bytes": 302737,
+          "sha256": "ba9f8348c73a5e273fa135d282f2635748373a467d06e5dd0e8f4d7506f76be8"
+        },
+        {
+          "path": "data/709/ent_fow_blocker_node.json",
+          "bytes": 9785,
+          "sha256": "9a2ef3492ca6152c3613daa0a926f19b833e0a6d99604e68be517889367d9b75"
+        },
+        {
+          "path": "data/709/mapdata.json",
+          "bytes": 63549,
+          "sha256": "cf9026075cbd9b654bb9be4c360fbd041f7b2346f0e655c729d1b7632f5b2b6b"
+        },
+        {
+          "path": "data/709/no_wards.json",
+          "bytes": 81749,
+          "sha256": "f345a33c2eb147011700d90fb8a327f007f6be5a0f21601ae3aca762f06b0f50"
+        },
+        {
+          "path": "data/709/npc_dota_spawner.json",
+          "bytes": 766,
+          "sha256": "4aa30cd5ed504c00d444a03b0e523ad28795da5f6fdcb18807ff7142f88e8b6f"
+        },
+        {
+          "path": "data/709/path_corner.json",
+          "bytes": 1832,
+          "sha256": "daeee8410a2b33adc93f3e53422f2b163bf428efe5fc534a941dcc9beb08578b"
+        }
+      ]
+    },
+    {
+      "id": "715",
+      "files": [
+        {
+          "path": "data/715/elevation.json",
+          "bytes": 302737,
+          "sha256": "ba9f8348c73a5e273fa135d282f2635748373a467d06e5dd0e8f4d7506f76be8"
+        },
+        {
+          "path": "data/715/ent_fow_blocker_node.json",
+          "bytes": 9785,
+          "sha256": "9a2ef3492ca6152c3613daa0a926f19b833e0a6d99604e68be517889367d9b75"
+        },
+        {
+          "path": "data/715/mapdata.json",
+          "bytes": 63474,
+          "sha256": "8aaf655467667b0ba042f5d3c56416efcda581a81e15dac86a69272d060b1389"
+        },
+        {
+          "path": "data/715/no_wards.json",
+          "bytes": 81749,
+          "sha256": "f345a33c2eb147011700d90fb8a327f007f6be5a0f21601ae3aca762f06b0f50"
+        },
+        {
+          "path": "data/715/npc_dota_spawner.json",
+          "bytes": 766,
+          "sha256": "4aa30cd5ed504c00d444a03b0e523ad28795da5f6fdcb18807ff7142f88e8b6f"
+        },
+        {
+          "path": "data/715/path_corner.json",
+          "bytes": 1832,
+          "sha256": "daeee8410a2b33adc93f3e53422f2b163bf428efe5fc534a941dcc9beb08578b"
+        }
+      ]
+    },
+    {
+      "id": "719",
+      "files": [
+        {
+          "path": "data/719/elevation.json",
+          "bytes": 302737,
+          "sha256": "ba9f8348c73a5e273fa135d282f2635748373a467d06e5dd0e8f4d7506f76be8"
+        },
+        {
+          "path": "data/719/ent_fow_blocker_node.json",
+          "bytes": 9785,
+          "sha256": "9a2ef3492ca6152c3613daa0a926f19b833e0a6d99604e68be517889367d9b75"
+        },
+        {
+          "path": "data/719/mapdata.json",
+          "bytes": 63524,
+          "sha256": "0e1e56f4542239220190b9c7e6baff9025c1bacbdda67cc0ed94ca25a25c55aa"
+        },
+        {
+          "path": "data/719/no_wards.json",
+          "bytes": 81749,
+          "sha256": "f345a33c2eb147011700d90fb8a327f007f6be5a0f21601ae3aca762f06b0f50"
+        },
+        {
+          "path": "data/719/npc_dota_spawner.json",
+          "bytes": 766,
+          "sha256": "4aa30cd5ed504c00d444a03b0e523ad28795da5f6fdcb18807ff7142f88e8b6f"
+        },
+        {
+          "path": "data/719/path_corner.json",
+          "bytes": 1832,
+          "sha256": "daeee8410a2b33adc93f3e53422f2b163bf428efe5fc534a941dcc9beb08578b"
+        }
+      ]
+    },
+    {
+      "id": "720",
+      "files": [
+        {
+          "path": "data/720/elevation.json",
+          "bytes": 289022,
+          "sha256": "e13bf49572a608d99f11686b97eb2859a35b7b8777793cea6297c07e04c269a1"
+        },
+        {
+          "path": "data/720/ent_fow_blocker_node.json",
+          "bytes": 9785,
+          "sha256": "9a2ef3492ca6152c3613daa0a926f19b833e0a6d99604e68be517889367d9b75"
+        },
+        {
+          "path": "data/720/mapdata.json",
+          "bytes": 63513,
+          "sha256": "9da2b0ae4cd45abe137b3153676ebb12fb181b7eb7eb1f89001547799c03e31a"
+        },
+        {
+          "path": "data/720/no_wards.json",
+          "bytes": 76525,
+          "sha256": "ad1f640c7e6b1cc5ea6c2f6a93810cc522f7dcf07da700cf2b4cf65ed9ba7151"
+        },
+        {
+          "path": "data/720/npc_dota_spawner.json",
+          "bytes": 766,
+          "sha256": "4aa30cd5ed504c00d444a03b0e523ad28795da5f6fdcb18807ff7142f88e8b6f"
+        },
+        {
+          "path": "data/720/path_corner.json",
+          "bytes": 1833,
+          "sha256": "8e239c8c1b1df064006dc4fc10215fe397f8e71f85be0d36416b77a4f1cd6146"
+        }
+      ]
+    },
+    {
+      "id": "721",
+      "files": [
+        {
+          "path": "data/721/elevation.json",
+          "bytes": 288792,
+          "sha256": "e4a49560c9f334488975efca3889608b102af150aaf62edd1c131661bacde9ce"
+        },
+        {
+          "path": "data/721/ent_fow_blocker_node.json",
+          "bytes": 9785,
+          "sha256": "9a2ef3492ca6152c3613daa0a926f19b833e0a6d99604e68be517889367d9b75"
+        },
+        {
+          "path": "data/721/mapdata.json",
+          "bytes": 63513,
+          "sha256": "b057a3aa1f8255da1066a44c7b37cf8d3ab52974996e5e2c76117d2cd7aa495a"
+        },
+        {
+          "path": "data/721/no_wards.json",
+          "bytes": 76413,
+          "sha256": "6b838087c46cd0d1df7adf6b7fd32bbe1a32fcd05c37f7d0c7766385804294c1"
+        },
+        {
+          "path": "data/721/npc_dota_spawner.json",
+          "bytes": 766,
+          "sha256": "4aa30cd5ed504c00d444a03b0e523ad28795da5f6fdcb18807ff7142f88e8b6f"
+        },
+        {
+          "path": "data/721/path_corner.json",
+          "bytes": 1833,
+          "sha256": "8e239c8c1b1df064006dc4fc10215fe397f8e71f85be0d36416b77a4f1cd6146"
+        }
+      ]
+    },
+    {
+      "id": "722",
+      "files": [
+        {
+          "path": "data/722/elevation.json",
+          "bytes": 288792,
+          "sha256": "e4a49560c9f334488975efca3889608b102af150aaf62edd1c131661bacde9ce"
+        },
+        {
+          "path": "data/722/ent_fow_blocker_node.json",
+          "bytes": 9785,
+          "sha256": "9a2ef3492ca6152c3613daa0a926f19b833e0a6d99604e68be517889367d9b75"
+        },
+        {
+          "path": "data/722/mapdata.json",
+          "bytes": 63521,
+          "sha256": "4d68527829489efb9088e5d65ab8a4c30251f836ea7b845fbbda66fd9bb277c8"
+        },
+        {
+          "path": "data/722/no_wards.json",
+          "bytes": 76756,
+          "sha256": "2c36a9790584b9711835941b5c69b54ba5eca9861f2cd5451ea1759238700d84"
+        },
+        {
+          "path": "data/722/npc_dota_spawner.json",
+          "bytes": 766,
+          "sha256": "4cd4c0a4415a6066c7297fcc7691c096e5532915920073ac67888978cfd01e11"
+        },
+        {
+          "path": "data/722/path_corner.json",
+          "bytes": 1833,
+          "sha256": "57b2f75153396c55bdea52a198d0fbbda95d5f2018a9bd817b318a8c04aef9e2"
+        }
+      ]
+    },
+    {
+      "id": "723",
+      "files": [
+        {
+          "path": "data/723/elevation.json",
+          "bytes": 291652,
+          "sha256": "92c70432573ad6b282f487176f41e04cc4606bdaea7ebdacf56f724c3716089a"
+        },
+        {
+          "path": "data/723/ent_fow_blocker_node.json",
+          "bytes": 9714,
+          "sha256": "5ab94e5e51837562db4df586892dbfe596a26fc2b4b1feb960cac483e1e049d1"
+        },
+        {
+          "path": "data/723/mapdata.json",
+          "bytes": 61073,
+          "sha256": "8717c22985c11fa7809973ab2f1fc8a6031b8dbce2d2be1001647e6e7d233e75"
+        },
+        {
+          "path": "data/723/no_wards.json",
+          "bytes": 77919,
+          "sha256": "aa7ac696ad74f5ac830ee0e082af169293dfa467aeeaed5828e923423d0a2bf0"
+        },
+        {
+          "path": "data/723/npc_dota_spawner.json",
+          "bytes": 766,
+          "sha256": "4cd4c0a4415a6066c7297fcc7691c096e5532915920073ac67888978cfd01e11"
+        },
+        {
+          "path": "data/723/path_corner.json",
+          "bytes": 1833,
+          "sha256": "f6d928ff7aef2cd22f0dbb6ccf7bf12a435f4bbaa7af5108a1b86acf71edb08b"
+        }
+      ]
+    },
+    {
+      "id": "741f",
+      "files": [
+        {
+          "path": "data/741f/building_vision.json",
+          "bytes": 18559,
+          "sha256": "d2b384c316538189e4a794782adf9bb6916f580af83ecea67ec225394b02d378"
+        },
+        {
+          "path": "data/741f/elevation.json",
+          "bytes": 170069,
+          "sha256": "93cd9e8ea08d5bc0abd9c83a496cfc9047982640d254808bf6450df20e6b5ad3"
+        },
+        {
+          "path": "data/741f/ent_fow_blocker_node.json",
+          "bytes": 6004,
+          "sha256": "d8f67c610988d2bc701aeef2c534bc186d7f7b3b7ed46c0b2c51f6de40bf0a22"
+        },
+        {
+          "path": "data/741f/eyes_vision.json",
+          "bytes": 191365,
+          "sha256": "c9329fe71eb360e5d4e1de7b04bc560f226b28dd725892adddf04dbdfbe54ea0"
+        },
+        {
+          "path": "data/741f/fow_blockers.json",
+          "bytes": 12619,
+          "sha256": "cc9670886f20101f6bc9d66327a8ad91dfdf5ac8232ab3978d5e9293594c5954"
+        },
+        {
+          "path": "data/741f/gridnav.gnv",
+          "bytes": 104992,
+          "sha256": "be66c5b5ff0d87d69b376622f1161e8f4a6f61433bf0f25f5ff986d70beac77c"
+        },
+        {
+          "path": "data/741f/live_tree_index.json",
+          "bytes": 11424,
+          "sha256": "70950416eae080c0bd81b325ec3b1d5135f851c85c115eefe07c6b80b63819db"
+        },
+        {
+          "path": "data/741f/mapdata.json",
+          "bytes": 116870,
+          "sha256": "da4d95e516900868cbd3695a4be0eed2abc942d32fa6ed991a8659a1f0a02ba7"
+        },
+        {
+          "path": "data/741f/no_wards.json",
+          "bytes": 105235,
+          "sha256": "11d8d789b88879868ad0c836a1813abfd0ecbc47e178f01a6dfe5e661e2382ee"
+        },
+        {
+          "path": "data/741f/npc_dota_spawner.json",
+          "bytes": 776,
+          "sha256": "0f73e6569eb5d18f702fb06862a1bf2ffc172e8ae4c1e5914c736aeeef9bd442"
+        },
+        {
+          "path": "data/741f/overview.json",
+          "bytes": 385,
+          "sha256": "7a838ab7e586d99717eb0c233dddd02e8647fbbd3226d9268a04c54218da12f9"
+        },
+        {
+          "path": "data/741f/overview.txt",
+          "bytes": 153,
+          "sha256": "fc31a7979950863f262afd2f0c8d7a8bf5ec6ffbdc48c465aa5495cd41d4cc1d"
+        },
+        {
+          "path": "data/741f/path_corner.json",
+          "bytes": 1618,
+          "sha256": "07778dfe67f8ce11a29a439163004c378ad63d8809dc4cfadd413443d3da700a"
+        },
+        {
+          "path": "data/741f/screenshot-controls.json",
+          "bytes": 1681,
+          "sha256": "30f078bddcd03523eb25bedcc87c9424d047d227feeef3ecbd05506ee95dc593"
+        },
+        {
+          "path": "data/741f/screenshot.json",
+          "bytes": 1643,
+          "sha256": "b3048304072a77e96939529af79efea9247ac92e6b124377055e13463f7b8afd"
+        },
+        {
+          "path": "data/741f/skins.json",
+          "bytes": 41879,
+          "sha256": "3d6f77d99507c5c7e756f6c3f1610e6ca4627e73a72246ed663acf460effc097"
+        },
+        {
+          "path": "data/741f/terrain_grid.json",
+          "bytes": 738709,
+          "sha256": "bfb3eeac8797009ef5a8805b090664167bc4c88088f02f0c7ec2d169b378c0f3"
+        },
+        {
+          "path": "data/741f/ward_grid.json",
+          "bytes": 42127,
+          "sha256": "7726303e58dd879a71e082df2a9e9cdcd24cc908fadf046082964f11f4ea60ee"
+        },
+        {
+          "path": "data/741f/ward_structures.json",
+          "bytes": 25877,
+          "sha256": "38658c15796a217f832d5167be4eaf0d14a04675a4280bb32382672a248d9124"
+        },
+        {
+          "path": "data/741f/watchers.json",
+          "bytes": 1052,
+          "sha256": "f3bd13028ef13905bdce71b8633de46bd7a2db2ea63da0c935408180e1ea0583"
+        },
+        {
+          "path": "data/741f/worlddata.json",
+          "bytes": 75,
+          "sha256": "3035c2c2308b81015ba260581f7209406dae49e68dc92b80e1fd4f71d8ba8170"
+        }
+      ]
+    }
+  ],
+  "shared": [
+    {
+      "path": "data/legacy/worlddata.json",
+      "bytes": 71,
+      "sha256": "4232528fc806768fa54e5a0667e8ed52d947b57cca89a96835211ef13c8f18b5"
+    }
+  ],
+  "images": [
+    {
+      "path": "img/dota-game-map-741f.jpg",
+      "bytes": 9473659,
+      "sha256": "84e6b8bd0f8a06548e45dbed94fb734ee280f3465bafef908f27889ccdd4d0b2"
+    },
+    {
+      "path": "img/dota-map-741f.png",
+      "bytes": 508016,
+      "sha256": "54555b9d9a9533ab3d39b0719b941ff9ce4b37b9b2777718ef9d87fbc7a12914"
+    },
+    {
+      "path": "img/map_data_700.png",
+      "bytes": 19105,
+      "sha256": "ecbf7e99ea0927a91a98397f680435a867a58b7c121468974c6537bb89884e24"
+    },
+    {
+      "path": "img/map_data_706.png",
+      "bytes": 19105,
+      "sha256": "ecbf7e99ea0927a91a98397f680435a867a58b7c121468974c6537bb89884e24"
+    },
+    {
+      "path": "img/map_data_707.png",
+      "bytes": 22497,
+      "sha256": "28d8d25c8dd72bfcd03c79fbd260682d6a6836ff9687f42bed8c9cd354f14bc6"
+    },
+    {
+      "path": "img/map_data_709.png",
+      "bytes": 20778,
+      "sha256": "138c27dd4c9b4006af4fe38f0868e658c164f9859a836c191326ba1cb822dd05"
+    },
+    {
+      "path": "img/map_data_715.png",
+      "bytes": 20763,
+      "sha256": "46fc356b413ce647a7b084e9b55b25f0bd0b26552dfcdb21df5ed358a5ecbd84"
+    },
+    {
+      "path": "img/map_data_719.png",
+      "bytes": 22517,
+      "sha256": "196907b8485560d5e4e8f1689b5385e9913920a426d8da27e6ed070cf086f68d"
+    },
+    {
+      "path": "img/map_data_720.png",
+      "bytes": 22133,
+      "sha256": "4e12dba5af8e2f1f1a3f1d3b74cb815589631c362e6a0129da4bf152293fd631"
+    },
+    {
+      "path": "img/map_data_721.png",
+      "bytes": 22139,
+      "sha256": "544277864566f8c81fe449e92183458fec88a4a4d4d2d871a7f4094639c388e6"
+    },
+    {
+      "path": "img/map_data_722.png",
+      "bytes": 18959,
+      "sha256": "9cac89d90ccf5a049994a88faa208606440f24cd474f9c7dbc3092cb0e79029f"
+    },
+    {
+      "path": "img/map_data_723.png",
+      "bytes": 19001,
+      "sha256": "47fb5d130fc495458338ff05e3f7db1ab8f6f585e40b72cf6712769dcfc144aa"
+    },
+    {
+      "path": "img/map_data_741f.png",
+      "bytes": 45558,
+      "sha256": "dd80a52c80e5dddaeea6b9d447d49424ea81340e698bdffdb8b5fe6a246ee1da"
+    },
+    {
+      "path": "img/map_data.png",
+      "bytes": 20772,
+      "sha256": "1c5454eb6d8b0daae040b9eb07e31b91c6dc0ba68209dd52bc93dd4b355b530e"
+    },
+    {
+      "path": "img/skins/741f/dota_autumn.png",
+      "bytes": 26251485,
+      "sha256": "74dbf32c0bfb1fbcbedf5fe43c1572639ab84a277e19f2f948249a4a46f4438d"
+    },
+    {
+      "path": "img/skins/741f/dota_cavern.png",
+      "bytes": 26900811,
+      "sha256": "4b700533672c95d790f95196f0cda93a52dcc3cc7ead711d89de6b29eb16c9aa"
+    },
+    {
+      "path": "img/skins/741f/dota_coloseum.png",
+      "bytes": 26823622,
+      "sha256": "f1caeb8ba9413a9418510cacbe2545e3e037a3fa6a523cf1f2db819009750b32"
+    },
+    {
+      "path": "img/skins/741f/dota_desert.png",
+      "bytes": 26043462,
+      "sha256": "838e5743f594314ad31be8503f98d99208df706d332631499acf44aa492f52da"
+    },
+    {
+      "path": "img/skins/741f/dota_journey.png",
+      "bytes": 25938304,
+      "sha256": "9782f17bea2dc678b0cde61f03935939ac779b3536b01749163de52c57233825"
+    },
+    {
+      "path": "img/skins/741f/dota_jungle.png",
+      "bytes": 27685364,
+      "sha256": "53d20c190493abba9c092251b9de6149640db2cf926807adfcee29d9dd130b7b"
+    },
+    {
+      "path": "img/skins/741f/dota_reef.png",
+      "bytes": 30190852,
+      "sha256": "080772debe860ba7788930f869bea7f2ea49923c4183972f106b7025eb90ef56"
+    },
+    {
+      "path": "img/skins/741f/dota_spring.png",
+      "bytes": 25471513,
+      "sha256": "14b73ccf5ee3a0e36ae0ce2d122a55e2ed3ea4a073b89f186a8bf101c01632ee"
+    },
+    {
+      "path": "img/skins/741f/dota_summer.png",
+      "bytes": 25346940,
+      "sha256": "4b9f2ad45d4193388fe390c76f839962bb7ca4812ef4306e8bfc57a40a41e137"
+    },
+    {
+      "path": "img/skins/741f/dota_ti10.png",
+      "bytes": 24211829,
+      "sha256": "c20f1f6900503d353e2c9842f93d1620bd062ba5e7e5278bd6e6b442e250e8ac"
+    },
+    {
+      "path": "img/skins/741f/dota_winter.png",
+      "bytes": 25374637,
+      "sha256": "d1f6273815278a4a5260b45fdbce3992d437f7f26b0b4710310e11437c89c252"
+    },
+    {
+      "path": "img/skins/741f/dota.png",
+      "bytes": 23793134,
+      "sha256": "660c5f6edfba7026a7b95c71626bafdd3bfc9d7b5580814939ed7172b8e62c3d"
+    }
+  ]
+}

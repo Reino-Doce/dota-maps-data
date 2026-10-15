@@ -1,0 +1,62 @@
+{
+  "image": "img/dota-game-map-741f.jpg",
+  "width": 8909,
+  "height": 8424,
+  "source": {
+    "url": "https://liquipedia.net/commons/images/0/07/Game_map_7.41.jpg",
+    "sha256": "84e6b8bd0f8a06548e45dbed94fb734ee280f3465bafef908f27889ccdd4d0b2",
+    "page": "https://liquipedia.net/dota2/Map_Screenshot",
+    "capture": "7.41 game screenshot stitched with Microsoft ICE",
+    "method": "https://devilesk.com/blog/creating-a-dota-map-image",
+    "worldCoordinates": "Installed dota map entity origins; ward_spot info_targets and wardspot_00 models",
+    "pixelCoordinates": "Centers measured in the original 8909 by 8424 image"
+  },
+  "worldExtent": [
+    -9454.855628120002,
+    -8680.271888763933,
+    9966.3513646168,
+    9676.423686206372
+  ],
+  "errors": [
+    {
+      "name": "northwest Lotus Pool",
+      "worldUnits": 9.844611802680259
+    },
+    {
+      "name": "southeast Lotus Pool",
+      "worldUnits": 5.677327298457016
+    },
+    {
+      "name": "northwest Twin Gate",
+      "worldUnits": 8.060667046286799
+    },
+    {
+      "name": "southeast Twin Gate",
+      "worldUnits": 8.539324647765325
+    },
+    {
+      "name": "northwest river rune",
+      "worldUnits": 9.102218084088545
+    },
+    {
+      "name": "southeast river rune",
+      "worldUnits": 4.437051993673463
+    },
+    {
+      "name": "north ward cliff",
+      "worldUnits": 6.5251434591079835
+    },
+    {
+      "name": "south ward cliff",
+      "worldUnits": 29.856155423790653
+    },
+    {
+      "name": "west ward cliff",
+      "worldUnits": 26.819105353091235
+    },
+    {
+      "name": "east ward cliff",
+      "worldUnits": 19.250158156249338
+    }
+  ]
+}

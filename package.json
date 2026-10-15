@@ -1,0 +1,59 @@
+{
+    "name": "@reino-doce/dota-maps-data",
+    "version": "0.1.0",
+    "description": "Prebuilt Dota 2 map data and reusable map calculations.",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Reino-Doce/dota-maps-data.git"
+    },
+    "private": true,
+    "type": "module",
+    "engines": {
+        "node": ">=24.21.0 <25",
+        "npm": ">=12.1.0"
+    },
+    "packageManager": "npm@12.1.0",
+    "main": "./src/index.mjs",
+    "exports": {
+        ".": "./src/index.mjs",
+        "./node": "./src/node/index.mjs",
+        "./node/game-files": "./src/node/game-files.mjs",
+        "./vision": {
+            "browser": "./dist/vision.browser.mjs",
+            "node": "./dist/vision.node.mjs",
+            "default": "./dist/vision.browser.mjs"
+        },
+        "./manifest.json": "./manifest.json",
+        "./data/*": "./assets/data/*",
+        "./image/*": "./assets/img/*",
+        "./package.json": "./package.json"
+    },
+    "scripts": {
+        "build": "node scripts/build.mjs",
+        "manifest": "node scripts/build-manifest.mjs",
+        "generatejson": "node scripts/generate-legacy-geojson.mjs",
+        "test": "node --test tests/*.test.mjs",
+        "import:terrain": "node scripts/import-vision-grid.mjs",
+        "import:wards": "node scripts/import-ward-grid.mjs",
+        "import:structures": "node scripts/import-structure-footprints.mjs",
+        "import:eyes": "node scripts/import-eyes-vision.mjs",
+        "import:watchers": "node scripts/import-watchers.mjs",
+        "import:building-vision": "node scripts/import-building-vision.mjs",
+        "import:neutral-spawn-boxes": "node scripts/import-neutral-spawn-boxes.mjs",
+        "import:live-trees": "node scripts/import-live-trees.mjs",
+        "import:overview": "node scripts/import-overview.mjs",
+        "import:screenshot": "node scripts/import-screenshot.mjs",
+        "map:skins": "node scripts/map-skins.mjs"
+    },
+    "dependencies": {
+        "@turf/helpers": "7.4.0",
+        "@turf/union": "7.4.0",
+        "dota-vision-simulation": "0.17.0",
+        "pngjs": "7.0.0"
+    },
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "29.0.3",
+        "@rollup/plugin-node-resolve": "16.0.3",
+        "rollup": "4.63.5"
+    }
+}
