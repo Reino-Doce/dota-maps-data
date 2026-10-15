@@ -58,6 +58,10 @@ test('npm map packages are self-contained and do not depend on generation toolin
     for (const item of plan.packages) {
         assert.equal(item.packageJson.exports['./latest/mapdata.json'],
             './assets/data/' + item.patch.id + '/mapdata.json');
+        assert.equal(item.packageJson.exports['./' + item.patch.id + '/mapdata.json'],
+            './assets/data/' + item.patch.id + '/mapdata.json');
+        assert.equal(item.packageJson.exports['./' + item.patch.id + '/*'],
+            './assets/data/' + item.patch.id + '/*');
         for (const image of item.images) {
             assert.equal(item.packageJson.exports['./latest/' + path.posix.basename(image.path)],
                 './assets/' + image.path);
@@ -72,6 +76,14 @@ test('npm map packages are self-contained and do not depend on generation toolin
     }
     assert.equal(plan.latestPackage.images.some(entry => entry.path.startsWith('img/skins/')), false,
         'the latest data package keeps large optional terrain images separate');
+    const currentPatchPackage = plan.patchPackages.find(item => item.id === plan.manifest.currentPatch);
+    assert.ok(currentPatchPackage.skins.length > 0);
+    for (const skin of currentPatchPackage.skins) {
+        assert.equal(currentPatchPackage.packageJson.exports['./images/' + currentPatchPackage.id + '/' + skin.id],
+            './skin-exports/' + currentPatchPackage.id + '/' + skin.id + '.mjs');
+        assert.equal(plan.latestPackage.packageJson.exports['./images/latest/' + skin.id],
+            './skin-exports/' + currentPatchPackage.id + '/' + skin.id + '.mjs');
+    }
     assert.equal(plan.skinPackages.length, plan.manifest.skinPackages.length);
     assert.equal(plan.skinsAggregatePackage.name, '@reino-doce/dota-map-skins-latest');
     for (const skin of plan.skinPackages) {

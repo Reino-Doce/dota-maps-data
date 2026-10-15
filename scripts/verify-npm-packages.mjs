@@ -50,6 +50,14 @@ for (const item of plan.packages) {
         assert.equal(await sha256(output), entry.sha256, `${item.name}: ${entry.path} checksum changed`);
         assert.equal(await sha256(source), entry.sha256, `source asset checksum changed: ${entry.path}`);
     }
+    for (const skin of item.skins) {
+        const wrapper = path.join(packageDirectory, 'skin-exports', item.patch.id, skin.id + '.mjs');
+        assert.equal(fs.existsSync(wrapper), true, `${item.name} omitted the ${skin.id} skin import wrapper`);
+        assert.ok(fs.readFileSync(wrapper, 'utf8').includes(skin.packageName),
+            `${item.name} skin wrapper must reference ${skin.packageName}`);
+        assert.equal(item.packageJson.dependencies, undefined,
+            `${item.name} must leave optional skin packages to the consumer`);
+    }
 }
 
 assert.equal(plan.manifest.latestPackage.sourcePackageName,
@@ -103,6 +111,9 @@ try {
 
     const mapDataSpecifier = '@reino-doce/dota-maps-data/latest/mapdata.json';
     const mapImageSpecifier = '@reino-doce/dota-maps-data/latest/dota-map.png';
+    const versionDataSpecifier = '@reino-doce/dota-maps-data/' + plan.manifest.currentPatch + '/mapdata.json';
+    const versionSkinSpecifier = '@reino-doce/dota-maps-data/images/' + plan.manifest.currentPatch + '/' + skin.id;
+    const latestSkinSpecifier = '@reino-doce/dota-maps-data/images/latest/' + skin.id;
     const skinImageSpecifier = skin.name + '/latest/' + skin.id + '/' + path.posix.basename(skin.image.path);
     const consumerScript = `
         import assert from 'node:assert/strict';
@@ -111,9 +122,11 @@ try {
         import mapdata from ${JSON.stringify(mapDataSpecifier)} with { type: 'json' };
         import { resolveAssetPath } from './runtime/src/node/map-assets.mjs';
         assert.ok(mapdata && typeof mapdata === 'object');
-        for (const specifier of [${JSON.stringify(mapDataSpecifier)}, ${JSON.stringify(mapImageSpecifier)}, ${JSON.stringify(skinImageSpecifier)}]) {
+        for (const specifier of [${JSON.stringify(mapDataSpecifier)}, ${JSON.stringify(mapImageSpecifier)}, ${JSON.stringify(versionDataSpecifier)}, ${JSON.stringify(versionSkinSpecifier)}, ${JSON.stringify(latestSkinSpecifier)}, ${JSON.stringify(skinImageSpecifier)}]) {
             assert.ok(fs.existsSync(fileURLToPath(import.meta.resolve(specifier))), specifier);
         }
+        const skinWrapper = fs.readFileSync(fileURLToPath(import.meta.resolve(${JSON.stringify(latestSkinSpecifier)})), 'utf8');
+        assert.ok(skinWrapper.includes(${JSON.stringify(skin.name + '/image/' + path.posix.basename(skin.image.path))}));
         for (const assetPath of ['data/latest/mapdata.json', 'latest/dota-map.png', ${JSON.stringify('latest/' + skin.id + '/' + path.posix.basename(skin.image.path))}]) {
             assert.ok(fs.existsSync(resolveAssetPath(assetPath)), assetPath);
         }

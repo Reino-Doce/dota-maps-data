@@ -32,15 +32,18 @@ Then import the map data and standard map image:
     import mapdata from '@reino-doce/dota-maps-data/latest/mapdata.json' with { type: 'json' };
     import mapImage from '@reino-doce/dota-maps-data/latest/dota-map.png';
 
-A patch-specific package can use the same paths when installed under that alias:
+A patch-specific package can be installed under the same base name. Its exports include both the stable `latest` path and the patch ID path:
 
     npm install @reino-doce/dota-maps-data@npm:@reino-doce/dota-maps-data-700
+    import mapdata from '@reino-doce/dota-maps-data/700/mapdata.json' with { type: 'json' };
 
-Terrain skins are optional image-only packages. Installing a skin does not install map data; install it only when the application needs that image:
+Terrain skins are optional image-only packages. Install the selected patch data and only the skin image the application needs:
 
+    npm install @reino-doce/dota-maps-data@npm:@reino-doce/dota-maps-data-latest
     npm install @reino-doce/dota-map-skin-autumn
+    import autumn from '@reino-doce/dota-maps-data/images/latest/autumn';
 
-Import from the skin package, or use resolveAssetPath('latest/autumn/dota_autumn.png') from the library's Node entry point. The source workspace also exposes @reino-doce/dota-maps-data/latest/autumn/dota_autumn.png directly. Published skin packages expose the matching latest/<skin>/<image> suffix under their own package name, so each skin stays independently installable.
+Patch-specific aliases expose the equivalent `@reino-doce/dota-maps-data/images/<patch>/<skin>` import path, such as `/images/741f/autumn`. That subpath is a small re-export wrapper; the PNG remains in the independently installable skin package, so install the matching `@reino-doce/dota-map-skin-<skin>` package as shown. Alternatively, import the PNG directly from that skin package. The source workspace also exposes `@reino-doce/dota-maps-data/latest/<skin>/<image>` and the Node entry point can resolve it with `resolveAssetPath()`.
 
 Existing consumers of the stable latest package do not change automatically. Run npm update @reino-doce/dota-maps-data-latest, or update the alias target in package.json, to receive newer map data. Consumers of a patch-specific package remain on that patch until they change dependencies.
 
