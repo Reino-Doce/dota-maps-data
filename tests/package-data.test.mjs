@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { readMapData, readMapManifest, resolveAssetPath } from '../src/node/index.mjs';
 import { importOverview } from '../scripts/import-overview.mjs';
 import { importScreenshot } from '../scripts/import-screenshot.mjs';
+import { buildNpmPackagePlan } from '../scripts/prepare-npm-packages.mjs';
 import { readPreparedWorldData } from '../src/node/patch-inputs.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -18,6 +19,8 @@ test('manifest checksums cover every committed map asset and registered image', 
     const manifest = readMapManifest();
     const entries = [...manifest.patches.flatMap(patch => patch.files), ...manifest.shared, ...manifest.images];
     assert.ok(manifest.patches.length >= 12);
+    assert.equal(manifest.currentPatch, '741f');
+    assert.equal(manifest.latestPackage.sourcePackageName, `@reino-doce/dota-maps-data-${manifest.currentPatch}`);
     assert.equal(new Set(entries.map(entry => entry.path)).size, entries.length);
     for (const entry of entries) {
         const bytes = fs.readFileSync(resolveAssetPath(entry.path));
@@ -27,6 +30,59 @@ test('manifest checksums cover every committed map asset and registered image', 
     for (const skin of readMapData('741f', 'skins.json')) assert.ok(fs.existsSync(resolveAssetPath(skin.image)), skin.image);
     const screenshot = readMapData('741f', 'screenshot.json');
     assert.ok(fs.existsSync(resolveAssetPath(screenshot.image)), screenshot.image);
+    assert.deepEqual(readMapData('latest', 'overview.json'), readMapData(manifest.currentPatch, 'overview.json'));
+});
+
+test('latest import paths resolve current map data, standard images, and selected skin images', () => {
+    const manifest = readMapManifest();
+    const cases = [
+        ['@reino-doce/dota-maps-data/latest/mapdata.json', 'latest/mapdata.json'],
+        ['@reino-doce/dota-maps-data/latest/dota-map.png', 'latest/dota-map.png'],
+        ['@reino-doce/dota-maps-data/latest/autumn/dota_autumn.png', 'latest/autumn/dota_autumn.png'],
+    ];
+    for (const [specifier, assetPath] of cases) {
+        assert.equal(
+            path.resolve(fileURLToPath(import.meta.resolve(specifier))),
+            path.resolve(resolveAssetPath(assetPath)),
+            specifier,
+        );
+    }
+    assert.deepEqual(readMapData('latest'), readMapData(manifest.currentPatch));
+});
+
+test('npm map packages are self-contained and do not depend on generation tooling', () => {
+    const plan = buildNpmPackagePlan();
+    assert.equal(plan.patchPackages.length, plan.manifest.patches.length);
+    assert.equal(plan.latestPackage.name, '@reino-doce/dota-maps-data-latest');
+    assert.equal(plan.latestPackage.patch.id, plan.manifest.currentPatch);
+    for (const item of plan.packages) {
+        assert.equal(item.packageJson.exports['./latest/mapdata.json'],
+            './assets/data/' + item.patch.id + '/mapdata.json');
+        for (const image of item.images) {
+            assert.equal(item.packageJson.exports['./latest/' + path.posix.basename(image.path)],
+                './assets/' + image.path);
+        }
+    }
+    for (const item of plan.packages) {
+        assert.equal(item.packageJson.dependencies, undefined, item.name);
+        assert.equal(item.packageJson.devDependencies, undefined, item.name);
+        assert.ok(item.patch.files.length > 0, item.name);
+        assert.ok(item.shared.some(entry => entry.path.startsWith('data/legacy/')), item.name);
+        assert.equal(item.packageJson.exports['./data/*'], `./assets/data/${item.patch.id}/*`);
+    }
+    assert.equal(plan.latestPackage.images.some(entry => entry.path.startsWith('img/skins/')), false,
+        'the latest data package keeps large optional terrain images separate');
+    assert.equal(plan.skinPackages.length, plan.manifest.skinPackages.length);
+    assert.equal(plan.skinsAggregatePackage.name, '@reino-doce/dota-map-skins-latest');
+    for (const skin of plan.skinPackages) {
+        assert.equal(skin.packageJson.dependencies, undefined, skin.name);
+        assert.equal(skin.packageJson.exports['./latest/' + skin.id + '/' + path.posix.basename(skin.image.path)],
+            './assets/' + skin.image.path);
+        assert.ok(skin.image.bytes < 100_000_000, `${skin.name} should remain an independently publishable package`);
+    }
+    for (const item of plan.patchPackages.filter(entry => entry.id !== plan.manifest.currentPatch)) {
+        assert.equal(item.images.some(entry => entry.path.startsWith('img/skins/')), false, item.name);
+    }
 });
 
 test('overview and screenshot importers generate an additional explicit patch from prepared sources', t => {

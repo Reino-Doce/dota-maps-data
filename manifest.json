@@ -1,8 +1,126 @@
 {
   "schemaVersion": 1,
+  "currentPatch": "741f",
+  "latestPackage": {
+    "packageName": "@reino-doce/dota-maps-data-latest",
+    "sourcePatch": "741f",
+    "sourcePackageName": "@reino-doce/dota-maps-data-741f"
+  },
+  "latestSkinsPackageName": "@reino-doce/dota-map-skins-latest",
+  "skinPackages": [
+    {
+      "id": "autumn",
+      "packageName": "@reino-doce/dota-map-skin-autumn",
+      "file": {
+        "path": "img/skins/741f/dota_autumn.png",
+        "bytes": 26251485,
+        "sha256": "74dbf32c0bfb1fbcbedf5fe43c1572639ab84a277e19f2f948249a4a46f4438d"
+      }
+    },
+    {
+      "id": "cavern",
+      "packageName": "@reino-doce/dota-map-skin-cavern",
+      "file": {
+        "path": "img/skins/741f/dota_cavern.png",
+        "bytes": 26900811,
+        "sha256": "4b700533672c95d790f95196f0cda93a52dcc3cc7ead711d89de6b29eb16c9aa"
+      }
+    },
+    {
+      "id": "coloseum",
+      "packageName": "@reino-doce/dota-map-skin-coloseum",
+      "file": {
+        "path": "img/skins/741f/dota_coloseum.png",
+        "bytes": 26823622,
+        "sha256": "f1caeb8ba9413a9418510cacbe2545e3e037a3fa6a523cf1f2db819009750b32"
+      }
+    },
+    {
+      "id": "desert",
+      "packageName": "@reino-doce/dota-map-skin-desert",
+      "file": {
+        "path": "img/skins/741f/dota_desert.png",
+        "bytes": 26043462,
+        "sha256": "838e5743f594314ad31be8503f98d99208df706d332631499acf44aa492f52da"
+      }
+    },
+    {
+      "id": "journey",
+      "packageName": "@reino-doce/dota-map-skin-journey",
+      "file": {
+        "path": "img/skins/741f/dota_journey.png",
+        "bytes": 25938304,
+        "sha256": "9782f17bea2dc678b0cde61f03935939ac779b3536b01749163de52c57233825"
+      }
+    },
+    {
+      "id": "jungle",
+      "packageName": "@reino-doce/dota-map-skin-jungle",
+      "file": {
+        "path": "img/skins/741f/dota_jungle.png",
+        "bytes": 27685364,
+        "sha256": "53d20c190493abba9c092251b9de6149640db2cf926807adfcee29d9dd130b7b"
+      }
+    },
+    {
+      "id": "reef",
+      "packageName": "@reino-doce/dota-map-skin-reef",
+      "file": {
+        "path": "img/skins/741f/dota_reef.png",
+        "bytes": 30190852,
+        "sha256": "080772debe860ba7788930f869bea7f2ea49923c4183972f106b7025eb90ef56"
+      }
+    },
+    {
+      "id": "spring",
+      "packageName": "@reino-doce/dota-map-skin-spring",
+      "file": {
+        "path": "img/skins/741f/dota_spring.png",
+        "bytes": 25471513,
+        "sha256": "14b73ccf5ee3a0e36ae0ce2d122a55e2ed3ea4a073b89f186a8bf101c01632ee"
+      }
+    },
+    {
+      "id": "summer",
+      "packageName": "@reino-doce/dota-map-skin-summer",
+      "file": {
+        "path": "img/skins/741f/dota_summer.png",
+        "bytes": 25346940,
+        "sha256": "4b9f2ad45d4193388fe390c76f839962bb7ca4812ef4306e8bfc57a40a41e137"
+      }
+    },
+    {
+      "id": "ti10",
+      "packageName": "@reino-doce/dota-map-skin-ti10",
+      "file": {
+        "path": "img/skins/741f/dota_ti10.png",
+        "bytes": 24211829,
+        "sha256": "c20f1f6900503d353e2c9842f93d1620bd062ba5e7e5278bd6e6b442e250e8ac"
+      }
+    },
+    {
+      "id": "winter",
+      "packageName": "@reino-doce/dota-map-skin-winter",
+      "file": {
+        "path": "img/skins/741f/dota_winter.png",
+        "bytes": 25374637,
+        "sha256": "d1f6273815278a4a5260b45fdbce3992d437f7f26b0b4710310e11437c89c252"
+      }
+    },
+    {
+      "id": "base",
+      "packageName": "@reino-doce/dota-map-skin-base",
+      "file": {
+        "path": "img/skins/741f/dota.png",
+        "bytes": 23793134,
+        "sha256": "660c5f6edfba7026a7b95c71626bafdd3bfc9d7b5580814939ed7172b8e62c3d"
+      }
+    }
+  ],
   "patches": [
     {
       "id": "688",
+      "packageName": "@reino-doce/dota-maps-data-688",
       "files": [
         {
           "path": "data/688/mapdata.json",
@@ -13,6 +131,7 @@
     },
     {
       "id": "700",
+      "packageName": "@reino-doce/dota-maps-data-700",
       "files": [
         {
           "path": "data/700/elevation.json",
@@ -48,6 +167,7 @@
     },
     {
       "id": "706",
+      "packageName": "@reino-doce/dota-maps-data-706",
       "files": [
         {
           "path": "data/706/elevation.json",
@@ -83,6 +203,7 @@
     },
     {
       "id": "707",
+      "packageName": "@reino-doce/dota-maps-data-707",
       "files": [
         {
           "path": "data/707/elevation.json",
@@ -118,6 +239,7 @@
     },
     {
       "id": "709",
+      "packageName": "@reino-doce/dota-maps-data-709",
       "files": [
         {
           "path": "data/709/elevation.json",
@@ -153,6 +275,7 @@
     },
     {
       "id": "715",
+      "packageName": "@reino-doce/dota-maps-data-715",
       "files": [
         {
           "path": "data/715/elevation.json",
@@ -188,6 +311,7 @@
     },
     {
       "id": "719",
+      "packageName": "@reino-doce/dota-maps-data-719",
       "files": [
         {
           "path": "data/719/elevation.json",
@@ -223,6 +347,7 @@
     },
     {
       "id": "720",
+      "packageName": "@reino-doce/dota-maps-data-720",
       "files": [
         {
           "path": "data/720/elevation.json",
@@ -258,6 +383,7 @@
     },
     {
       "id": "721",
+      "packageName": "@reino-doce/dota-maps-data-721",
       "files": [
         {
           "path": "data/721/elevation.json",
@@ -293,6 +419,7 @@
     },
     {
       "id": "722",
+      "packageName": "@reino-doce/dota-maps-data-722",
       "files": [
         {
           "path": "data/722/elevation.json",
@@ -328,6 +455,7 @@
     },
     {
       "id": "723",
+      "packageName": "@reino-doce/dota-maps-data-723",
       "files": [
         {
           "path": "data/723/elevation.json",
@@ -363,11 +491,12 @@
     },
     {
       "id": "741f",
+      "packageName": "@reino-doce/dota-maps-data-741f",
       "files": [
         {
           "path": "data/741f/building_vision.json",
-          "bytes": 18559,
-          "sha256": "d2b384c316538189e4a794782adf9bb6916f580af83ecea67ec225394b02d378"
+          "bytes": 19410,
+          "sha256": "0fb4bf5f4328da7b624025fe52974389cfdf177a0e7a34e80d515d26f6762e3c"
         },
         {
           "path": "data/741f/elevation.json",
@@ -396,13 +525,13 @@
         },
         {
           "path": "data/741f/live_tree_index.json",
-          "bytes": 11424,
-          "sha256": "70950416eae080c0bd81b325ec3b1d5135f851c85c115eefe07c6b80b63819db"
+          "bytes": 11425,
+          "sha256": "352528dc51cb45125c856827f6770aaac30c6ef97fa7d5be1d1a95c7ddc2e197"
         },
         {
           "path": "data/741f/mapdata.json",
-          "bytes": 116870,
-          "sha256": "da4d95e516900868cbd3695a4be0eed2abc942d32fa6ed991a8659a1f0a02ba7"
+          "bytes": 116871,
+          "sha256": "9bc8f793a85222410c2bf34a945bb25c18046c72055334ffb4b4ef26873346ff"
         },
         {
           "path": "data/741f/no_wards.json",
@@ -416,8 +545,8 @@
         },
         {
           "path": "data/741f/overview.json",
-          "bytes": 385,
-          "sha256": "7a838ab7e586d99717eb0c233dddd02e8647fbbd3226d9268a04c54218da12f9"
+          "bytes": 400,
+          "sha256": "0f63479c5ff860fd2942135350c0353a5ed9cc79d60250f3c38eee9493747253"
         },
         {
           "path": "data/741f/overview.txt",
@@ -431,18 +560,18 @@
         },
         {
           "path": "data/741f/screenshot-controls.json",
-          "bytes": 1681,
-          "sha256": "30f078bddcd03523eb25bedcc87c9424d047d227feeef3ecbd05506ee95dc593"
+          "bytes": 1709,
+          "sha256": "cafa4e494462d3f4e1f83559332d2ae7d019146b18ce01fad95fd51d23355052"
         },
         {
           "path": "data/741f/screenshot.json",
-          "bytes": 1643,
-          "sha256": "b3048304072a77e96939529af79efea9247ac92e6b124377055e13463f7b8afd"
+          "bytes": 1705,
+          "sha256": "918ee7b8d801cef05bf6a19cb3377c5d125ad650550a41d63c72a2281f27771d"
         },
         {
           "path": "data/741f/skins.json",
-          "bytes": 41879,
-          "sha256": "3d6f77d99507c5c7e756f6c3f1610e6ca4627e73a72246ed663acf460effc097"
+          "bytes": 43762,
+          "sha256": "4265e1d91ea4aa9e196abb11534295853f73b11958e45292d408e522dbc1e785"
         },
         {
           "path": "data/741f/terrain_grid.json",
@@ -461,8 +590,8 @@
         },
         {
           "path": "data/741f/watchers.json",
-          "bytes": 1052,
-          "sha256": "f3bd13028ef13905bdce71b8633de46bd7a2db2ea63da0c935408180e1ea0583"
+          "bytes": 1116,
+          "sha256": "c9fbde25d154f1502011dc942549e4b9f3c892f8b493c851f136a294bfe2f28f"
         },
         {
           "path": "data/741f/worlddata.json",

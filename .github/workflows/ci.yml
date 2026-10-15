@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.21.0
+          cache: npm
+
+      - name: Install pinned npm
+        run: npm install --global npm@12.1.0
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Refresh the asset manifest
+        run: npm run manifest
+
+      - name: Build runtime entry points
+        run: npm run build
+
+      - name: Run library tests
+        run: npm test
+
+      - name: Prepare and verify independent npm packages
+        run: |
+          npm run packages:prepare
+          npm run packages:verify
+
+      - name: Dry-run every public package
+        shell: bash
+        run: |
+          npm publish --dry-run --access public ./npm-packages/core > /tmp/dota-maps-data-core-publish.log
+          for package in npm-packages/dota-map*; do
+            log_file="/tmp/$(basename "$package")-publish.log"
+            if ! npm publish --dry-run --access public "./$package" > "$log_file"; then
+              cat "$log_file"
+              exit 1
+            fi
+          done

@@ -3,4 +3,5 @@ map-captures/
 extracted/
 game-resource-work/
 coverage/
+npm-packages/
 *.log

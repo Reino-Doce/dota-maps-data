@@ -1,59 +1,112 @@
 {
-    "name": "@reino-doce/dota-maps-data",
-    "version": "0.1.0",
-    "description": "Prebuilt Dota 2 map data and reusable map calculations.",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Reino-Doce/dota-maps-data.git"
+  "name": "@reino-doce/dota-maps-data",
+  "version": "0.1.0",
+  "description": "Prebuilt Dota 2 map data and reusable map calculations.",
+  "dotaMapsData": {
+    "currentPatch": "741f"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Reino-Doce/dota-maps-data.git"
+  },
+  "homepage": "https://github.com/Reino-Doce/dota-maps-data#readme",
+  "bugs": {
+    "url": "https://github.com/Reino-Doce/dota-maps-data/issues"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=24.21.0 <25",
+    "npm": ">=12.1.0"
+  },
+  "packageManager": "npm@12.1.0",
+  "files": [
+    "assets/data/legacy/",
+    "dist/",
+    "manifest.json",
+    "scripts/",
+    "src/",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./src/index.mjs",
+  "exports": {
+    ".": "./src/index.mjs",
+    "./node": "./src/node/index.mjs",
+    "./node/game-files": "./src/node/game-files.mjs",
+    "./vision": {
+      "browser": "./dist/vision.browser.mjs",
+      "node": "./dist/vision.node.mjs",
+      "default": "./dist/vision.browser.mjs"
     },
-    "private": true,
-    "type": "module",
-    "engines": {
-        "node": ">=24.21.0 <25",
-        "npm": ">=12.1.0"
-    },
-    "packageManager": "npm@12.1.0",
-    "main": "./src/index.mjs",
-    "exports": {
-        ".": "./src/index.mjs",
-        "./node": "./src/node/index.mjs",
-        "./node/game-files": "./src/node/game-files.mjs",
-        "./vision": {
-            "browser": "./dist/vision.browser.mjs",
-            "node": "./dist/vision.node.mjs",
-            "default": "./dist/vision.browser.mjs"
-        },
-        "./manifest.json": "./manifest.json",
-        "./data/*": "./assets/data/*",
-        "./image/*": "./assets/img/*",
-        "./package.json": "./package.json"
-    },
-    "scripts": {
-        "build": "node scripts/build.mjs",
-        "manifest": "node scripts/build-manifest.mjs",
-        "generatejson": "node scripts/generate-legacy-geojson.mjs",
-        "test": "node --test tests/*.test.mjs",
-        "import:terrain": "node scripts/import-vision-grid.mjs",
-        "import:wards": "node scripts/import-ward-grid.mjs",
-        "import:structures": "node scripts/import-structure-footprints.mjs",
-        "import:eyes": "node scripts/import-eyes-vision.mjs",
-        "import:watchers": "node scripts/import-watchers.mjs",
-        "import:building-vision": "node scripts/import-building-vision.mjs",
-        "import:neutral-spawn-boxes": "node scripts/import-neutral-spawn-boxes.mjs",
-        "import:live-trees": "node scripts/import-live-trees.mjs",
-        "import:overview": "node scripts/import-overview.mjs",
-        "import:screenshot": "node scripts/import-screenshot.mjs",
-        "map:skins": "node scripts/map-skins.mjs"
-    },
-    "dependencies": {
-        "@turf/helpers": "7.4.0",
-        "@turf/union": "7.4.0",
-        "dota-vision-simulation": "0.17.0",
-        "pngjs": "7.0.0"
-    },
-    "devDependencies": {
-        "@rollup/plugin-commonjs": "29.0.3",
-        "@rollup/plugin-node-resolve": "16.0.3",
-        "rollup": "4.63.5"
-    }
+    "./manifest.json": "./manifest.json",
+    "./data/*": "./assets/data/*",
+    "./image/*": "./assets/img/*",
+    "./package.json": "./package.json",
+    "./latest/mapdata.json": "./assets/data/741f/mapdata.json",
+    "./latest/dota-game-map-741f.jpg": "./assets/img/dota-game-map-741f.jpg",
+    "./latest/dota-map-741f.png": "./assets/img/dota-map-741f.png",
+    "./latest/map_data_741f.png": "./assets/img/map_data_741f.png",
+    "./latest/map_data.png": "./assets/img/map_data_741f.png",
+    "./latest/dota-map.png": "./assets/img/dota-map-741f.png",
+    "./latest/dota-game-map.jpg": "./assets/img/dota-game-map-741f.jpg",
+    "./latest/autumn/*": "./assets/img/skins/741f/*",
+    "./latest/cavern/*": "./assets/img/skins/741f/*",
+    "./latest/coloseum/*": "./assets/img/skins/741f/*",
+    "./latest/desert/*": "./assets/img/skins/741f/*",
+    "./latest/journey/*": "./assets/img/skins/741f/*",
+    "./latest/jungle/*": "./assets/img/skins/741f/*",
+    "./latest/reef/*": "./assets/img/skins/741f/*",
+    "./latest/spring/*": "./assets/img/skins/741f/*",
+    "./latest/summer/*": "./assets/img/skins/741f/*",
+    "./latest/ti10/*": "./assets/img/skins/741f/*",
+    "./latest/winter/*": "./assets/img/skins/741f/*",
+    "./latest/base/*": "./assets/img/skins/741f/*",
+    "./latest/autumn/dota_autumn.png": "./assets/img/skins/741f/dota_autumn.png",
+    "./latest/cavern/dota_cavern.png": "./assets/img/skins/741f/dota_cavern.png",
+    "./latest/coloseum/dota_coloseum.png": "./assets/img/skins/741f/dota_coloseum.png",
+    "./latest/desert/dota_desert.png": "./assets/img/skins/741f/dota_desert.png",
+    "./latest/journey/dota_journey.png": "./assets/img/skins/741f/dota_journey.png",
+    "./latest/jungle/dota_jungle.png": "./assets/img/skins/741f/dota_jungle.png",
+    "./latest/reef/dota_reef.png": "./assets/img/skins/741f/dota_reef.png",
+    "./latest/spring/dota_spring.png": "./assets/img/skins/741f/dota_spring.png",
+    "./latest/summer/dota_summer.png": "./assets/img/skins/741f/dota_summer.png",
+    "./latest/ti10/dota_ti10.png": "./assets/img/skins/741f/dota_ti10.png",
+    "./latest/winter/dota_winter.png": "./assets/img/skins/741f/dota_winter.png",
+    "./latest/base/dota.png": "./assets/img/skins/741f/dota.png"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "manifest": "node scripts/build-manifest.mjs",
+    "generatejson": "node scripts/generate-legacy-geojson.mjs",
+    "prepack": "node scripts/guard-publish.mjs",
+    "prepublishOnly": "node scripts/guard-publish.mjs",
+    "packages:prepare": "node scripts/prepare-npm-packages.mjs",
+    "packages:verify": "node scripts/verify-npm-packages.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "import:terrain": "node scripts/import-vision-grid.mjs",
+    "import:wards": "node scripts/import-ward-grid.mjs",
+    "import:structures": "node scripts/import-structure-footprints.mjs",
+    "import:eyes": "node scripts/import-eyes-vision.mjs",
+    "import:watchers": "node scripts/import-watchers.mjs",
+    "import:building-vision": "node scripts/import-building-vision.mjs",
+    "import:neutral-spawn-boxes": "node scripts/import-neutral-spawn-boxes.mjs",
+    "import:live-trees": "node scripts/import-live-trees.mjs",
+    "import:overview": "node scripts/import-overview.mjs",
+    "import:screenshot": "node scripts/import-screenshot.mjs",
+    "map:skins": "node scripts/map-skins.mjs"
+  },
+  "dependencies": {
+    "@turf/helpers": "7.4.0",
+    "@turf/union": "7.4.0",
+    "dota-vision-simulation": "0.17.0",
+    "pngjs": "7.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "29.0.3",
+    "@rollup/plugin-json": "6.1.0",
+    "@rollup/plugin-node-resolve": "16.0.3",
+    "rollup": "4.63.5"
+  }
 }
