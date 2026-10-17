@@ -5,7 +5,7 @@ export function createGridCollector() {
     let complete = false;
     return {
         accept(line) {
-            const match = line.match(/\[MAP_GRID_(BEGIN|HEIGHT|TREE|ENTITY|PIT|EXPORT_COMPLETE)\](.*)/);
+            const match = line.match(/\[MAP_GRID_(BEGIN|HEIGHT|TREE_ID|TREE|ENTITY|PIT|EXPORT_COMPLETE)\](.*)/);
             if (!match) return;
             if (complete) throw new Error('Duplicate game grid export.');
             const [, type, value] = match;
@@ -19,11 +19,12 @@ export function createGridCollector() {
                 }
                 grid.source = {
                     map: grid.map, heights: 'GetGroundHeight at GNV cell centers', trees: 'ent_dota_tree GetAbsOrigin',
+                    treeIds: 'GetTreeIdForEntityIndex on runtime ent_dota_tree entities when available',
                     entities: 'Runtime structure origins, hulls, models, scales and angles',
                     pits: 'World TraceLine below GetGroundHeight at miniboss_location markers',
                 };
                 delete grid.map;
-                Object.assign(grid, { heights: [], trees: [], entities: [], pits: [] });
+                Object.assign(grid, { heights: [], trees: [], treeIds: [], entities: [], pits: [] });
                 return;
             }
             if (!grid) throw new Error('Game grid export has no header.');
@@ -40,6 +41,12 @@ export function createGridCollector() {
                 grid.heights.push(row.map(Math.fround));
             }
             else if (type === 'TREE') grid.trees.push(vector(JSON.parse(value)));
+            else if (type === 'TREE_ID') {
+                const row = JSON.parse(value);
+                if (!Array.isArray(row) || row.length !== 4 || !Number.isInteger(row[0]) || row[0] < 0
+                    || !row.slice(1).every(Number.isFinite)) throw new Error('Invalid native tree ID.');
+                grid.treeIds.push([row[0], ...row.slice(1).map(Math.fround)]);
+            }
             else if (type === 'ENTITY') {
                 const entity = JSON.parse(value);
                 entity.origin = vector(entity.origin);

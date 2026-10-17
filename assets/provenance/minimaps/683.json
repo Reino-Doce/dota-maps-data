@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "patch": "683",
+  "source": {
+    "archive": "dota/pak01_dir.vpk",
+    "overviewConfig": "resource/overviews/dota_683.txt",
+    "overviewConfigSha256": "2719020be20862c94b69736fdbe44bc303e7594d48130b28d6d8810512421514",
+    "clientBuild": 6962,
+    "vpkIndexesScanned": 746,
+    "source2Viewer": "Source2Viewer-CLI"
+  },
+  "images": {
+    "simple": {
+      "path": "img/683/minimaps/simple.png",
+      "sourceMaterial": "materials/overviews/dota_683.vmat",
+      "resolvedMaterial": "materials/overviews/dotamap683.vmat",
+      "materialResource": "materials/overviews/dotamap683.vmat_c",
+      "materialSha256": "f7b364b90c682e608213a434395e44b8f9666a419447a11317b2c8c929fac9f8",
+      "textureResource": "materials/overviews/dotamap683_psd_70d656bf.vtex_c",
+      "textureSha256": "532f6fdecc5b0ead78b5aa1d7b77e21f92b3004293275dd1bec2dc3a0c69d971",
+      "sha256": "14ebec7ecd6ea7ad5528118eeffc7a1b96358e382b475bd2a8cdcf8dcfcf8146",
+      "bytes": 310013,
+      "width": 1024,
+      "height": 1024
+    }
+  }
+}

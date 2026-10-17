@@ -26,7 +26,7 @@ export function createScreenshotMetadata(patch, bytes, controls) {
         throw new Error('Screenshot dimensions differ from the measured calibration source.');
     }
     return {
-        image: `img/dota-game-map-${patch}.jpg`, width: controls.width, height: controls.height,
+        image: `img/${patch}/screenshot.jpg`, width: controls.width, height: controls.height,
         source: { ...controls.source, sha256 },
         ...calibrateScreenshot(controls),
     };
@@ -36,7 +36,7 @@ export function importScreenshot({ patch, input, assetDirectory = path.join(root
     if (!patch || !/^[a-z0-9]+$/iu.test(patch)) throw new Error('A valid patch ID is required.');
     const directory = path.join(assetDirectory, 'data', patch);
     const controls = JSON.parse(fs.readFileSync(path.join(directory, 'screenshot-controls.json'), 'utf8'));
-    const image = `img/dota-game-map-${patch}.jpg`;
+    const image = `img/${patch}/screenshot.jpg`;
     const destination = path.join(assetDirectory, image);
     const bytes = fs.readFileSync(input || destination);
     const metadata = createScreenshotMetadata(patch, bytes, controls);

@@ -1,0 +1,120 @@
+{
+  "patch": "670",
+  "sourceEngine": "Source 1",
+  "sourceId": "670",
+  "mapName": "dota",
+  "bspVersion": 21,
+  "steamInfo": {
+    "productName": "dota",
+    "appId": "570",
+    "patchVersion": "37",
+    "clientVersion": null
+  },
+  "files": {
+    "map": {
+      "path": "dota/maps/dota.bsp",
+      "bytes": 16617576,
+      "sha256": "93de6395e6c8290b2517ba0c25fc705907c00ce8c738297b015ecee15b71822b"
+    },
+    "navigation": {
+      "path": "dota/maps/dota.gnv",
+      "bytes": 8224,
+      "sha256": "72ea037713b75600a48efb2fdbb296cffb466546dc92c9f0a067a247a2b6fc4e"
+    },
+    "steamInfo": {
+      "path": "dota/steam.inf",
+      "bytes": 46,
+      "sha256": "61f7bf9df075d5c25f0e1f497768f450cc8bf127b34833449e0c0e7d9f1d497c"
+    }
+  },
+  "coverage": {
+    "entityCount": 2725,
+    "treeEntityCount": 2476,
+    "uniqueTreeCount": 2476,
+    "neutralSpawnerCount": 12,
+    "neutralTriggerCount": 12,
+    "neutralAssociations": [
+      {
+        "triggerName": "neutralcamp_evil_1",
+        "distance": 160,
+        "inferredBy": "minimum-total-XY-distance",
+        "hasNeutralType": true
+      },
+      {
+        "triggerName": "neutralcamp_evil_2",
+        "distance": 128,
+        "inferredBy": "minimum-total-XY-distance",
+        "hasNeutralType": true
+      },
+      {
+        "triggerName": "neutralcamp_evil_4",
+        "distance": 115.37764081484765,
+        "inferredBy": "minimum-total-XY-distance",
+        "hasNeutralType": false
+      },
+      {
+        "triggerName": "neutralcamp_evil_3",
+        "distance": 194.64840096954302,
+        "inferredBy": "minimum-total-XY-distance",
+        "hasNeutralType": true
+      },
+      {
+        "triggerName": "neutralcamp_evil_5",
+        "distance": 45.254833995939045,
+        "inferredBy": "minimum-total-XY-distance",
+        "hasNeutralType": true
+      },
+      {
+        "triggerName": "neutralcamp_evil_6",
+        "distance": 192,
+        "inferredBy": "minimum-total-XY-distance",
+        "hasNeutralType": true
+      },
+      {
+        "triggerName": "neutralcamp_good_2",
+        "distance": 181.01933598375618,
+        "inferredBy": "minimum-total-XY-distance",
+        "hasNeutralType": true
+      },
+      {
+        "triggerName": "neutralcamp_good_1",
+        "distance": 234.9088648816809,
+        "inferredBy": "minimum-total-XY-distance",
+        "hasNeutralType": true
+      },
+      {
+        "triggerName": "neutralcamp_good_3",
+        "distance": 86.34176046386837,
+        "inferredBy": "minimum-total-XY-distance",
+        "hasNeutralType": true
+      },
+      {
+        "triggerName": "neutralcamp_good_4",
+        "distance": 64,
+        "inferredBy": "minimum-total-XY-distance",
+        "hasNeutralType": false
+      },
+      {
+        "triggerName": "neutralcamp_good_5",
+        "distance": 163.1686244349691,
+        "inferredBy": "minimum-total-XY-distance",
+        "hasNeutralType": true
+      },
+      {
+        "triggerName": "neutralcamp_good_6",
+        "distance": 295.0254226333724,
+        "inferredBy": "minimum-total-XY-distance",
+        "hasNeutralType": true
+      }
+    ],
+    "unsupportedMapFeatures": [
+      "building vision",
+      "fog-of-war blockers",
+      "ward restrictions",
+      "Watchers",
+      "Eyes vision",
+      "terrain heights",
+      "terrain skins"
+    ]
+  }
+}

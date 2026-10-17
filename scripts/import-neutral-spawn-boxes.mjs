@@ -5,12 +5,10 @@ import { execFileSync } from 'node:child_process';
 import { parseArgs } from 'node:util';
 import { fileURLToPath } from 'node:url';
 import { openVpk, resolveGameDirectory } from '../src/node/game-files.mjs';
-import { readInstalledClientVersion } from '../src/node/game-files.mjs';
 import { buildNeutralSpawnBoxes, mergeNeutralSpawnBoxes, parseNeutralSpawnEntities,
     parseSource2PhysicsHull } from './neutral-spawn-boxes.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const entityResourcePath = 'maps/dota/entities/default_ents.vents_c';
 const resourceVersion = /^[\w.+-]{1,128}$/;
 const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
 
@@ -39,7 +37,8 @@ function decodeResource(resourceTool, input, block) {
     });
 }
 
-function runCapture({ archive, entityBytes, resourceTool, resourceToolVersion, captureRoot }) {
+function runCapture({ archive, entityBytes, entityResourcePath, patch, archiveSha256, navigationSha256,
+    resourceTool, resourceToolVersion, captureRoot }) {
     const runRoot = fs.mkdtempSync(path.join(captureRoot, 'run-'));
     const resourceDirectory = path.join(runRoot, 'resources');
     const decodedDirectory = path.join(runRoot, 'decoded');
@@ -72,6 +71,7 @@ function runCapture({ archive, entityBytes, resourceTool, resourceToolVersion, c
     }
     const toolBytes = fs.readFileSync(resourceTool);
     const manifest = {
+        patch, archiveSha256, navigationSha256, entityResourcePath,
         source2ViewerCli: resourceToolVersion,
         source2ViewerCliSha256: sha256(toolBytes),
         resources: [...resources.values()].sort((a, b) => a.resourcePath.localeCompare(b.resourcePath)),
@@ -83,13 +83,18 @@ function runCapture({ archive, entityBytes, resourceTool, resourceToolVersion, c
         source2ViewerCliSha256: manifest.source2ViewerCliSha256 };
 }
 
-function readCaptured({ archive, entityBytes, captureRoot, patch, clientVersion }) {
+function readCaptured({ archive, entityBytes, entityResourcePath, captureRoot, patch, archiveSha256, navigationSha256 }) {
     const manifestPath = path.join(captureRoot, 'source-manifest.json');
     const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-    if (manifest.patch !== patch || String(manifest.gameClientVersion) !== String(clientVersion)
-        || manifest.sourceArchive !== 'dota/maps/dota.vpk'
+    const capturedNavigationSha256 = manifest.navigationSha256 ?? manifest.gridnavSha256 ?? null;
+    if (manifest.patch !== patch
+        || (manifest.archiveSha256 && manifest.archiveSha256 !== archiveSha256)
+        || (manifest.entityResourcePath && manifest.entityResourcePath !== entityResourcePath)
+        || capturedNavigationSha256 !== navigationSha256
+        || (manifest.sourceArchive && manifest.sourceArchive !== 'dota/maps/dota.vpk'
+            && manifest.archiveSha256 === undefined)
         || !resourceVersion.test(manifest.source2ViewerCli || '')) {
-        throw new Error('Captured neutral spawn resources do not match the selected patch or installed client.');
+        throw new Error('Captured neutral spawn resources do not match the selected patch archive.');
     }
     const decodedDirectory = path.join(captureRoot, 'decoded');
     const captureFile = resourcePath => path.join(captureRoot, resourcePath);
@@ -132,7 +137,9 @@ function readCaptured({ archive, entityBytes, captureRoot, patch, clientVersion 
     }
     const nextManifest = {
         ...manifest,
-        gridnavSha256: sha256(archive.read('maps/dota.gnv')),
+        archiveSha256,
+        navigationSha256,
+        entityResourcePath,
         resources: [...new Map([
             ...(manifest.resources || []).map(resource => [resource.resourcePath, resource]),
             [entityResourcePath, { resourcePath: entityResourcePath, bytes: entityBytes.length, sha256: sha256(entityBytes) }],
@@ -147,7 +154,7 @@ function readCaptured({ archive, entityBytes, captureRoot, patch, clientVersion 
         source2ViewerCliSha256: manifest.source2ViewerCliSha256 || null, nextManifest };
 }
 
-export async function importNeutralSpawnBoxes({ patch, game: gameDirectory, resourceTool, resourceToolVersion,
+export async function importNeutralSpawnBoxes({ patch, game: gameDirectory, archive: archiveInput, resourceTool, resourceToolVersion,
     captureRoot: captureRootOption, assetDirectory = path.join(root, 'assets'),
     mapCaptureDirectory = path.join(root, 'map-captures') } = {}) {
     const useCapture = Boolean(captureRootOption);
@@ -158,21 +165,43 @@ export async function importNeutralSpawnBoxes({ patch, game: gameDirectory, reso
     }
     const directory = path.join(assetDirectory, 'data', patch);
     const mapdataPath = path.join(directory, 'mapdata.json');
-    const game = resolveGameDirectory(gameDirectory);
-    const clientVersion = String(readInstalledClientVersion(game));
-    const archive = openVpk(path.join(game, 'dota/maps/dota.vpk'));
-    const gridnav = archive.read('maps/dota.gnv');
-    if (sha256(gridnav) !== sha256(fs.readFileSync(path.join(directory, 'gridnav.gnv')))) {
-        throw new Error('Installed navigation differs from the selected map patch; refresh map data first.');
+    const patchSource = JSON.parse(fs.readFileSync(path.join(directory, 'source.json'), 'utf8'));
+    if (patchSource.patch !== patch || !patchSource.archiveSha256 || !patchSource.resources?.entities?.available) {
+        throw new Error(`Patch ${patch} is missing exact map archive or entity provenance; re-import its map data first.`);
     }
+    const game = archiveInput ? null : resolveGameDirectory(gameDirectory);
+    const archivePath = path.resolve(archiveInput || path.join(game, 'dota/maps', patchSource.archive));
+    if (!fs.existsSync(archivePath)) throw new Error(`Exact patch ${patch} map archive is missing; pass --archive <file>.`);
+    const archiveBytes = fs.readFileSync(archivePath);
+    const archiveSha256 = sha256(archiveBytes);
+    if (archiveSha256 !== patchSource.archiveSha256) {
+        throw new Error(`Patch ${patch} map archive SHA-256 mismatch; refusing to use a different version.`);
+    }
+    const archive = openVpk(archivePath);
+    const entityResourcePath = patchSource.resources.entities.path;
     const entityBytes = archive.read(entityResourcePath);
+    if (sha256(entityBytes) !== patchSource.resources.entities.sha256) {
+        throw new Error(`Patch ${patch} entity resource does not match source.json.`);
+    }
+    let gridnavSha256 = null;
+    if (patchSource.resources.navigation?.available) {
+        const gridnav = archive.read(patchSource.resources.navigation.path);
+        gridnavSha256 = sha256(gridnav);
+        if (gridnavSha256 !== patchSource.resources.navigation.sha256
+            || gridnavSha256 !== sha256(fs.readFileSync(path.join(directory, 'gridnav.gnv')))) {
+            throw new Error('Exact archive navigation differs from this patch data; re-import the map archive first.');
+        }
+    }
+    else if (fs.existsSync(path.join(directory, 'gridnav.gnv'))) {
+        throw new Error(`Patch ${patch} archive has no native navigation, but data contains gridnav.gnv.`);
+    }
     const captureRoot = useCapture ? path.resolve(captureRootOption)
         : path.join(mapCaptureDirectory, patch, 'neutral-spawn-boxes');
     fs.mkdirSync(captureRoot, { recursive: true });
     const capture = useCapture
-        ? readCaptured({ archive, entityBytes, captureRoot, patch, clientVersion })
-        : runCapture({ archive, entityBytes, resourceTool,
-            resourceToolVersion, captureRoot });
+        ? readCaptured({ archive, entityBytes, entityResourcePath, captureRoot, patch, archiveSha256, navigationSha256: gridnavSha256 })
+        : runCapture({ archive, entityBytes, entityResourcePath, patch, archiveSha256,
+            navigationSha256: gridnavSha256, resourceTool, resourceToolVersion, captureRoot });
     const mapdata = JSON.parse(fs.readFileSync(mapdataPath, 'utf8'));
     if (!Array.isArray(mapdata.data?.npc_dota_neutral_spawner)
         || mapdata.data.npc_dota_neutral_spawner.length === 0) {
@@ -180,8 +209,9 @@ export async function importNeutralSpawnBoxes({ patch, game: gameDirectory, reso
     }
     const source = {
         patch,
-        gameClientVersion: clientVersion,
-        gridnavSha256: sha256(gridnav),
+        gameClientVersion: patchSource.gameClientVersion || null,
+        mapArchiveSha256: archiveSha256,
+        gridnavSha256,
         entityResource: { path: entityResourcePath, sha256: sha256(entityBytes) },
         source2ViewerCli: capture.source2ViewerCli,
         ...(capture.source2ViewerCliSha256 ? { source2ViewerCliSha256: capture.source2ViewerCliSha256 } : {}),
@@ -200,14 +230,14 @@ export async function importNeutralSpawnBoxes({ patch, game: gameDirectory, reso
 
 async function main(argv = process.argv.slice(2)) {
     const { values, positionals } = parseArgs({ args: argv, allowPositionals: true, options: {
-        game: { type: 'string' }, 'resource-tool': { type: 'string' },
+        game: { type: 'string' }, archive: { type: 'string' }, 'resource-tool': { type: 'string' },
         'resource-tool-version': { type: 'string' }, 'capture-root': { type: 'string' },
     } });
     const [patch] = positionals;
     if (positionals.length !== 1) {
-        throw new Error('Usage: npm run import:neutral-spawn-boxes -- <patch> --resource-tool <Source2Viewer-CLI> --resource-tool-version <version> [--game <directory>] | --capture-root <capture-directory> [--game <directory>]');
+        throw new Error('Usage: npm run import:neutral-spawn-boxes -- <patch> --resource-tool <Source2Viewer-CLI> --resource-tool-version <version> [--archive <exact-map-vpk>] [--game <directory>] | --capture-root <capture-directory> [--archive <exact-map-vpk>] [--game <directory>]');
     }
-    await importNeutralSpawnBoxes({ patch, game: values.game, resourceTool: values['resource-tool'],
+    await importNeutralSpawnBoxes({ patch, game: values.game, archive: values.archive, resourceTool: values['resource-tool'],
         resourceToolVersion: values['resource-tool-version'], captureRoot: values['capture-root'] });
 }
 

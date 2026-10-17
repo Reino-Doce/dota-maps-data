@@ -17,41 +17,39 @@ function copyAsset(rootDirectory, destinationDirectory, entry) {
 }
 
 function packageImages(patchId, entries) {
+    const packageImageNames = new Set(['map_data.png', 'illustrated.jpg', 'screenshot.jpg']);
+    const minimapImageNames = new Set(['simple.png', 'detailed.png']);
     return entries.filter(({ path: assetPath }) => {
-        if (assetPath.startsWith('img/skins/')) return false;
-        if (assetPath === `img/map_data_${patchId}.png`) return true;
-        if (assetPath === `img/map_data.png`) return patchId === '688';
-        if (assetPath === `img/dota-map-${patchId}.png` || assetPath === `img/dota-game-map-${patchId}.jpg`) return true;
-        return false;
+        const prefix = `img/${patchId}/`;
+        if (!assetPath.startsWith(prefix)) return false;
+        const relativePath = assetPath.slice(prefix.length);
+        return packageImageNames.has(relativePath)
+            || (relativePath.startsWith('minimaps/') && minimapImageNames.has(relativePath.slice('minimaps/'.length)));
     });
 }
 
 function dataPackageExports(patchId, images, skins, currentPatchId) {
     const exports = {
-        './data/legacy/*': './assets/data/legacy/*',
         './data/*': './assets/data/' + patchId + '/*',
-        './image/*': './assets/img/*',
+        './image/*': './assets/img/' + patchId + '/*',
         ['./' + patchId]: './assets/data/' + patchId + '/mapdata.json',
         ['./' + patchId + '/mapdata.json']: './assets/data/' + patchId + '/mapdata.json',
+        ['./' + patchId + '/worlddata.json']: './assets/data/' + patchId + '/worlddata.json',
         ['./' + patchId + '/*']: './assets/data/' + patchId + '/*',
         './latest': './assets/data/' + patchId + '/mapdata.json',
         './latest/*': './assets/data/' + patchId + '/*',
         './latest/mapdata.json': './assets/data/' + patchId + '/mapdata.json',
+        './latest/worlddata.json': './assets/data/' + patchId + '/worlddata.json',
         './manifest.json': './manifest.json',
         './package.json': './package.json',
     };
+    const hasMinimaps = images.some(image => image.path.startsWith('img/' + patchId + '/minimaps/'));
+    if (hasMinimaps) {
+        exports['./' + patchId + '/minimaps/*'] = './assets/img/' + patchId + '/minimaps/*';
+        exports['./latest/minimaps/*'] = './assets/img/' + patchId + '/minimaps/*';
+    }
     for (const image of images) {
         exports['./latest/' + path.posix.basename(image.path)] = './assets/' + image.path;
-    }
-    const aliases = [
-        ['./latest/map_data.png', patchId === '688' ? 'img/map_data.png' : 'img/map_data_' + patchId + '.png'],
-        ['./latest/dota-map.png', 'img/dota-map-' + patchId + '.png'],
-        ['./latest/dota-game-map.jpg', 'img/dota-game-map-' + patchId + '.jpg'],
-    ];
-    for (const [subpath, assetPath] of aliases) {
-        if (images.some(image => image.path === assetPath)) {
-            exports[subpath] = './assets/' + assetPath;
-        }
     }
     for (const skin of skins) {
         exports['./images/' + patchId + '/' + skin.id] = './skin-exports/' + patchId + '/' + skin.id + '.mjs';
@@ -95,7 +93,8 @@ function aggregateSkinPackage({ name, patchId, skins, sourcePackage, latest = fa
 function allSkinsModule(skins) {
     const imports = skins.map((skin, index) =>
         `import skin${index} from ${JSON.stringify(skinPackageName(skin) + '/image/' + path.posix.basename((skin.file ?? skin.image).path))};`);
-    const exports = skins.map((skin, index) => `export { skin${index} as ${skin.id} };`);
+    const exports = skins.filter(skin => skin.id !== 'default')
+        .map(skin => `export { skin${skins.indexOf(skin)} as ${skin.id} };`);
     const objectEntries = skins.map((skin, index) => `${JSON.stringify(skin.id)}: skin${index}`);
     return [
         ...imports,
@@ -111,7 +110,7 @@ function aggregateReexportModule(packageName) {
 
 function corePackageJson(sourcePackage) {
     const result = structuredClone(sourcePackage);
-    result.files = ['assets/data/legacy/', 'dist/', 'manifest.json', 'scripts/', 'src/', 'README.md'];
+    result.files = ['dist/', 'manifest.json', 'scripts/', 'src/', 'README.md'];
     result.exports = Object.fromEntries(Object.entries(result.exports)
         .filter(([subpath]) => subpath !== './data/*' && subpath !== './image/*'
             && !subpath.startsWith('./latest/')
@@ -127,10 +126,14 @@ function corePackageJson(sourcePackage) {
 export function buildNpmPackagePlan({ sourceRoot = root } = {}) {
     const sourcePackage = readJson(path.join(sourceRoot, 'package.json'));
     const manifest = readJson(path.join(sourceRoot, 'manifest.json'));
-    const shared = manifest.shared;
+    const shared = [];
     const patchPackages = manifest.patches.map(patch => {
+        const worldDataPath = `data/${patch.id}/worlddata.json`;
+        if (!patch.files.some(entry => entry.path === worldDataPath)) {
+            throw new Error(`Patch ${patch.id} is missing ${worldDataPath}; version packages require patch-specific bounds.`);
+        }
         const images = packageImages(patch.id, manifest.images);
-        const skins = manifest.skinPackages.filter(skin => skin.file.path.startsWith(`img/skins/${patch.id}/`));
+        const skins = manifest.skinPackages.filter(skin => skin.patchId === patch.id);
         const packageName = patch.packageName ?? `@reino-doce/dota-maps-data-${patch.id}`;
         const packageJson = {
             name: packageName,
@@ -155,11 +158,6 @@ export function buildNpmPackagePlan({ sourceRoot = root } = {}) {
     });
     const currentPatchPackage = patchPackages.find(item => item.id === manifest.currentPatch);
     if (!currentPatchPackage) throw new Error(`No package plan exists for current patch ${manifest.currentPatch}.`);
-    const latestImageAliases = [
-        ['./image/map_data.png', currentPatchPackage.id === '688' ? 'img/map_data.png' : 'img/map_data_' + currentPatchPackage.id + '.png'],
-        ['./image/dota-map.png', 'img/dota-map-' + currentPatchPackage.id + '.png'],
-        ['./image/dota-game-map.jpg', 'img/dota-game-map-' + currentPatchPackage.id + '.jpg'],
-    ].filter(([, assetPath]) => currentPatchPackage.images.some(image => image.path === assetPath));
     const latestPackage = {
         ...currentPatchPackage,
         id: 'latest',
@@ -171,7 +169,6 @@ export function buildNpmPackagePlan({ sourceRoot = root } = {}) {
             homepage: dataPackagesHomepage(sourcePackage),
             exports: {
                 ...currentPatchPackage.packageJson.exports,
-                ...Object.fromEntries(latestImageAliases.map(([subpath, assetPath]) => [subpath, './assets/' + assetPath])),
                 ...Object.fromEntries(currentPatchPackage.skins.map(skin => [
                     './images/latest/' + skin.id,
                     './skin-exports/' + manifest.currentPatch + '/' + skin.id + '.mjs',
@@ -194,7 +191,7 @@ export function buildNpmPackagePlan({ sourceRoot = root } = {}) {
             type: 'module',
             files: ['assets/', 'manifest.json', 'README.md'],
             exports: {
-                './image/*': './assets/img/skins/' + skin.patchId + '/*',
+                './image/*': './assets/img/' + skin.patchId + '/*',
                 ['./image/' + filename]: './assets/' + skin.file.path,
                 ['./' + skin.patchId + '/' + skin.id]: './assets/' + skin.file.path,
                 './manifest.json': './manifest.json',
@@ -252,8 +249,6 @@ export function prepareNpmPackages({ sourceRoot = root, destination = outputDire
     for (const directoryName of ['src', 'dist', 'scripts']) {
         fs.cpSync(path.join(sourceRoot, directoryName), path.join(coreDirectory, directoryName), { recursive: true });
     }
-    fs.mkdirSync(path.join(coreDirectory, 'assets', 'data'), { recursive: true });
-    fs.cpSync(path.join(sourceRoot, 'assets', 'data', 'legacy'), path.join(coreDirectory, 'assets', 'data', 'legacy'), { recursive: true });
     fs.copyFileSync(path.join(sourceRoot, 'manifest.json'), path.join(coreDirectory, 'manifest.json'));
     fs.copyFileSync(path.join(sourceRoot, 'README.md'), path.join(coreDirectory, 'README.md'));
     writeJson(path.join(coreDirectory, 'package.json'), plan.corePackageJson);
@@ -283,8 +278,8 @@ export function prepareNpmPackages({ sourceRoot = root, destination = outputDire
         writeJson(path.join(packageDirectory, 'package.json'), item.packageJson);
         writeJson(path.join(packageDirectory, 'manifest.json'), item.subsetManifest);
         const readme = item.id === 'latest'
-            ? '# Latest Dota map data\n\nThis data-only package contains the current Dota 2 patch (' + item.patch.id + ') and required map images. It has no runtime or generation dependencies.\n\nInstall with npm install ' + item.name + '. Import JSON from ' + item.name + '/latest/mapdata.json or /' + item.patch.id + '/mapdata.json, and images from ' + item.name + '/latest/<image>. Optional terrain images are separate packages: install @reino-doce/dota-map-skin-<patch>-<skin> to use /images/latest/<skin>, or @reino-doce/dota-map-skins-latest to import all skins from /images/latest.\n'
-            : '# Dota map data: ' + item.id + '\n\nThis data-only package contains the Dota 2 patch ' + item.id + ' and required map images. It has no runtime or generation dependencies.\n\nInstall with npm install ' + item.name + '. Import JSON from ' + item.name + '/latest/mapdata.json or /' + item.patch.id + '/mapdata.json, and images from ' + item.name + '/latest/<image>. Optional terrain images are separate packages: install @reino-doce/dota-map-skin-<patch>-<skin> to import one skin, or @reino-doce/dota-map-skins-<patch> for all skins.\n';
+            ? '# Latest Dota map data\n\nThis data-only package contains the current Dota 2 patch (' + item.patch.id + ') and required map images. It has no runtime or generation dependencies.\n\nInstall with npm install ' + item.name + '. Import JSON from ' + item.name + '/latest/mapdata.json or /' + item.patch.id + '/mapdata.json, and essential images from ' + item.name + '/latest/<image>. Optional terrain images are separate packages: install @reino-doce/dota-map-skin-<patch>-<skin> to use /images/latest/<skin>, or @reino-doce/dota-map-skins-latest to import all skins from /images/latest.\n'
+            : '# Dota map data: ' + item.id + '\n\nThis data-only package contains the Dota 2 patch ' + item.id + ' and required map images. It has no runtime or generation dependencies.\n\nInstall with npm install ' + item.name + '. Import JSON from ' + item.name + '/latest/mapdata.json or /' + item.patch.id + '/mapdata.json, and essential images from ' + item.name + '/latest/<image>. Optional terrain images are separate packages: install @reino-doce/dota-map-skin-<patch>-<skin> to import one skin, or @reino-doce/dota-map-skins-<patch> for all skins.\n';
         fs.writeFileSync(path.join(packageDirectory, 'README.md'), readme);
     }
     for (const item of plan.skinPackages) {

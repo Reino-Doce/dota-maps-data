@@ -6,10 +6,11 @@ import net from 'node:net';
 import { createHash } from 'node:crypto';
 import test from 'node:test';
 import { PNG } from 'pngjs';
+import sharp from 'sharp';
 import { openVpk, parseKeyValues, terrainItems } from '../src/node/game-files.mjs';
 import { compareTerrain, createGridCollector, scanConsole } from '../scripts/game-scan.mjs';
 import { assertUsableImage, decodeTga } from '../scripts/terrain-image.mjs';
-import { createSfmSession } from '../scripts/sfm-session.mjs';
+import { createSfmSession, createSfmSweepSession } from '../scripts/sfm-session.mjs';
 import { importSkin } from '../scripts/map-skins.mjs';
 
 test('terrain discovery follows item overrides and excludes previews/non-terrain items', () => {
@@ -65,6 +66,7 @@ const messages = [
     '[MAP_GRID_BEGIN]{"width":2,"height":2,"cellSize":64,"origin":[-64,-64],"map":"dota"}',
     '[MAP_GRID_HEIGHT][0,128]', '[MAP_GRID_HEIGHT][256,384]',
     '[MAP_GRID_TREE][1,2,3]',
+    '[MAP_GRID_TREE_ID][0,1,2,3]',
     '[MAP_GRID_ENTITY]{"classname":"npc_dota_lotus_pool","origin":[4,5,6],"hullRadius":96,"bounds":[[-96,-96,0],[96,96,50]]}',
     '[MAP_GRID_EXPORT_COMPLETE]',
 ];
@@ -79,12 +81,16 @@ function sampleGrid() {
 test('scan collector rejects incomplete and overlapping scans and retains runtime ward hulls', () => {
     const grid = sampleGrid();
     assert.equal(grid.entities[0].hullRadius, 96);
+    assert.deepEqual(grid.treeIds, [[0, 1, 2, 3]]);
     assert.equal(grid.source.map, 'dota');
     const incomplete = createGridCollector();
     incomplete.accept(messages[0]);
     assert.throws(() => incomplete.accept(messages.at(-1)), /Incomplete/);
     assert.throws(() => incomplete.accept(messages[0]), /Overlapping/);
     assert.throws(() => createGridCollector().accept(messages[1]), /no header/);
+    const invalidTreeId = createGridCollector();
+    invalidTreeId.accept(messages[0]);
+    assert.throws(() => invalidTreeId.accept('[MAP_GRID_TREE_ID][1,"x",2,3]'), /Invalid native tree ID/);
 });
 
 test('console scan handles fragmented packets, ignores unrelated output and never quits the client', async t => {
@@ -187,6 +193,30 @@ test('SFM camera covers the complete game grid without resolution-dependent stre
     assert.throws(() => createSfmSession({ ...options, worldExtent: [1, 1, 0, 0] }), /Invalid/);
 });
 
+test('SFM sweep creates a square-world 5 by 9 sequence of zoomed camera tiles', () => {
+    const sweep = createSfmSweepSession({ map: 'dota', worldExtent: [-10208, -10720, 10208, 10208],
+        outputPrefix: 'capture/tile' });
+    assert.equal(sweep.tiles.length, 45);
+    assert.equal(sweep.sequenceDuration, 45);
+    assert.deepEqual(sweep.nominalWorldExtent, [-10464, -10720, 10464, 10208]);
+    assert.equal(sweep.tiles[0].row, 0);
+    assert.equal(sweep.tiles[0].column, 0);
+    assert.equal(sweep.tiles.at(-1).index, 44);
+    assert.ok(sweep.tiles[0].cameraHeight < 400_000);
+    assert.ok(sweep.tiles[0].viewWidth < 5000);
+    assert.match(sweep.text, /"TimeRangeEndTime" "float" "45"/);
+    assert.match(sweep.text, /"DmeAnimationSet"/);
+    assert.match(sweep.text, /"times" "time_array".*"44\.0000"/);
+    assert.match(sweep.text, /"values" "vector3_array"/);
+    assert.equal(sweep.tiles[4].column, 4);
+    assert.equal(sweep.tiles[5].row, 1);
+    assert.equal(sweep.tiles[5].column, 4);
+    assert.equal(sweep.tiles[9].column, 0);
+    assert.equal(sweep.tiles[0].cameraHeight,
+        sweep.tiles[0].viewWidth / (2 * Math.tan(Math.PI / 360)));
+    assert.throws(() => createSfmSweepSession({ map: 'dota', worldExtent: [0, 0, 10, 10], columns: 21 }), /Invalid/);
+});
+
 test('terrain import rejects magenta renderer errors while allowing isolated purple detail', () => {
     const png = new PNG({ width: 100, height: 100 });
     for (let i = 0; i < png.data.length; i += 4) png.data.set([50, 130, 80, 255], i);
@@ -196,7 +226,7 @@ test('terrain import rejects magenta renderer errors while allowing isolated pur
     assert.throws(() => assertUsableImage(png), /magenta.*renderer/i);
 });
 
-test('skin import verifies scan provenance, calibration and registration before writing assets', t => {
+test('skin import verifies scan provenance, calibration and registration before writing assets', async t => {
     const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'map-skins-import-'));
     t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
     const patchDirectory = path.join(directory, 'assets/data/test');
@@ -228,19 +258,24 @@ test('skin import verifies scan provenance, calibration and registration before 
     const options = { terrain, image, controls, scanDirectory, patchDirectory, patch: 'test', repositoryRoot: directory };
     const writeControls = value => fs.writeFileSync(controls, JSON.stringify(value));
     writeControls({ ...measured, source: { ...measured.source, sha256: 'changed' } });
-    assert.throws(() => importSkin(options), /Image differs/);
+    await assert.rejects(() => importSkin(options), /Image differs/);
     writeControls({ ...measured, source: { ...measured.source, terrainArchiveSha256: 'another archive' } });
-    assert.throws(() => importSkin(options), /different game files/);
+    await assert.rejects(() => importSkin(options), /different game files/);
     writeControls({ ...measured, checks: [{ ...measured.checks[0], pixel: [18, 16] }] });
-    assert.throws(() => importSkin(options), /registration exceeds/);
+    await assert.rejects(() => importSkin(options), /registration exceeds/);
     assert.equal(fs.existsSync(path.join(patchDirectory, 'skins.json')), false);
     writeControls(measured);
-    importSkin(options);
+    await importSkin(options);
     const [registered] = JSON.parse(fs.readFileSync(path.join(patchDirectory, 'skins.json')));
     assert.equal(registered.id, 'skin-dota_ti10');
+    assert.equal(registered.image, 'img/test/ti10.jpg');
     assert.deepEqual(registered.worldExtent, [0, 0, 2048, 2048]);
-    assert.deepEqual(fs.readFileSync(path.join(directory, 'assets', registered.image)), bytes);
-    assert.throws(() => importSkin(options), /already registered/);
+    const jpeg = fs.readFileSync(path.join(directory, 'assets', registered.image));
+    assert.equal(jpeg.readUInt16BE(0), 0xffd8);
+    assert.deepEqual(await sharp(jpeg).metadata().then(({ width, height }) => [width, height]), [32, 32]);
+    assert.equal(registered.source.sha256, hash(bytes));
+    assert.equal(fs.existsSync(path.join(directory, 'assets', 'img', 'test', 'ti10.source.png')), false);
+    await assert.rejects(() => importSkin(options), /already registered/);
     fs.appendFileSync(path.join(scanDirectory, 'gridnav.gnv'), 'changed');
-    assert.throws(() => importSkin(options), /Scan files changed/);
+    await assert.rejects(() => importSkin(options), /Scan files changed/);
 });

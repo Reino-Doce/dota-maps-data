@@ -1,8 +1,11 @@
+import { parseEntityBoolean, parseEntityVector, parseSource2EntityDump } from './source2-entities.mjs';
+import { featureCollection, polygon } from '@turf/helpers';
+import { union } from '@turf/union';
 const campTypes = ['small', 'medium', 'large', 'ancient'];
 const targetPrefix = '[PR#]neutralcamp_';
 const hashPattern = /^[a-f0-9]{64}$/i;
 const campIdPattern = /^neutralcamp_(?:good|evil)_\d+$/;
-const modelPathPattern = /^maps\/dota\/entities\/neutralcamp_[a-z0-9_]+\.vmdl$/i;
+const modelPathPattern = /^maps\/dota(?:_[a-z0-9]+)?\/entities\/neutralcamp_[a-z0-9_]+\.vmdl$/i;
 
 function matchingDelimiter(text, start, open, close) {
     if (text[start] !== open) throw new Error('Expected a balanced source delimiter.');
@@ -103,6 +106,22 @@ function readEntityValues(text, start) {
 
 export function parseNeutralSpawnEntities(text) {
     if (typeof text !== 'string' || !text.length) throw new Error('Empty Source 2 entity data.');
+    if (!/\bkeyValues3Data\s*=\s*\{/u.test(text)) {
+        const entities = parseSource2EntityDump(text).filter(entity => entity.classname === 'trigger_multiple'
+            || entity.classname === 'npc_dota_neutral_spawner');
+        if (!entities.length) throw new Error('No neutral spawn entities were found in the Source 2 dump.');
+        return entities.map(entity => ({
+            classname: entity.classname,
+            targetname: entity.targetname ?? '',
+            parentname: entity.parentname ?? '',
+            useLocalOffset: parseEntityBoolean(entity.uselocaloffset, false),
+            volumeName: entity.volumename ?? '',
+            origin: parseEntityVector(entity.origin, 'origin'),
+            angles: entity.angles === undefined ? [0, 0, 0] : parseEntityVector(entity.angles, 'angles'),
+            scales: entity.scales === undefined ? [1, 1, 1] : parseEntityVector(entity.scales, 'scales'),
+            model: typeof entity.model === 'string' ? entity.model.split(String.fromCharCode(92)).join('/') : null,
+        }));
+    }
     const entities = [];
     const starts = /\bkeyValues3Data\s*=\s*\{/g;
     for (const match of text.matchAll(starts)) {
@@ -139,38 +158,41 @@ function vectorBounds(points) {
     };
 }
 
-export function parseSource2PhysicsHull(text) {
-    if (typeof text !== 'string' || !text.length) throw new Error('Empty Source 2 PHYS data.');
-    const physStart = text.indexOf('--- Data for block "PHYS" ---');
-    const phys = physStart < 0 ? text : text.slice(physStart);
-    const hullCount = (phys.match(/\bm_Hull\s*=/g) || []).length;
-    if (hullCount !== 1 || (phys.match(/\bm_hulls\s*=/g) || []).length !== 1) {
-        throw new Error('Spawn box models must contain exactly one convex PHYS hull.');
-    }
-    for (const field of ['m_spheres', 'm_capsules', 'm_meshes']) {
-        if (readArray(phys, field) !== '') throw new Error('Unsupported non-hull PHYS primitive: ' + field);
-    }
-    const hullStart = phys.search(/\bm_Hull\s*=\s*\{/);
-    const open = phys.indexOf('{', hullStart);
-    const close = matchingDelimiter(phys, open, '{', '}');
-    const hull = phys.slice(open + 1, close);
+function parsePhysicsHullBlock(hull) {
     const min = vectorInBlock(hull, 'm_vMinBounds');
     const max = vectorInBlock(hull, 'm_vMaxBounds');
     if (min.some((value, axis) => value >= max[axis])) throw new Error('PHYS hull bounds have no volume.');
 
-    const encoded = hull.match(/\bm_VertexPositions\s*=\s*#\[\s*([\s\S]*?)\]/);
-    if (!encoded) throw new Error('PHYS hull is missing m_VertexPositions.');
-    const hex = encoded[1].replace(/\s+/g, '');
-    if (!/^(?:[0-9a-f]{2})+$/i.test(hex)) throw new Error('PHYS hull vertex bytes are malformed.');
-    const bytes = Buffer.from(hex, 'hex');
-    if (bytes.length < 48 || bytes.length % 12 !== 0) {
-        throw new Error('PHYS hull must provide at least four complete 3D vertices.');
+    let vertices;
+    const encoded = hull.match(/\bm_VertexPositions\s*=\s*#\[\s*([\s\S]*?)\]/)
+        || hull.match(/\bm_Vertices\s*=\s*#\[\s*([\s\S]*?)\]/);
+    if (encoded) {
+        const hex = encoded[1].replace(/\s+/g, '');
+        if (!/^(?:[0-9a-f]{2})+$/i.test(hex)) throw new Error('PHYS hull vertex bytes are malformed.');
+        const bytes = Buffer.from(hex, 'hex');
+        if (bytes.length < 48 || bytes.length % 12 !== 0) {
+            throw new Error('PHYS hull must provide at least four complete 3D vertices.');
+        }
+        vertices = [];
+        for (let offset = 0; offset < bytes.length; offset += 12) {
+            const point = [0, 4, 8].map(axis => bytes.readFloatLE(offset + axis));
+            if (!point.every(Number.isFinite)) throw new Error('PHYS hull contains a non-finite vertex.');
+            vertices.push(point);
+        }
     }
-    const vertices = [];
-    for (let offset = 0; offset < bytes.length; offset += 12) {
-        const point = [0, 4, 8].map(axis => bytes.readFloatLE(offset + axis));
-        if (!point.every(Number.isFinite)) throw new Error('PHYS hull contains a non-finite vertex.');
-        vertices.push(point);
+    else {
+        const vertexField = /\bm_Vertices\s*=\s*/.exec(hull);
+        if (!vertexField) throw new Error('PHYS hull is missing m_VertexPositions or m_Vertices.');
+        const arrayStart = hull.indexOf('[', vertexField.index + vertexField[0].length);
+        const arrayEnd = matchingDelimiter(hull, arrayStart, '[', ']');
+        const arrayText = hull.slice(arrayStart + 1, arrayEnd);
+        const number = '[-+]?(?:\\d+\\.?\\d*|\\.\\d+)(?:[eE][-+]?\\d+)?';
+        const vectorPattern = new RegExp('\\[\\s*(' + number + ')\\s*,\\s*(' + number
+            + ')\\s*,\\s*(' + number + ')\\s*\\]', 'gu');
+        vertices = [...arrayText.matchAll(vectorPattern)].map(match => match.slice(1).map(Number));
+        if (vertices.length < 4 || vertices.some(point => !point.every(Number.isFinite))) {
+            throw new Error('PHYS hull must provide at least four complete 3D vertices.');
+        }
     }
     if (new Set(vertices.map(point => point.join(','))).size !== vertices.length) {
         throw new Error('PHYS hull contains duplicate vertices.');
@@ -183,6 +205,29 @@ export function parseSource2PhysicsHull(text) {
         }
     }
     return { vertices, localBounds: { min, max } };
+}
+
+export function parseSource2PhysicsHull(text) {
+    if (typeof text !== 'string' || !text.length) throw new Error('Empty Source 2 PHYS data.');
+    const physStart = text.indexOf('--- Data for block "PHYS" ---');
+    const phys = physStart < 0 ? text : text.slice(physStart);
+    const hullArrayMatches = [...phys.matchAll(/\bm_hulls\s*=\s*/g)];
+    if (hullArrayMatches.length !== 1) throw new Error('Spawn box models must contain one PHYS hull array.');
+    for (const field of ['m_spheres', 'm_capsules', 'm_meshes']) {
+        if (readArray(phys, field) !== '') throw new Error('Unsupported non-hull PHYS primitive: ' + field);
+    }
+    const hullArrayStart = phys.indexOf('[', hullArrayMatches[0].index + hullArrayMatches[0][0].length);
+    const hullArrayEnd = matchingDelimiter(phys, hullArrayStart, '[', ']');
+    const hullArray = phys.slice(hullArrayStart + 1, hullArrayEnd);
+    const hullEntries = [...hullArray.matchAll(/\bm_Hull\s*=\s*/g)];
+    if (hullEntries.length === 0) throw new Error('Spawn box models must contain at least one convex PHYS hull.');
+    const hulls = hullEntries.map(entry => {
+        const open = hullArray.indexOf('{', entry.index + entry[0].length);
+        const close = matchingDelimiter(hullArray, open, '{', '}');
+        return parsePhysicsHullBlock(hullArray.slice(open + 1, close));
+    });
+    const vertices = hulls.flatMap(hull => hull.vertices);
+    return { vertices, hulls, localBounds: vectorBounds(vertices) };
 }
 
 function vector(value, name) {
@@ -237,6 +282,17 @@ function convexHull(points) {
     return hull;
 }
 
+function mergeHullFootprints(rings) {
+    if (rings.length === 1) return rings[0];
+    const merged = union(featureCollection(rings.map(ring => polygon([[...ring, ring[0]]]))));
+    if (merged?.geometry.type !== 'Polygon' || merged.geometry.coordinates.length !== 1) {
+        throw new Error('Neutral camp compound hull must form one polygon without holes.');
+    }
+    const ring = merged.geometry.coordinates[0].slice(0, -1);
+    if (ring.length < 3) throw new Error('Neutral camp compound hull has a degenerate footprint.');
+    return ring;
+}
+
 function validHash(value) {
     return typeof value === 'string' && hashPattern.test(value);
 }
@@ -258,8 +314,8 @@ function validateSource(source) {
         && (typeof source.gameClientVersion !== 'string' || !/^\d+$/.test(source.gameClientVersion))) {
         throw new Error('Invalid Dota client version in neutral spawn source metadata.');
     }
-    if (!validHash(source.gridnavSha256) || !source.entityResource
-        || source.entityResource.path !== 'maps/dota/entities/default_ents.vents_c'
+    if (!(source.gridnavSha256 === null || validHash(source.gridnavSha256)) || !source.entityResource
+        || !/^maps\/dota(?:_[a-z0-9]+)?\/entities\/default_ents\.vents_c$/i.test(source.entityResource.path || '')
         || !validHash(source.entityResource.sha256)) {
         throw new Error('Neutral spawn source metadata is incomplete.');
     }
@@ -322,8 +378,16 @@ export function buildNeutralSpawnBoxes({ camps, entities, models, source }) {
             throw new Error('Neutral camp type is unsupported for ' + campId + '.');
         }
         const transform = { origin: trigger.origin, angles: trigger.angles, scales: trigger.scales };
-        const vertices = model.vertices.map(point => transformSpawnBoxPoint(point, transform));
-        const points = convexHull(vertices.map(([x, y]) => [x, y]));
+        const hulls = Array.isArray(model.hulls) && model.hulls.length ? model.hulls : [{ vertices: model.vertices }];
+        if (hulls.some(hull => !Array.isArray(hull?.vertices) || hull.vertices.length < 4)) {
+            throw new Error('Neutral camp hull model has an incomplete convex component: ' + trigger.model);
+        }
+        const vertices = hulls.flatMap(hull => hull.vertices.map(point => transformSpawnBoxPoint(point, transform)));
+        const rings = hulls.map(hull => convexHull(hull.vertices.map(point => {
+            const [x, y] = transformSpawnBoxPoint(point, transform);
+            return [x, y];
+        })));
+        const points = mergeHullFootprints(rings);
         const worldBounds = vectorBounds(vertices);
         return {
             campId,
@@ -340,7 +404,8 @@ export function buildNeutralSpawnBoxes({ camps, entities, models, source }) {
             source: {
                 ...source,
                 entityResource: { ...source.entityResource },
-                model: { path: trigger.model, sha256: model.sha256 },
+                model: { path: trigger.model, ...(model.sourcePath ? { sourcePath: model.sourcePath } : {}),
+                    sha256: model.sha256 },
             },
         };
     }).sort((a, b) => a.campId.localeCompare(b.campId));

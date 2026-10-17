@@ -1,0 +1,15 @@
+{
+  "posX": -8204,
+  "posY": 8173,
+  "scale": 16,
+  "material": "materials/overviews/dota.vmat",
+  "source": {
+    "file": "resource/overviews/dota.txt",
+    "sha256": "b765c6541b62d6d0f948ebb41eb0414d05c7e7e8b5ff31a189e8470f67af2912"
+  },
+  "texture": {
+    "width": 1024,
+    "height": 1024,
+    "rgbaSha256": "96dee8748fad167691856c5529f833b21aa8b340a04cfeb4475219fc705bc2ed"
+  }
+}

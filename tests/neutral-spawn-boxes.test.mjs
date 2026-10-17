@@ -12,9 +12,33 @@ const corners = [
 ];
 
 function physicsDump(points = corners, bounds = { min: [-10, -20, -5], max: [10, 20, 5] }) {
-    const bytes = Buffer.alloc(points.length * 12);
-    points.flat().forEach((value, index) => bytes.writeFloatLE(value, index * 4));
-    const hex = bytes.toString('hex').match(/.{2}/gu).join(' ');
+    const parts = Array.isArray(points[0]?.[0]) ? points : [points];
+    const boundsFor = vertices => ({
+        min: [0, 1, 2].map(axis => Math.min(...vertices.map(point => point[axis]))),
+        max: [0, 1, 2].map(axis => Math.max(...vertices.map(point => point[axis]))),
+    });
+    const hulls = parts.map((vertices, partIndex) => {
+        const bytes = Buffer.alloc(vertices.length * 12);
+        vertices.flat().forEach((value, index) => bytes.writeFloatLE(value, index * 4));
+        const hex = bytes.toString('hex').match(/.{2}/gu).join(' ');
+        const partBounds = parts.length === 1 && partIndex === 0 ? bounds : boundsFor(vertices);
+        return [
+            '                    {',
+            '                        m_Hull =',
+            '                        {',
+            '                            m_Bounds =',
+            '                            {',
+            '                                m_vMinBounds = [ ' + partBounds.min.join(', ') + ' ]',
+            '                                m_vMaxBounds = [ ' + partBounds.max.join(', ') + ' ]',
+            '                            }',
+            '                            m_VertexPositions =',
+            '                            #[',
+            '                                ' + hex,
+            '                            ]',
+            '                        }',
+            '                    }',
+        ].join('\n');
+    }).join(',\n');
     return [
         '--- Data for block "PHYS" ---',
         '{',
@@ -27,20 +51,7 @@ function physicsDump(points = corners, bounds = { min: [-10, -20, -5], max: [10,
         '                m_capsules = [ ]',
         '                m_hulls =',
         '                [',
-        '                    {',
-        '                        m_Hull =',
-        '                        {',
-        '                            m_Bounds =',
-        '                            {',
-        '                                m_vMinBounds = [ ' + bounds.min.join(', ') + ' ]',
-        '                                m_vMaxBounds = [ ' + bounds.max.join(', ') + ' ]',
-        '                            }',
-        '                            m_VertexPositions =',
-        '                            #[',
-        '                                ' + hex,
-        '                            ]',
-        '                        }',
-        '                    }',
+        hulls,
         '                ]',
         '                m_meshes = [ ]',
         '            }',
@@ -96,7 +107,7 @@ function parsedCapture(options) {
     const hull = parseSource2PhysicsHull(physicsDump());
     const models = new Map([[modelPath, { ...hull, sha256: hash('a') }]]);
     const source = {
-        patch: '741f',
+        patch: '741',
         gameClientVersion: '6955',
         gridnavSha256: hash('b'),
         entityResource: { path: 'maps/dota/entities/default_ents.vents_c', sha256: hash('c') },
@@ -120,7 +131,33 @@ test('parses the exact Source 2 entity transform fields, not local.origin', () =
 test('decodes one PHYS convex hull and verifies its explicit vertex cloud against local bounds', () => {
     const hull = parseSource2PhysicsHull(physicsDump());
     assert.deepEqual(hull.vertices, corners);
+    assert.equal(hull.hulls.length, 1);
     assert.deepEqual(hull.localBounds, { min: [-10, -20, -5], max: [10, 20, 5] });
+});
+
+test('decodes compact m_Vertices float data embedded in compiled map models', () => {
+    const hull = parseSource2PhysicsHull(physicsDump().replace('m_VertexPositions =', 'm_Vertices ='));
+    assert.deepEqual(hull.vertices, corners);
+});
+
+test('unions connected PHYS hull components without filling the concave camp footprint', () => {
+    const box = (minX, maxX, minY, maxY) => [
+        [minX, minY, -5], [maxX, minY, -5], [maxX, maxY, -5], [minX, maxY, -5],
+        [minX, minY, 5], [maxX, minY, 5], [maxX, maxY, 5], [minX, maxY, 5],
+    ];
+    const hull = parseSource2PhysicsHull(physicsDump([box(-10, 0, -10, 10), box(0, 10, 0, 10)]));
+    assert.equal(hull.hulls.length, 2);
+    assert.equal(hull.vertices.length, 16);
+    assert.deepEqual(hull.localBounds, { min: [-10, -10, -5], max: [10, 10, 5] });
+    const capture = parsedCapture();
+    const [boxData] = buildNeutralSpawnBoxes({
+        camps: [{ triggerName: 'neutralcamp_good_1', neutralType: '2' }],
+        ...capture,
+        models: new Map([[modelPath, { ...hull, sha256: hash('a') }]]),
+    });
+    assert.equal(boxData.points.length, 6, 'the merged L-shaped footprint retains its concave boundary');
+    assert.ok(!boxData.points.some(point => point.x === 10 && point.y === -10),
+        'the empty outer corner is not filled by a convex hull');
 });
 
 test('projects the complete rotated 3D hull and retains stable camp identity and provenance', () => {
@@ -173,12 +210,12 @@ test('rejects parented and local-offset triggers instead of guessing their world
         entityText({ useLocalOffset: true })), models: source.models, source: source.source }), /unparented and absolute/);
 });
 
-test('rejects malformed hull bytes, unsupported multi-hull models, and inconsistent bounds', () => {
+test('rejects malformed hull bytes, multiple hull arrays, and inconsistent bounds', () => {
     assert.throws(() => parseSource2PhysicsHull(physicsDump(corners.slice(0, 2))), /at least four|vertex/i);
     assert.throws(() => parseSource2PhysicsHull(physicsDump(corners,
         { min: [-9, -20, -5], max: [10, 20, 5] })), /bounds/i);
     assert.throws(() => parseSource2PhysicsHull(physicsDump().replace('m_hulls =', 'm_hulls =\n []\n m_hulls =')),
-        /one.*hull|multiple.*hull/i);
+        /one PHYS hull array/i);
 });
 
 test('rejects unsupported patch provenance and unresolved models', () => {
@@ -186,7 +223,7 @@ test('rejects unsupported patch provenance and unresolved models', () => {
     assert.throws(() => buildNeutralSpawnBoxes({
         camps: [{ triggerName: 'neutralcamp_good_1', neutralType: '2' }],
         ...capture,
-        source: { ...capture.source, patch: '../741f' },
+        source: { ...capture.source, patch: '../741' },
     }), /patch/i);
     assert.throws(() => buildNeutralSpawnBoxes({
         camps: [{ triggerName: 'neutralcamp_good_1', neutralType: '2' }],
@@ -199,7 +236,7 @@ test('merges complete camp geometry while preserving unrelated trigger polygons'
     const capture = parsedCapture();
     const [box] = buildNeutralSpawnBoxes({ camps: [{ triggerName: 'neutralcamp_good_1', neutralType: '2' }], ...capture });
     const mapdata = { data: { npc_dota_neutral_spawner: [{ triggerName: box.campId }],
-        trigger_multiple: [{ campId: box.campId, points: [] }, { id: 'other-trigger', points: [] }] }, stats: { version: '741f' } };
+        trigger_multiple: [{ campId: box.campId, points: [] }, { id: 'other-trigger', points: [] }] }, stats: { version: '741' } };
     const merged = mergeNeutralSpawnBoxes(mapdata, [box]);
     assert.deepEqual(merged.data.trigger_multiple, [{ id: 'other-trigger', points: [] }, box]);
     assert.deepEqual(mapdata.data.trigger_multiple[0], { campId: box.campId, points: [] },
@@ -208,8 +245,8 @@ test('merges complete camp geometry while preserving unrelated trigger polygons'
     assert.throws(() => mergeNeutralSpawnBoxes(mapdata, [box, box]), /duplicate/);
 });
 
-test('741f map data contains complete, source-qualified spawn boxes for every neutral camp', () => {
-    const mapdata = JSON.parse(readFileSync(new URL('../assets/data/741f/mapdata.json', import.meta.url), 'utf8'));
+test('741 map data contains complete, source-qualified spawn boxes for every neutral camp', () => {
+    const mapdata = JSON.parse(readFileSync(new URL('../assets/data/741/mapdata.json', import.meta.url), 'utf8'));
     const camps = mapdata.data.npc_dota_neutral_spawner;
     const boxes = mapdata.data.trigger_multiple;
     const byCamp = new Map(boxes.map(box => [box.campId, box]));
@@ -218,7 +255,7 @@ test('741f map data contains complete, source-qualified spawn boxes for every ne
     assert.equal(byCamp.size, camps.length, 'each camp has exactly one box');
     for (const camp of camps) assert.ok(byCamp.has(camp.triggerName), `missing box for ${camp.triggerName}`);
     for (const box of boxes) {
-        assert.equal(box.source.patch, '741f');
+        assert.equal(box.source.patch, '741');
         assert.equal(box.source.gameClientVersion, '6955');
         assert.equal(box.source.entityResource.path, 'maps/dota/entities/default_ents.vents_c');
         assert.match(box.source.entityResource.sha256, /^[a-f0-9]{64}$/);
@@ -232,7 +269,7 @@ test('741f map data contains complete, source-qualified spawn boxes for every ne
 });
 
 test('native camp trigger geometry verifies against exact versioned names, transforms and PHYS bounds', () => {
-    const mapdata = JSON.parse(readFileSync(new URL('../assets/data/741f/mapdata.json', import.meta.url), 'utf8'));
+    const mapdata = JSON.parse(readFileSync(new URL('../assets/data/741/mapdata.json', import.meta.url), 'utf8'));
     const campCandidates = mapdata.data.trigger_multiple.map((box, entityIndex) => ({
         classname: 'trigger_multiple', entityIndex: entityIndex + 1, name: box.campId,
         origin: box.transform.origin, angles: box.transform.angles,
@@ -271,7 +308,7 @@ test('native camp trigger geometry verifies against exact versioned names, trans
 });
 
 test('native camp geometry stays unverified on version, identity, transform or coverage uncertainty', () => {
-    const mapdata = JSON.parse(readFileSync(new URL('../assets/data/741f/mapdata.json', import.meta.url), 'utf8'));
+    const mapdata = JSON.parse(readFileSync(new URL('../assets/data/741/mapdata.json', import.meta.url), 'utf8'));
     const boxes = mapdata.data.trigger_multiple;
     const candidateFor = box => ({ classname: 'trigger_multiple', entityIndex: 1, name: box.campId,
         origin: box.transform.origin, angles: box.transform.angles,

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "patch": "670",
+  "source": {
+    "engine": "Source 1",
+    "appId": "570",
+    "patchVersion": "37",
+    "mapBsp": "dota/maps/dota.bsp",
+    "mapBspSha256": "93de6395e6c8290b2517ba0c25fc705907c00ce8c738297b015ecee15b71822b",
+    "archive": "dota/pak01_dir.vpk",
+    "archiveSha256": "6b7015095a8c61f06adf532d428f5c6660a56bfc9c5ed18f06575d59bf043d61",
+    "archiveChunk": "dota/pak01_001.vpk",
+    "archiveChunkSha256": "45a59979c0a8c516abf2c536ad068a748e88e573b5101392231e6d17163f8428",
+    "sourceMaterial": "materials/overviews/dota.vmt",
+    "materialSha256": "b76792d29e5a9566bb13d7ef4d4ff7fdc7e2046a8233cd54a467e25b10ea7198",
+    "textureResource": "materials/overviews/dota.vtf",
+    "textureSha256": "dc04d0b13a3b6ffd92cb1453749d0aec0a780dd03837f2a4bc9177f2423797cb",
+    "textureFormat": "DXT1",
+    "converter": "Valve vtf2tga.exe and lossless TGA-to-PNG conversion"
+  },
+  "images": {
+    "detailed": {
+      "path": "img/670/minimaps/detailed.png",
+      "sourceMaterial": "materials/overviews/dota.vmt",
+      "textureResource": "materials/overviews/dota.vtf",
+      "textureSha256": "dc04d0b13a3b6ffd92cb1453749d0aec0a780dd03837f2a4bc9177f2423797cb",
+      "sha256": "dbc527544420d5d09a8cc9e0ac6c8f23168d70b5b666984002960e96a1341b39",
+      "bytes": 1204536,
+      "width": 1024,
+      "height": 1024
+    }
+  }
+}

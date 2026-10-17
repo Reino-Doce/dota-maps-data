@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "patch": "728",
+  "source": {
+    "archive": "dota/pak01_dir.vpk",
+    "overviewConfig": "resource/overviews/dota_728.txt",
+    "overviewConfigSha256": "d0780d27ced1d0454040ffab74dee1a0673cd35e1825b26d13ec48102dbfe05c",
+    "clientBuild": 6962,
+    "vpkIndexesScanned": 746,
+    "source2Viewer": "Source2Viewer-CLI",
+    "source2ViewerSha256": "ef9f6fb3943c30b73f0991bce6654128727b0807968f7997a6bb014efbec8830"
+  },
+  "images": {},
+  "omittedImages": {
+    "simple": {
+      "path": "img/728/minimaps/simple.png",
+      "configuredMaterial": "materials/overviews/dota_minimal.vmat",
+      "reason": "The config selects a generic material, and no authenticated 7.28 simple minimap source is available."
+    },
+    "detailed": {
+      "path": "img/728/minimaps/detailed.png",
+      "configuredMaterial": "materials/overviews/dota.vmat",
+      "reason": "The previously included candidate was rejected after visual review. The config selects a generic material, and no authenticated 7.28 detailed minimap source is available."
+    }
+  },
+  "rejectedCandidates": {
+    "simple": {
+      "path": "img/728/minimaps/simple.png",
+      "sha256": "459e5a8953a0f7f4396bc5c8a1e81f809f7635edfff0894fadfc0250402f0354",
+      "bytes": 450507,
+      "reason": "Earlier candidate retained for audit; its bytes match the 741 simple minimap and it is not a verified 728 image.",
+      "auditPath": "map-captures/default-image-sweep/728/rejected-minimaps/simple.png"
+    },
+    "detailedPrior": {
+      "path": "img/728/minimaps/detailed.png",
+      "sha256": "54555b9d9a9533ab3d39b0719b941ff9ce4b37b9b2777718ef9d87fbc7a12914",
+      "bytes": 508016,
+      "reason": "Earlier candidate retained for audit; its bytes match the 741 detailed minimap and it is not a verified 728 image.",
+      "auditPath": "map-captures/default-image-sweep/728/rejected-minimaps/detailed.png"
+    },
+    "detailed": {
+      "path": "img/728/minimaps/detailed.png",
+      "sha256": "a50c903f2507f9ddab00cb74c8855a6d3fd13a45f9be3f351255d624ebe66584",
+      "bytes": 1231516,
+      "width": 1024,
+      "height": 1024,
+      "sourceMaterial": "materials/overviews/dota_728.vmat",
+      "configuredMaterial": "materials/overviews/dota.vmat",
+      "materialResource": "materials/overviews/dota_728.vmat_c",
+      "materialArchive": "dota/pak01_dir.vpk",
+      "materialSha256": "662841aa5c0b762dbaf9e5640217f4e3f49eb11e93266f1a8ce9bda659a23170",
+      "textureResource": "materials/overviews/dota_psd_8b4a9409.vtex_c",
+      "textureArchive": "dota/pak01_dir.vpk",
+      "textureSha256": "3a5e1797cad79fa8d8b144ba2e315c9f52a6ed5bc45cf1471ebd8ca2ec6b9419",
+      "reason": "Rejected after visual review because it does not depict the correct 7.28 minimap.",
+      "historicalReason": "This was extracted from a retained patch-named material that resource/overviews/dota_728.txt does not select. Its image bytes are identical to the 722 detailed minimap. The client VPK scan and patch-named resource do not authenticate this image to the 7.28 release.",
+      "auditPath": "map-captures/default-image-sweep/728/rejected-minimaps/detailed-patch-named-client-build-6962.png"
+    }
+  }
+}

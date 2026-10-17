@@ -12,15 +12,59 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const hash = data => createHash('sha256').update(data).digest('hex');
 
 export function mapTreeIds(rows, trees) {
-    const byPosition = new Map(trees.map((tree, i) => [`${tree.x},${tree.y},${tree.z}`, i]));
-    const indices = [];
-    for (const [id, x, y, z] of rows) {
-        const index = byPosition.get(`${x},${y},${z}`);
-        if (!Number.isInteger(id) || id < 0 || id >= trees.length || index === undefined || indices[id] !== undefined)
-            throw new Error('Tree IDs do not match this map.');
-        indices[id] = index;
+    const key = position => position.map(value => Math.fround(value)).join(',');
+    if (new Set(trees.map(tree => key([tree.x, tree.y, tree.z ?? 0]))).size !== trees.length
+        || new Set(rows.map(([, x, y, z]) => key([x, y, z]))).size !== rows.length) {
+        throw new Error('Tree positions are duplicated in the map or runtime capture.');
     }
-    if (rows.length !== trees.length || new Set(indices).size !== trees.length) throw new Error('Incomplete tree index.');
+    const byPosition = new Map();
+    trees.forEach((tree, index) => {
+        const position = key([tree.x, tree.y, tree.z ?? 0]);
+        if (!byPosition.has(position)) byPosition.set(position, []);
+        byPosition.get(position).push(index);
+    });
+    const maxId = rows.reduce((max, row) => Math.max(max, row[0]), -1);
+    if (!Number.isSafeInteger(maxId) || maxId > 1_000_000) throw new Error('Tree ID range is invalid.');
+    const indices = Array(maxId + 1).fill(null);
+    const used = new Set();
+    const seenIds = new Set();
+    const pending = [];
+    for (const [id, x, y, z] of rows) {
+        if (!Number.isSafeInteger(id) || id < 0 || seenIds.has(id)) {
+            throw new Error('Tree IDs do not match this map.');
+        }
+        seenIds.add(id);
+        const matches = byPosition.get(key([x, y, z])) || [];
+        if (matches.length === 1 && !used.has(matches[0])) {
+            indices[id] = matches[0];
+            used.add(matches[0]);
+        }
+        else pending.push({ id, position: [x, y, z] });
+    }
+    if (rows.length !== trees.length) throw new Error('Incomplete tree index.');
+    const unmatchedTrees = trees.map((tree, index) => ({ index, position: [tree.x, tree.y, tree.z ?? 0] }))
+        .filter(tree => !used.has(tree.index));
+    if (pending.length !== unmatchedTrees.length) throw new Error('Incomplete tree index.');
+    const nearest = (point, candidates) => candidates.map((candidate, index) => ({
+        index,
+        distance: Math.hypot(point[0] - candidate.position[0], point[1] - candidate.position[1], point[2] - candidate.position[2]),
+    })).sort((a, b) => a.distance - b.distance);
+    const forward = pending.map(row => nearest(row.position, unmatchedTrees));
+    const reverse = unmatchedTrees.map(tree => nearest(tree.position, pending.map(row => ({ position: row.position }))));
+    for (let i = 0; i < pending.length; i++) {
+        const [best, second] = forward[i];
+        if (!best || best.distance > 64 || (second && second.distance - best.distance <= 0.01)) {
+            throw new Error('Tree IDs do not unambiguously match this map.');
+        }
+        const [reverseBest, reverseSecond] = reverse[best.index] || [];
+        if (reverseBest?.index !== i || (reverseSecond && reverseSecond.distance - reverseBest.distance <= 0.01)) {
+            throw new Error('Tree IDs do not unambiguously match this map.');
+        }
+        indices[pending[i].id] = unmatchedTrees[best.index].index;
+        used.add(unmatchedTrees[best.index].index);
+    }
+    const mappedIndices = indices.filter(Number.isInteger);
+    if (new Set(mappedIndices).size !== trees.length || mappedIndices.length !== trees.length) throw new Error('Incomplete tree index.');
     return indices;
 }
 

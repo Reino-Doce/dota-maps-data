@@ -11,7 +11,7 @@ export function composeMapData(value, patch, { watchers, buildings }) {
         || !data.stats || typeof data.stats !== 'object' || Array.isArray(data.stats)) {
         throw new Error('Map data has no entity and stats records.');
     }
-    if (patch !== '741f') return data;
+    if (patch !== '741') return data;
     if (!Array.isArray(watchers?.positions) || !Array.isArray(buildings?.buildings)) {
         throw new Error('Watcher and building metadata are incomplete.');
     }

@@ -7,16 +7,16 @@ import { readGridNav, encodeWardGrid, wardGridToGeoJSON, runtimeWardHulls } from
 import { isWardBlocked } from '../src/wardGrid.mjs';
 
 const read = name => fs.readFileSync(new URL(`../assets/${name}`, import.meta.url));
-const source = read('data/741f/gridnav.gnv');
-const grid = JSON.parse(read('data/741f/ward_grid.json'));
-const overlay = JSON.parse(read('data/741f/no_wards.json'));
+const source = read('data/741/gridnav.gnv');
+const grid = JSON.parse(read('data/741/ward_grid.json'));
+const overlay = JSON.parse(read('data/741/no_wards.json'));
 const nav = readGridNav(source);
-const terrain = JSON.parse(read('data/741f/terrain_grid.json'));
-const structures = JSON.parse(read('data/741f/ward_structures.json'));
+const terrain = JSON.parse(read('data/741/terrain_grid.json'));
+const structures = JSON.parse(read('data/741/ward_structures.json'));
 const staticGrid = { ...grid, hulls: [], structures: [] };
 
 test('rejects wards on both Twin Gate structures', () => {
-    const controls = JSON.parse(read('data/741f/screenshot-controls.json'));
+    const controls = JSON.parse(read('data/741/screenshot-controls.json'));
     for (const gate of controls.anchors.filter(anchor => anchor.name.includes('Twin Gate'))) {
         assert.equal(isWardBlocked(grid, ...gate.world), true, gate.name);
     }
@@ -77,7 +77,7 @@ test('imports the full installed game grid with its original bounds and provenan
     assert.deepEqual([nav.width, nav.height, nav.cellSize], [320, 328, 64]);
     assert.deepEqual(nav.origin, [-10240, -10752]);
     assert.equal(grid.source.sha256, createHash('sha256').update(source).digest('hex'));
-    assert.equal(structures.source.terrainSha256, createHash('sha256').update(read('data/741f/terrain_grid.json')).digest('hex'));
+    assert.equal(structures.source.terrainSha256, createHash('sha256').update(read('data/741/terrain_grid.json')).digest('hex'));
     assert.equal(structures.source.navigationSha256, grid.source.sha256);
     assert.equal(structures.features.length, 8);
     assert.deepEqual(encodeWardGrid(nav, grid.source, runtimeWardHulls(terrain), structures.features), grid);
@@ -106,7 +106,7 @@ test('the static overlay preserves every game WardBlocking cell', () => {
 
 test('runtime structures agree with markers, overlay and placement', () => {
     const entities = terrain.entities.filter(entity => entity.classname === 'npc_dota_lotus_pool');
-    const map = JSON.parse(read('data/741f/mapdata.json'));
+    const map = JSON.parse(read('data/741/mapdata.json'));
     assert.equal(entities.length, 2, 'export both pools omitted by the old entity allowlist');
     assert.equal(map.data.npc_dota_lotus_pool.length, 2);
     for (const entity of entities) {
@@ -142,7 +142,7 @@ test('runtime structures agree with markers, overlay and placement', () => {
 });
 
 test('the vision raster uses the same ward flag, without movement-based restrictions', () => {
-    const image = PNG.sync.read(read('img/map_data_741f.png'));
+    const image = PNG.sync.read(read('img/741/map_data.png'));
     assert.deepEqual([image.width, image.height], [1600, 328]);
     for (let y = 0; y < nav.height; y++) {
         for (let x = 0; x < nav.width; x++) {
@@ -175,9 +175,9 @@ test('preserves terrain restrictions, both pits, fountains, cliffs and the outer
 });
 
 test('terrain and blocker contours occupy the same full-map cells as the vision raster', () => {
-    const image = PNG.sync.read(read('img/map_data_741f.png'));
-    const elevation = JSON.parse(read('data/741f/elevation.json'));
-    const blockers = JSON.parse(read('data/741f/ent_fow_blocker_node.json'));
+    const image = PNG.sync.read(read('img/741/map_data.png'));
+    const elevation = JSON.parse(read('data/741/elevation.json'));
+    const blockers = JSON.parse(read('data/741/ent_fow_blocker_node.json'));
     const actualBlockers = rasterize(blockers, grid);
     const actualHeights = new Int16Array(nav.width * nav.height).fill(-1);
     for (const feature of elevation.features) {

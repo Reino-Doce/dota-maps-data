@@ -60,7 +60,7 @@ export function wardGridToGeoJSON(grid) {
     const coordinates = gridToPolygons(grid);
     const features = coordinates.length ? [{
         type: 'Feature',
-        properties: { source: 'dota.gnv', flag: WARD_BLOCKING },
+        properties: { source: grid.source?.file?.split('/').at(-1) || 'dota.gnv', flag: WARD_BLOCKING },
         geometry: { type: 'MultiPolygon', coordinates: coordinates },
     }] : [];
     for (const { center, radius, classname } of grid.hulls || []) {

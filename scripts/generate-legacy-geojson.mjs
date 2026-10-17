@@ -2,31 +2,44 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import VisionSimulation from '../dist/vision.node.mjs';
-import { unionFeatures } from './geojson-union.mjs';
+import { gridToPolygons } from '../src/gridContours.mjs';
 import { wardGridToGeoJSON } from './ward-grid.mjs';
 import { readPreparedWorldData } from '../src/node/patch-inputs.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
-function generateGeoJSON(vision, grids) {
-    let result = null;
-    grids.forEach((data, index) => {
-        const total = Object.keys(data).length;
-        let count = 0;
-        for (const key in data) {
-            const point = vision.key2pt(key);
-            const world = vision.GridXYtoWorldXY(point.x, point.y);
-            const feature = { type: 'Feature', geometry: { type: 'Polygon', coordinates: [[
-                [world.x - 32, world.y - 32], [world.x - 32, world.y + 32],
-                [world.x + 32, world.y + 32], [world.x + 32, world.y - 32],
-                [world.x - 32, world.y - 32],
-            ]] } };
-            result = result === null ? feature : unionFeatures(result, feature);
-            if (count % 200 === 0) console.log('grids', index, '/', grids.length, ', points', count, '/', total);
-            count++;
+export function gridKeysToFeature(vision, keys, properties) {
+    const width = vision.gridWidth;
+    const height = vision.gridHeight;
+    if (!Number.isInteger(width) || !Number.isInteger(height)) throw new Error('Vision raster has invalid grid dimensions.');
+    const rows = Array.from({ length: height }, () => []);
+    for (const key of keys) {
+        const point = vision.key2pt(key);
+        if (Number.isInteger(point.x) && Number.isInteger(point.y)
+            && point.x >= 0 && point.y >= 0 && point.x < width && point.y < height) rows[point.y].push(point.x);
+    }
+    const blockedRows = rows.map(cells => {
+        cells.sort((first, second) => first - second);
+        const spans = [];
+        for (const x of cells) {
+            const last = spans.length - 1;
+            if (last >= 0 && x < spans[last]) continue;
+            if (last >= 0 && x === spans[last]) spans[last]++;
+            else spans.push(x, x + 1);
         }
+        return spans;
     });
-    return result;
+    const coordinates = gridToPolygons({ width, height, cellSize: 64,
+        origin: [vision.worldMinX - 32, vision.worldMinY - 32], blockedRows });
+    if (!coordinates.length) return null;
+    return { type: 'Feature', ...(properties ? { properties } : {}),
+        geometry: { type: 'MultiPolygon', coordinates } };
+}
+
+function gridFeatures(vision, grids, properties) {
+    const keys = new Set();
+    for (const grid of grids) for (const key of Object.keys(grid)) keys.add(key);
+    return gridKeysToFeature(vision, keys, properties);
 }
 
 export function generateLegacyGeoJSON({ patch, index = -1, assetDirectory = path.join(root, 'assets') } = {}) {
@@ -35,7 +48,12 @@ export function generateLegacyGeoJSON({ patch, index = -1, assetDirectory = path
     const directory = path.join(assetDirectory, 'data', patch);
     const world = readPreparedWorldData({ patch, assetDirectory });
     const vision = new VisionSimulation(world);
-    const imagePath = path.join(assetDirectory, 'img', `map_data_${patch}.png`);
+    const versionedImagePath = path.join(assetDirectory, 'img', patch, 'map_data.png');
+    const legacyImagePath = path.join(assetDirectory, 'img', `map_data_${patch}.png`);
+    const imagePath = fs.existsSync(versionedImagePath) ? versionedImagePath : legacyImagePath;
+    if (!fs.existsSync(imagePath)) {
+        throw new Error(`Patch ${patch} is missing its map_data.png vision raster under assets/img/${patch}/.`);
+    }
     return new Promise((resolve, reject) => {
         vision.initialize(imagePath, () => {
             try {
@@ -43,23 +61,23 @@ export function generateLegacyGeoJSON({ patch, index = -1, assetDirectory = path
                     const wardPath = path.join(directory, 'ward_grid.json');
                     const noWards = fs.existsSync(wardPath)
                         ? wardGridToGeoJSON(JSON.parse(fs.readFileSync(wardPath, 'utf8')))
-                        : generateGeoJSON(vision, [vision.gridnav, vision.tools_no_wards]);
+                        : gridFeatures(vision, [vision.gridnav, vision.tools_no_wards]);
                     fs.writeFileSync(path.join(directory, 'no_wards.json'), JSON.stringify(noWards), 'utf8');
                 }
                 if (index === 1 || index === -1) {
-                    const blockers = generateGeoJSON(vision, [vision.ent_fow_blocker_node]);
+                    const blockers = gridFeatures(vision, [vision.ent_fow_blocker_node]);
                     fs.writeFileSync(path.join(directory, 'ent_fow_blocker_node.json'), JSON.stringify(blockers), 'utf8');
                 }
                 if (index === 2 || index === -1) {
-                    const elevations = {};
+                    const elevations = new Map();
                     for (const [key, point] of Object.entries(vision.elevationGrid)) {
-                        (elevations[point.z] ||= {})[key] = point;
+                        if (!elevations.has(point.z)) elevations.set(point.z, []);
+                        elevations.get(point.z).push(key);
                     }
                     const combined = { type: 'FeatureCollection', features: [] };
-                    for (const [elevation, grid] of Object.entries(elevations)) {
-                        const feature = generateGeoJSON(vision, [grid]);
-                        feature.properties = { elevation };
-                        combined.features.push(feature);
+                    for (const elevation of [...elevations.keys()].sort((first, second) => first - second)) {
+                        const feature = gridKeysToFeature(vision, elevations.get(elevation), { elevation: String(elevation) });
+                        if (feature) combined.features.push(feature);
                     }
                     fs.writeFileSync(path.join(directory, 'elevation.json'), JSON.stringify(combined), 'utf8');
                 }

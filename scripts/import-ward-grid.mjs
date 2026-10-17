@@ -13,7 +13,19 @@ export function importWardGrid({ patch, input, assetDirectory = path.join(root, 
     if (!patch || !/^[a-z0-9]+$/iu.test(patch)) throw new Error('A valid patch ID is required.');
     const directory = path.join(assetDirectory, 'data', patch);
     const sourcePath = path.join(directory, 'gridnav.gnv');
+    const source = JSON.parse(fs.readFileSync(path.join(directory, 'source.json'), 'utf8'));
+    const navigation = source.resources?.navigation;
+    if (source.patch !== patch || navigation?.available !== true || !navigation.path || !navigation.sha256) {
+        throw new Error(`Patch ${patch} has no exact native navigation grid in source.json; ward restrictions cannot be generated.`);
+    }
     const bytes = fs.readFileSync(input || sourcePath);
+    const navigationSha256 = createHash('sha256').update(bytes).digest('hex');
+    if (navigationSha256 !== navigation.sha256) {
+        throw new Error('Navigation input does not match this patch source.json; refusing to create mixed-version ward data.');
+    }
+    if (fs.existsSync(sourcePath) && createHash('sha256').update(fs.readFileSync(sourcePath)).digest('hex') !== navigationSha256) {
+        throw new Error('Prepared gridnav.gnv does not match this patch source.json; refusing to overwrite it.');
+    }
     const nav = readGridNav(bytes);
     const terrainBytes = fs.readFileSync(path.join(directory, 'terrain_grid.json'));
     const terrain = JSON.parse(terrainBytes);
@@ -23,12 +35,12 @@ export function importWardGrid({ patch, input, assetDirectory = path.join(root, 
         throw new Error('Structure footprints are stale; run import:structures for this terrain scan.');
     }
     const grid = encodeWardGrid(nav, {
-        file: 'maps/dota.gnv',
-        sha256: createHash('sha256').update(bytes).digest('hex'),
+        file: navigation.path,
+        sha256: navigationSha256,
         flag: WARD_BLOCKING,
     }, runtimeWardHulls(terrain), structures.features);
     const geoJSON = wardGridToGeoJSON(grid);
-    const imagePath = path.join(assetDirectory, 'img', `map_data_${patch}.png`);
+    const imagePath = path.join(assetDirectory, 'img', patch, 'map_data.png');
     const image = PNG.sync.read(fs.readFileSync(imagePath));
     const world = readPreparedWorldData({ patch, assetDirectory });
     const width = (world.worldMaxX - world.worldMinX) / 64 + 1;
@@ -45,10 +57,15 @@ export function importWardGrid({ patch, input, assetDirectory = path.join(root, 
         }
     }
     fs.mkdirSync(directory, { recursive: true });
-    fs.writeFileSync(sourcePath, bytes);
+    if (!fs.existsSync(sourcePath)) fs.writeFileSync(sourcePath, bytes, { flag: 'wx' });
     fs.writeFileSync(path.join(directory, 'ward_grid.json'), JSON.stringify(grid));
     fs.writeFileSync(path.join(directory, 'no_wards.json'), JSON.stringify(geoJSON));
     fs.writeFileSync(imagePath, PNG.sync.write(image));
+    source.dataCoverage = { ...source.dataCoverage,
+        wardGrid: `ward_grid.json: exact ${navigation.path} (${navigationSha256}) plus matching terrain/collision inputs`,
+        wardRestrictions: 'no_wards.json and panel 5 of assets/img/<patch>/map_data.png generated from this patch ward_grid.json',
+    };
+    fs.writeFileSync(path.join(directory, 'source.json'), `${JSON.stringify(source, null, 2)}\n`);
     return { width: nav.width, height: nav.height, blockedCells: nav.flags.filter(flag => flag & WARD_BLOCKING).length };
 }
 

@@ -26,6 +26,8 @@ const coreDirectory = path.join(outputDirectory, 'core');
 assert.equal(readJson(path.join(coreDirectory, 'package.json')).name, plan.sourcePackage.name);
 assert.equal(fs.existsSync(path.join(coreDirectory, 'assets', 'data', '688')), false,
     'the runtime package must not include an individual patch dataset');
+assert.equal(fs.existsSync(path.join(coreDirectory, 'assets', 'data', 'legacy')), false,
+    'the runtime package must not include shared legacy bounds');
 
 for (const item of plan.packages) {
     const packageDirectory = path.join(outputDirectory, item.name.slice('@reino-doce/'.length));
@@ -35,6 +37,12 @@ for (const item of plan.packages) {
     assert.equal(packageJson.dependencies, undefined, `${item.name} must not pull in the extractor or runtime`);
     assert.equal(packageJson.devDependencies, undefined, `${item.name} must not pull in development tooling`);
     assert.equal(fs.existsSync(path.join(packageDirectory, 'assets', 'data', item.patch.id)), true);
+    assert.ok(item.patch.files.some(entry => entry.path === `data/${item.patch.id}/worlddata.json`),
+        `${item.name} must include its own world bounds`);
+    assert.equal(fs.existsSync(path.join(packageDirectory, 'assets', 'data', 'legacy')), false,
+        `${item.name} must not require shared legacy data`);
+    assert.equal(packageJson.exports['./latest/worlddata.json'],
+        './assets/data/' + item.patch.id + '/worlddata.json');
 
     for (const [subpath, target] of Object.entries(packageJson.exports)) {
         if (target.includes('*')) continue;
@@ -89,7 +97,9 @@ for (const item of plan.skinPackages) {
         item.name + ' must not include map data');
     assert.deepEqual(filesIn(path.join(packageDirectory, 'assets')), [item.image.path],
         item.name + ' must contain only its registered skin image');
-    const skinSubpath = './latest/' + item.id + '/' + path.posix.basename(item.image.path);
+    const skinSubpath = item.patchId === plan.manifest.currentPatch
+        ? './latest/' + item.id + '/' + path.posix.basename(item.image.path)
+        : './' + item.patchId + '/' + item.id;
     const exportTarget = packageJson.exports[skinSubpath];
     assert.equal(exportTarget, './assets/' + item.image.path);
     assert.equal(fs.existsSync(path.join(packageDirectory, exportTarget.replace(/^\.\//u, ''))), true,
@@ -115,7 +125,10 @@ for (const item of plan.skinsAggregatePackages) {
     const moduleSource = fs.readFileSync(path.join(packageDirectory, 'index.mjs'), 'utf8');
     for (const skin of item.skins) {
         assert.ok(moduleSource.includes(skin.name + '/image/' + path.posix.basename(skin.image.path)));
-        assert.ok(moduleSource.includes('as ' + skin.id), `${item.name} must export ${skin.id} by name`);
+        if (skin.id === 'default') {
+            assert.match(moduleSource, /"default": skin\d+/u, `${item.name} must include the default image in its skin map`);
+        }
+        else assert.ok(moduleSource.includes('as ' + skin.id), `${item.name} must export ${skin.id} by name`);
     }
 }
 
@@ -126,7 +139,7 @@ try {
     const latestDirectory = path.join(outputDirectory, plan.latestPackage.name.slice('@reino-doce/'.length));
     fs.cpSync(latestDirectory, path.join(scope, 'dota-maps-data'), { recursive: true });
     fs.cpSync(latestDirectory, path.join(scope, plan.latestPackage.name.slice('@reino-doce/'.length)), { recursive: true });
-    const skin = plan.skinPackages.find(item => item.id === 'autumn') ?? plan.skinPackages[0];
+    const skin = plan.skinPackages.find(item => item.patchId === plan.manifest.currentPatch) ?? plan.skinPackages[0];
     fs.cpSync(path.join(outputDirectory, skin.name.slice('@reino-doce/'.length)),
         path.join(scope, skin.name.slice('@reino-doce/'.length)), { recursive: true });
 
@@ -138,8 +151,10 @@ try {
     fs.copyFileSync(path.join(coreDirectory, 'manifest.json'), path.join(runtimeRoot, 'manifest.json'));
 
     const mapDataSpecifier = '@reino-doce/dota-maps-data/latest/mapdata.json';
-    const mapImageSpecifier = '@reino-doce/dota-maps-data/latest/dota-map.png';
+    const worldDataSpecifier = '@reino-doce/dota-maps-data/latest/worlddata.json';
+    const mapImageSpecifier = '@reino-doce/dota-maps-data/latest/minimaps/detailed.png';
     const versionDataSpecifier = '@reino-doce/dota-maps-data/' + plan.manifest.currentPatch + '/mapdata.json';
+    const versionWorldDataSpecifier = '@reino-doce/dota-maps-data/' + plan.manifest.currentPatch + '/worlddata.json';
     const versionSkinSpecifier = '@reino-doce/dota-maps-data/images/' + plan.manifest.currentPatch + '/' + skin.id;
     const versionAllSkinsSpecifier = '@reino-doce/dota-maps-data/images/' + plan.manifest.currentPatch;
     const latestSkinSpecifier = '@reino-doce/dota-maps-data/images/latest/' + skin.id;
@@ -150,16 +165,18 @@ try {
         import fs from 'node:fs';
         import { fileURLToPath } from 'node:url';
         import mapdata from ${JSON.stringify(mapDataSpecifier)} with { type: 'json' };
+        import worlddata from ${JSON.stringify(worldDataSpecifier)} with { type: 'json' };
         import { resolveAssetPath } from './runtime/src/node/map-assets.mjs';
         assert.ok(mapdata && typeof mapdata === 'object');
-        for (const specifier of [${JSON.stringify(mapDataSpecifier)}, ${JSON.stringify(mapImageSpecifier)}, ${JSON.stringify(versionDataSpecifier)}, ${JSON.stringify(versionSkinSpecifier)}, ${JSON.stringify(versionAllSkinsSpecifier)}, ${JSON.stringify(latestSkinSpecifier)}, ${JSON.stringify(latestAllSkinsSpecifier)}, ${JSON.stringify(skinImageSpecifier)}]) {
+        assert.ok(worlddata && worlddata.worldMaxX > worlddata.worldMinX);
+        for (const specifier of [${JSON.stringify(mapDataSpecifier)}, ${JSON.stringify(worldDataSpecifier)}, ${JSON.stringify(mapImageSpecifier)}, ${JSON.stringify(versionDataSpecifier)}, ${JSON.stringify(versionWorldDataSpecifier)}, ${JSON.stringify(versionSkinSpecifier)}, ${JSON.stringify(versionAllSkinsSpecifier)}, ${JSON.stringify(latestSkinSpecifier)}, ${JSON.stringify(latestAllSkinsSpecifier)}, ${JSON.stringify(skinImageSpecifier)}]) {
             assert.ok(fs.existsSync(fileURLToPath(import.meta.resolve(specifier))), specifier);
         }
         const skinWrapper = fs.readFileSync(fileURLToPath(import.meta.resolve(${JSON.stringify(latestSkinSpecifier)})), 'utf8');
         assert.ok(skinWrapper.includes(${JSON.stringify(skin.name + '/image/' + path.posix.basename(skin.image.path))}));
         const allSkinsWrapper = fs.readFileSync(fileURLToPath(import.meta.resolve(${JSON.stringify(versionAllSkinsSpecifier)})), 'utf8');
         assert.ok(allSkinsWrapper.includes(${JSON.stringify(plan.skinSetPackages.find(item => item.patchId === plan.manifest.currentPatch).name)}));
-        for (const assetPath of ['data/latest/mapdata.json', 'latest/dota-map.png', ${JSON.stringify('latest/' + skin.id + '/' + path.posix.basename(skin.image.path))}]) {
+        for (const assetPath of ['data/latest/mapdata.json', 'data/latest/worlddata.json', 'latest/minimaps/detailed.png', ${JSON.stringify('latest/' + skin.id + '/' + path.posix.basename(skin.image.path))}]) {
             assert.ok(fs.existsSync(resolveAssetPath(assetPath)), assetPath);
         }
     `;
@@ -170,21 +187,30 @@ try {
 
     const versionOnlyRoot = path.join(fixtureRoot, 'version-only');
     const versionScope = path.join(versionOnlyRoot, 'node_modules', '@reino-doce');
-    const currentPatch = plan.patchPackages.find(item => item.id === plan.manifest.currentPatch);
+    const selectedPatch = plan.patchPackages.find(item => item.id !== plan.manifest.currentPatch)
+        ?? plan.patchPackages.find(item => item.id === plan.manifest.currentPatch);
     fs.mkdirSync(versionScope, { recursive: true });
-    fs.cpSync(path.join(outputDirectory, currentPatch.name.slice('@reino-doce/'.length)),
-        path.join(versionScope, currentPatch.name.slice('@reino-doce/'.length)), { recursive: true });
+    const selectedPackageDirectory = path.join(outputDirectory, selectedPatch.name.slice('@reino-doce/'.length));
+    fs.cpSync(selectedPackageDirectory,
+        path.join(versionScope, selectedPatch.name.slice('@reino-doce/'.length)), { recursive: true });
+    fs.cpSync(selectedPackageDirectory, path.join(versionScope, 'dota-maps-data'), { recursive: true });
     const versionRuntime = path.join(versionOnlyRoot, 'runtime');
     const versionRuntimeNode = path.join(versionRuntime, 'src', 'node');
     fs.mkdirSync(versionRuntimeNode, { recursive: true });
     fs.copyFileSync(path.join(coreDirectory, 'src', 'node', 'map-assets.mjs'),
         path.join(versionRuntimeNode, 'map-assets.mjs'));
     fs.copyFileSync(path.join(coreDirectory, 'manifest.json'), path.join(versionRuntime, 'manifest.json'));
+    const standaloneMapDataSpecifier = '@reino-doce/dota-maps-data/' + selectedPatch.id + '/mapdata.json';
+    const standaloneWorldDataSpecifier = '@reino-doce/dota-maps-data/' + selectedPatch.id + '/worlddata.json';
     const fallbackScript = `
         import assert from 'node:assert/strict';
         import fs from 'node:fs';
+        import mapdata from ${JSON.stringify(standaloneMapDataSpecifier)} with { type: 'json' };
+        import worlddata from ${JSON.stringify(standaloneWorldDataSpecifier)} with { type: 'json' };
         import { resolveAssetPath } from './runtime/src/node/map-assets.mjs';
-        for (const assetPath of ['data/latest/mapdata.json', 'latest/dota-map.png']) {
+        assert.ok(mapdata && typeof mapdata === 'object');
+        assert.ok(worlddata && worlddata.worldMaxX > worlddata.worldMinX);
+        for (const assetPath of [${JSON.stringify('data/' + selectedPatch.id + '/mapdata.json')}, ${JSON.stringify('data/' + selectedPatch.id + '/worlddata.json')}]) {
             assert.ok(fs.existsSync(resolveAssetPath(assetPath)), assetPath);
         }
     `;
@@ -192,7 +218,7 @@ try {
     fs.writeFileSync(fallbackFile, fallbackScript);
     const fallbackResult = spawnSync(process.execPath, [fallbackFile], { cwd: versionOnlyRoot, encoding: 'utf8' });
     assert.equal(fallbackResult.status, 0,
-        fallbackResult.stderr || fallbackResult.stdout || 'version package latest fallback failed');
+        fallbackResult.stderr || fallbackResult.stdout || 'standalone version package resolution failed');
 } finally {
     fs.rmSync(fixtureRoot, { recursive: true, force: true });
 }

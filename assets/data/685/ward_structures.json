@@ -1,0 +1,14 @@
+{
+  "type": "FeatureCollection",
+  "cellSize": 8,
+  "source": {
+    "patch": "685",
+    "mapArchiveSha256": "3f5656f4bcb2c63e7e8baec2dcd5e6b73a4bbb8190993739301975dfc1c05c2c",
+    "navigationPath": "maps/dota.gnv",
+    "terrainSha256": "2959577eaf40504f8a5523152a825564dcc24f8ce088e9b119e0508d846d7fe2",
+    "navigationSha256": "da05e5f1c49ae18fc0f8e927fef6c34abe0dfec2ff38c85f122ee6b508407c2b",
+    "meshSelection": "Default bodygroups, opaque structural materials; enclosed bowls filled",
+    "models": []
+  },
+  "features": []
+}

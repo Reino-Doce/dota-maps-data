@@ -1,6 +1,11 @@
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import { test } from 'node:test';
 import { defaultMeshGroups, readModelTriangles, projectModelFootprint, pitFootprint } from '../scripts/structure-footprints.mjs';
+import { importStructureFootprints, validateStructureCapture } from '../scripts/import-structure-footprints.mjs';
 import { isWardBlocked } from '../src/wardGrid.mjs';
 
 function modelFixture(extraGeometry = false) {
@@ -61,4 +66,56 @@ test('pit extraction keeps only the connected hole at the spawn marker and detec
     assert.equal(blocked(geometry, 8, 20), true, 'the pit boundary is included');
     assert.throws(() => pitFootprint({ ...pit, center: [40, 20] }), /No pit/);
     assert.throws(() => pitFootprint({ ...pit, blockedRows: [[1, 4], ...pit.blockedRows.slice(1)] }), /boundary/);
+});
+
+test('older maps without ward-blocking structures produce an exact-source empty footprint set', t => {
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'dota-map-structure-import-'));
+    t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
+    const assets = path.join(directory, 'assets');
+    const dataDirectory = path.join(assets, 'data', 'test');
+    const captureDirectory = path.join(directory, 'captures');
+    fs.mkdirSync(dataDirectory, { recursive: true });
+    const navigation = Buffer.alloc(36);
+    navigation.writeUInt32LE(0xFADEBEAD, 0);
+    navigation.writeFloatLE(64, 4);
+    navigation.writeFloatLE(32, 8);
+    navigation.writeFloatLE(32, 12);
+    navigation.writeInt32LE(2, 16);
+    navigation.writeInt32LE(2, 20);
+    navigation.writeInt32LE(-1, 24);
+    navigation.writeInt32LE(-1, 28);
+    const navigationSha256 = createHash('sha256').update(navigation).digest('hex');
+    const source = { patch: 'test', archiveSha256: 'a'.repeat(64),
+        resources: { map: { path: 'maps/test.vmap_c' }, entities: { sha256: 'b'.repeat(64) },
+            navigation: { available: true, path: 'maps/test.gnv', sha256: navigationSha256 } } };
+    const mapData = { data: { npc_dota_lotus_pool: [], npc_dota_unit_twin_gate: [], npc_dota_watch_tower: [] } };
+    const terrain = { source: { patch: 'test', mapArchiveSha256: source.archiveSha256,
+        mapResource: source.resources.map.path, mapEntitiesSha256: source.resources.entities.sha256, navigationSha256 },
+    entities: [], pits: [] };
+    fs.writeFileSync(path.join(dataDirectory, 'source.json'), JSON.stringify(source));
+    fs.writeFileSync(path.join(dataDirectory, 'mapdata.json'), JSON.stringify(mapData));
+    fs.writeFileSync(path.join(dataDirectory, 'terrain_grid.json'), JSON.stringify(terrain));
+    fs.writeFileSync(path.join(dataDirectory, 'gridnav.gnv'), navigation);
+
+    const result = importStructureFootprints({ patch: 'test', assetDirectory: assets, captureDirectory });
+    assert.deepEqual(result.features, []);
+    assert.equal(result.source.mapArchiveSha256, source.archiveSha256);
+    assert.equal(result.source.navigationPath, source.resources.navigation.path);
+    assert.equal(result.source.modelArchive, undefined);
+});
+
+test('structure capture validation compares archived X/Y while preserving runtime height', () => {
+    const source = { patch: '732', archiveSha256: 'a'.repeat(64),
+        resources: { map: { path: 'maps/dota.vmap_c' }, entities: { sha256: 'b'.repeat(64) } } };
+    const terrain = { source: { patch: '732', mapArchiveSha256: source.archiveSha256,
+        mapResource: source.resources.map.path, mapEntitiesSha256: source.resources.entities.sha256,
+        navigationSha256: 'c'.repeat(64) },
+    entities: [{ classname: 'npc_dota_watch_tower', origin: [1, 2, 256] }], pits: [] };
+    const mapData = { data: { npc_dota_lotus_pool: [], npc_dota_unit_twin_gate: [],
+        npc_dota_watch_tower: [{ x: 1, y: 2 }] } };
+
+    assert.doesNotThrow(() => validateStructureCapture('732', source, terrain, mapData, 'c'.repeat(64)));
+    assert.throws(() => validateStructureCapture('732', source, terrain, { data: {
+        ...mapData.data, npc_dota_watch_tower: [{ x: 9, y: 2 }],
+    } }, 'c'.repeat(64)), /positions do not match/);
 });

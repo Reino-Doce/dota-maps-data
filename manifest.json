@@ -1,146 +1,874 @@
 {
   "schemaVersion": 1,
-  "currentPatch": "741f",
+  "currentPatch": "741",
   "latestPackage": {
     "packageName": "@reino-doce/dota-maps-data-latest",
-    "sourcePatch": "741f",
-    "sourcePackageName": "@reino-doce/dota-maps-data-741f"
+    "sourcePatch": "741",
+    "sourcePackageName": "@reino-doce/dota-maps-data-741"
   },
   "latestSkinsPackageName": "@reino-doce/dota-map-skins-latest",
   "skinSetPackages": {
-    "741f": "@reino-doce/dota-map-skins-741f"
+    "681": "@reino-doce/dota-map-skins-681",
+    "682": "@reino-doce/dota-map-skins-682",
+    "683": "@reino-doce/dota-map-skins-683",
+    "684": "@reino-doce/dota-map-skins-684",
+    "685": "@reino-doce/dota-map-skins-685",
+    "687": "@reino-doce/dota-map-skins-687",
+    "688": "@reino-doce/dota-map-skins-688",
+    "700": "@reino-doce/dota-map-skins-700",
+    "706": "@reino-doce/dota-map-skins-706",
+    "707": "@reino-doce/dota-map-skins-707",
+    "709": "@reino-doce/dota-map-skins-709",
+    "715": "@reino-doce/dota-map-skins-715",
+    "719": "@reino-doce/dota-map-skins-719",
+    "720": "@reino-doce/dota-map-skins-720",
+    "722": "@reino-doce/dota-map-skins-722",
+    "723": "@reino-doce/dota-map-skins-723",
+    "727": "@reino-doce/dota-map-skins-727",
+    "728": "@reino-doce/dota-map-skins-728",
+    "729": "@reino-doce/dota-map-skins-729",
+    "732": "@reino-doce/dota-map-skins-732",
+    "737": "@reino-doce/dota-map-skins-737",
+    "738": "@reino-doce/dota-map-skins-738",
+    "739": "@reino-doce/dota-map-skins-739",
+    "740": "@reino-doce/dota-map-skins-740",
+    "741": "@reino-doce/dota-map-skins-741"
   },
   "skinPackages": [
     {
+      "id": "default",
+      "patchId": "681",
+      "packageName": "@reino-doce/dota-map-skin-681-default",
+      "file": {
+        "path": "img/681/default.jpg",
+        "bytes": 3629109,
+        "sha256": "d265e62a7e07547f5932425a43fb368bec600c8e72b3c4d1074cf91429b2e7bb"
+      }
+    },
+    {
+      "id": "default_small",
+      "patchId": "682",
+      "packageName": "@reino-doce/dota-map-skin-682-default_small",
+      "file": {
+        "path": "img/682/default_small.jpg",
+        "bytes": 1104010,
+        "sha256": "bf7cef9630ea920cdd9a9a102087be7adb1a0bb72c6d5e9534eaf980c8e10e5d"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "682",
+      "packageName": "@reino-doce/dota-map-skin-682-default",
+      "file": {
+        "path": "img/682/default.jpg",
+        "bytes": 9223666,
+        "sha256": "8ed5a663c7bede05540e6e70f3dae4d47b7e6272a9c8b78e0b6f69ed323e7eaa"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "683",
+      "packageName": "@reino-doce/dota-map-skin-683-default",
+      "file": {
+        "path": "img/683/default.jpg",
+        "bytes": 33346023,
+        "sha256": "beb27a598b7ed8828d0281dd9983fa8b36c858093fd99853966b77a0cdaed0d2"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "684",
+      "packageName": "@reino-doce/dota-map-skin-684-default",
+      "file": {
+        "path": "img/684/default.jpg",
+        "bytes": 39747339,
+        "sha256": "ef8e3db0f7154cf83819e4b5ae1c182c603d2a236c759a6d46ef2958fdae192c"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "685",
+      "packageName": "@reino-doce/dota-map-skin-685-default",
+      "file": {
+        "path": "img/685/default.jpg",
+        "bytes": 36784958,
+        "sha256": "bcc4dc0836890c17976d6536113cd8d2a24e9f0e19c78d016c10b8c1dc86c3ff"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "687",
+      "packageName": "@reino-doce/dota-map-skin-687-default",
+      "file": {
+        "path": "img/687/default.jpg",
+        "bytes": 1210295,
+        "sha256": "673671e7b90824ba3501a5e9ecfdfa606b616ca8496734d75bacd5872b0745c1"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "688",
+      "packageName": "@reino-doce/dota-map-skin-688-default",
+      "file": {
+        "path": "img/688/default.jpg",
+        "bytes": 39515687,
+        "sha256": "d0d6a0e7620b889599d1dcfc6d716ef24951af2aae03a54abe8cd57e76237bd1"
+      }
+    },
+    {
+      "id": "default_smaller",
+      "patchId": "700",
+      "packageName": "@reino-doce/dota-map-skin-700-default_smaller",
+      "file": {
+        "path": "img/700/default_smaller.jpg",
+        "bytes": 2288181,
+        "sha256": "0cac17ad601a8744e6493453b1882076136938c57117775d16352742e2cb4b77"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "700",
+      "packageName": "@reino-doce/dota-map-skin-700-default",
+      "file": {
+        "path": "img/700/default.jpg",
+        "bytes": 25065348,
+        "sha256": "ea6803659dca58a64b9bda05593e4a2a20bff8db1bada7e2576ea8a7eab83430"
+      }
+    },
+    {
       "id": "autumn",
-      "patchId": "741f",
-      "packageName": "@reino-doce/dota-map-skin-741f-autumn",
+      "patchId": "706",
+      "packageName": "@reino-doce/dota-map-skin-706-autumn",
       "file": {
-        "path": "img/skins/741f/dota_autumn.png",
-        "bytes": 26251485,
-        "sha256": "74dbf32c0bfb1fbcbedf5fe43c1572639ab84a277e19f2f948249a4a46f4438d"
+        "path": "img/706/autumn.jpg",
+        "bytes": 31334105,
+        "sha256": "38e8c18191448b481e34d8acdb091a4ca6ccaa9c812ae469aa7fee0422e1e08f"
       }
     },
     {
-      "id": "cavern",
-      "patchId": "741f",
-      "packageName": "@reino-doce/dota-map-skin-741f-cavern",
+      "id": "default_smaller",
+      "patchId": "706",
+      "packageName": "@reino-doce/dota-map-skin-706-default_smaller",
       "file": {
-        "path": "img/skins/741f/dota_cavern.png",
-        "bytes": 26900811,
-        "sha256": "4b700533672c95d790f95196f0cda93a52dcc3cc7ead711d89de6b29eb16c9aa"
+        "path": "img/706/default_smaller.jpg",
+        "bytes": 5163458,
+        "sha256": "4b263e81f8ddcb52a44dd98bf164222be7dff728ac2eec0d770f36ddc092034c"
       }
     },
     {
-      "id": "coloseum",
-      "patchId": "741f",
-      "packageName": "@reino-doce/dota-map-skin-741f-coloseum",
+      "id": "default",
+      "patchId": "706",
+      "packageName": "@reino-doce/dota-map-skin-706-default",
       "file": {
-        "path": "img/skins/741f/dota_coloseum.png",
-        "bytes": 26823622,
-        "sha256": "f1caeb8ba9413a9418510cacbe2545e3e037a3fa6a523cf1f2db819009750b32"
+        "path": "img/706/default.jpg",
+        "bytes": 39280661,
+        "sha256": "0cd49592abea5141f5e8d7a20a9f449cace848dd28e37143efaba74063231820"
       }
     },
     {
       "id": "desert",
-      "patchId": "741f",
-      "packageName": "@reino-doce/dota-map-skin-741f-desert",
+      "patchId": "706",
+      "packageName": "@reino-doce/dota-map-skin-706-desert",
       "file": {
-        "path": "img/skins/741f/dota_desert.png",
-        "bytes": 26043462,
-        "sha256": "838e5743f594314ad31be8503f98d99208df706d332631499acf44aa492f52da"
+        "path": "img/706/desert.jpg",
+        "bytes": 30643077,
+        "sha256": "13b6348564aa7c24a8bca3f466ac56c81b7ce4a5f8ba5eb49862a05ce628573a"
+      }
+    },
+    {
+      "id": "immortalgardens",
+      "patchId": "706",
+      "packageName": "@reino-doce/dota-map-skin-706-immortalgardens",
+      "file": {
+        "path": "img/706/immortalgardens.jpg",
+        "bytes": 36749050,
+        "sha256": "1f07c3acf80cbd6345fab5e6b29ed122b8e0571267e5450ed6833be15a8aad52"
       }
     },
     {
       "id": "journey",
-      "patchId": "741f",
-      "packageName": "@reino-doce/dota-map-skin-741f-journey",
+      "patchId": "706",
+      "packageName": "@reino-doce/dota-map-skin-706-journey",
       "file": {
-        "path": "img/skins/741f/dota_journey.png",
-        "bytes": 25938304,
-        "sha256": "9782f17bea2dc678b0cde61f03935939ac779b3536b01749163de52c57233825"
-      }
-    },
-    {
-      "id": "jungle",
-      "patchId": "741f",
-      "packageName": "@reino-doce/dota-map-skin-741f-jungle",
-      "file": {
-        "path": "img/skins/741f/dota_jungle.png",
-        "bytes": 27685364,
-        "sha256": "53d20c190493abba9c092251b9de6149640db2cf926807adfcee29d9dd130b7b"
+        "path": "img/706/journey.jpg",
+        "bytes": 31020648,
+        "sha256": "6d79bdad48dc1233c6a9f532e1a26ea5784737998ee0e0b89bc3856b8a67b3d9"
       }
     },
     {
       "id": "reef",
-      "patchId": "741f",
-      "packageName": "@reino-doce/dota-map-skin-741f-reef",
+      "patchId": "706",
+      "packageName": "@reino-doce/dota-map-skin-706-reef",
       "file": {
-        "path": "img/skins/741f/dota_reef.png",
-        "bytes": 30190852,
-        "sha256": "080772debe860ba7788930f869bea7f2ea49923c4183972f106b7025eb90ef56"
+        "path": "img/706/reef.jpg",
+        "bytes": 34799576,
+        "sha256": "8bd77967e3ffe802e8a2c16cb2a5cdab84a62005f11ba958a4b569b3e8f4de9c"
       }
     },
     {
       "id": "spring",
-      "patchId": "741f",
-      "packageName": "@reino-doce/dota-map-skin-741f-spring",
+      "patchId": "706",
+      "packageName": "@reino-doce/dota-map-skin-706-spring",
       "file": {
-        "path": "img/skins/741f/dota_spring.png",
-        "bytes": 25471513,
-        "sha256": "14b73ccf5ee3a0e36ae0ce2d122a55e2ed3ea4a073b89f186a8bf101c01632ee"
-      }
-    },
-    {
-      "id": "summer",
-      "patchId": "741f",
-      "packageName": "@reino-doce/dota-map-skin-741f-summer",
-      "file": {
-        "path": "img/skins/741f/dota_summer.png",
-        "bytes": 25346940,
-        "sha256": "4b9f2ad45d4193388fe390c76f839962bb7ca4812ef4306e8bfc57a40a41e137"
-      }
-    },
-    {
-      "id": "ti10",
-      "patchId": "741f",
-      "packageName": "@reino-doce/dota-map-skin-741f-ti10",
-      "file": {
-        "path": "img/skins/741f/dota_ti10.png",
-        "bytes": 24211829,
-        "sha256": "c20f1f6900503d353e2c9842f93d1620bd062ba5e7e5278bd6e6b442e250e8ac"
+        "path": "img/706/spring.jpg",
+        "bytes": 32766816,
+        "sha256": "0042b10148410a307d50944bceb6c8b67451ea5b181d67d78b804204b883ad0a"
       }
     },
     {
       "id": "winter",
-      "patchId": "741f",
-      "packageName": "@reino-doce/dota-map-skin-741f-winter",
+      "patchId": "706",
+      "packageName": "@reino-doce/dota-map-skin-706-winter",
       "file": {
-        "path": "img/skins/741f/dota_winter.png",
-        "bytes": 25374637,
-        "sha256": "d1f6273815278a4a5260b45fdbce3992d437f7f26b0b4710310e11437c89c252"
+        "path": "img/706/winter.jpg",
+        "bytes": 31014751,
+        "sha256": "7997303e843bea8f9cb5787a4222c4bed8cc5ecb5f294262ee24e1d5994c41b2"
       }
     },
     {
-      "id": "base",
-      "patchId": "741f",
-      "packageName": "@reino-doce/dota-map-skin-741f-base",
+      "id": "default",
+      "patchId": "707",
+      "packageName": "@reino-doce/dota-map-skin-707-default",
       "file": {
-        "path": "img/skins/741f/dota.png",
-        "bytes": 23793134,
-        "sha256": "660c5f6edfba7026a7b95c71626bafdd3bfc9d7b5580814939ed7172b8e62c3d"
+        "path": "img/707/default.jpg",
+        "bytes": 25297991,
+        "sha256": "dd7b2d161a5396c50825371f5b12e7e00ee6fe9b2b83f8950227525fff5c74b5"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "709",
+      "packageName": "@reino-doce/dota-map-skin-709-default",
+      "file": {
+        "path": "img/709/default.jpg",
+        "bytes": 24702318,
+        "sha256": "198aa990b333713f9eb900e86ede14ca588bf62215a97c66f80c600977f1e807"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "715",
+      "packageName": "@reino-doce/dota-map-skin-715-default",
+      "file": {
+        "path": "img/715/default.jpg",
+        "bytes": 24693613,
+        "sha256": "1b00b9bba265f20d71b9752c25d0aee6184a7ad79a7c42c9269f18d3fd0de258"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "719",
+      "packageName": "@reino-doce/dota-map-skin-719-default",
+      "file": {
+        "path": "img/719/default.jpg",
+        "bytes": 38063346,
+        "sha256": "d3e654083928c6727843e9441c0971f63538acd135db8261d9034f6bbf6e7382"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "720",
+      "packageName": "@reino-doce/dota-map-skin-720-default",
+      "file": {
+        "path": "img/720/default.jpg",
+        "bytes": 24732648,
+        "sha256": "c747e8400413e1c98d58621f6a77205bb05f749a53894a6749445fb776d85357"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "722",
+      "packageName": "@reino-doce/dota-map-skin-722-default",
+      "file": {
+        "path": "img/722/default.jpg",
+        "bytes": 37774465,
+        "sha256": "859acf5feed31ade531b4f295cfb74d1fdc2feca5d26eb0018df251ff1342e48"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "723",
+      "packageName": "@reino-doce/dota-map-skin-723-default",
+      "file": {
+        "path": "img/723/default.jpg",
+        "bytes": 3747531,
+        "sha256": "74fe8151930ce04ae4faef2657c0c427a1a5b193572192d1109843c2a063c056"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "727",
+      "packageName": "@reino-doce/dota-map-skin-727-default",
+      "file": {
+        "path": "img/727/default.jpg",
+        "bytes": 2626547,
+        "sha256": "4cf507f92971515335e4bd5c60c770fba941d74f5875b69df523a4785c79c786"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "728",
+      "packageName": "@reino-doce/dota-map-skin-728-default",
+      "file": {
+        "path": "img/728/default.jpg",
+        "bytes": 38368129,
+        "sha256": "049372f001e39e5f90da19e3d19e7bc2df1bb55c8554634aa7f7c1e6ad01bea4"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "729",
+      "packageName": "@reino-doce/dota-map-skin-729-default",
+      "file": {
+        "path": "img/729/default.jpg",
+        "bytes": 4875636,
+        "sha256": "8c759607169027854f500971c3f32ae70a89d3aebabf6cbd26d48e1f83d2b391"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "732",
+      "packageName": "@reino-doce/dota-map-skin-732-default",
+      "file": {
+        "path": "img/732/default.jpg",
+        "bytes": 38323011,
+        "sha256": "fc4f8d7b89b343bbdbc9fa7bfb3d23660afff3fcb6d9feac3ceacfca1d4c6d59"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "737",
+      "packageName": "@reino-doce/dota-map-skin-737-default",
+      "file": {
+        "path": "img/737/default.jpg",
+        "bytes": 39027844,
+        "sha256": "900b78c625f7dcdeb0968b6a79b19b766d3e6d2846c75ae1a9fb64882c7e56bb"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "738",
+      "packageName": "@reino-doce/dota-map-skin-738-default",
+      "file": {
+        "path": "img/738/default.jpeg",
+        "bytes": 20736789,
+        "sha256": "ea4e0f60a85451382c887d4ea26c928a19d680c9557211211f4a0385e98ff5c2"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "739",
+      "packageName": "@reino-doce/dota-map-skin-739-default",
+      "file": {
+        "path": "img/739/default.jpeg",
+        "bytes": 20805440,
+        "sha256": "b0869c04918895dfe1470521804dd3e855bf42cf0108f88754f829a284f084f8"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "740",
+      "packageName": "@reino-doce/dota-map-skin-740-default",
+      "file": {
+        "path": "img/740/default.jpeg",
+        "bytes": 23648862,
+        "sha256": "d64f0afee255a600cbc46344251ebd9cadea3064b09b60ec3ea4cdf25f7851e9"
+      }
+    },
+    {
+      "id": "autumn",
+      "patchId": "741",
+      "packageName": "@reino-doce/dota-map-skin-741-autumn",
+      "file": {
+        "path": "img/741/autumn.jpg",
+        "bytes": 6696956,
+        "sha256": "8435660f9fad7bc1e09edf203e0d6bbf8612ed65ab92de3dbc043fcbb816c3a0"
+      }
+    },
+    {
+      "id": "cavern",
+      "patchId": "741",
+      "packageName": "@reino-doce/dota-map-skin-741-cavern",
+      "file": {
+        "path": "img/741/cavern.jpg",
+        "bytes": 7392392,
+        "sha256": "18ba81f8b4fdadedf4aec2a0ae8e9e856700782882823fccabdbc2bb71ef607a"
+      }
+    },
+    {
+      "id": "coloseum",
+      "patchId": "741",
+      "packageName": "@reino-doce/dota-map-skin-741-coloseum",
+      "file": {
+        "path": "img/741/coloseum.jpg",
+        "bytes": 7039302,
+        "sha256": "f5e40a0bcc92343ae091b2552dd8f640515edaba2cd42cb319c57bf7d9272a8c"
+      }
+    },
+    {
+      "id": "default",
+      "patchId": "741",
+      "packageName": "@reino-doce/dota-map-skin-741-default",
+      "file": {
+        "path": "img/741/default.jpg",
+        "bytes": 34932112,
+        "sha256": "852d13d8b3364e1c41bde5f7597296cf991297c9bd53873edff04b1308d3b2ab"
+      }
+    },
+    {
+      "id": "desert",
+      "patchId": "741",
+      "packageName": "@reino-doce/dota-map-skin-741-desert",
+      "file": {
+        "path": "img/741/desert.jpg",
+        "bytes": 6701625,
+        "sha256": "1f1df0e903b7d6808db9ee9afa87257051f332e065ce7ee2871a8136fb91eeb1"
+      }
+    },
+    {
+      "id": "journey",
+      "patchId": "741",
+      "packageName": "@reino-doce/dota-map-skin-741-journey",
+      "file": {
+        "path": "img/741/journey.jpg",
+        "bytes": 6507852,
+        "sha256": "5cb2a616602bd7cac0abfaa6803f8a15256719451e41b6f202d1e9aa6fea7d27"
+      }
+    },
+    {
+      "id": "jungle",
+      "patchId": "741",
+      "packageName": "@reino-doce/dota-map-skin-741-jungle",
+      "file": {
+        "path": "img/741/jungle.jpg",
+        "bytes": 7614508,
+        "sha256": "c9f8455fd7a647710fc5e8df133d4d7c664c76b3200ca32416d7eac87f78cbee"
+      }
+    },
+    {
+      "id": "reef",
+      "patchId": "741",
+      "packageName": "@reino-doce/dota-map-skin-741-reef",
+      "file": {
+        "path": "img/741/reef.jpg",
+        "bytes": 8559965,
+        "sha256": "6df541ccb32f691d85a41f88ce3694adfa3d5af8aa6781a3d3ef4389de5d2d75"
+      }
+    },
+    {
+      "id": "spring",
+      "patchId": "741",
+      "packageName": "@reino-doce/dota-map-skin-741-spring",
+      "file": {
+        "path": "img/741/spring.jpg",
+        "bytes": 6381429,
+        "sha256": "26a2230d55751127b8dee137f814417a459ce929bee59258bcf07546bb916993"
+      }
+    },
+    {
+      "id": "summer",
+      "patchId": "741",
+      "packageName": "@reino-doce/dota-map-skin-741-summer",
+      "file": {
+        "path": "img/741/summer.jpg",
+        "bytes": 6595427,
+        "sha256": "1da8eec4719178115583a955e0f06910b893b3af55936e11fe00a6ebb90038bb"
+      }
+    },
+    {
+      "id": "ti10",
+      "patchId": "741",
+      "packageName": "@reino-doce/dota-map-skin-741-ti10",
+      "file": {
+        "path": "img/741/ti10.jpg",
+        "bytes": 5885570,
+        "sha256": "9078e34a5eb769ca173ca5503ecbb1562867bc23abd96a2ae51e216462008aea"
+      }
+    },
+    {
+      "id": "winter",
+      "patchId": "741",
+      "packageName": "@reino-doce/dota-map-skin-741-winter",
+      "file": {
+        "path": "img/741/winter.jpg",
+        "bytes": 6752976,
+        "sha256": "fccaa8dd9b327ca7d88518c436bc22d714df489569dc8e1c7faabdff077273ba"
       }
     }
   ],
   "patches": [
     {
+      "id": "670",
+      "packageName": "@reino-doce/dota-maps-data-670",
+      "files": [
+        {
+          "path": "data/670/gridnav.gnv",
+          "bytes": 8224,
+          "sha256": "72ea037713b75600a48efb2fdbb296cffb466546dc92c9f0a067a247a2b6fc4e"
+        },
+        {
+          "path": "data/670/mapdata.json",
+          "bytes": 87378,
+          "sha256": "668b2a323dea40e0c852103e099696b1855fb8011a0d1d443127d131b2e757d1"
+        },
+        {
+          "path": "data/670/source.json",
+          "bytes": 3293,
+          "sha256": "5035c6bbfc7d17c63ee4471e35d8e8b3fe571af24a09d2524cad5ee605ad7d97"
+        },
+        {
+          "path": "data/670/worlddata.json",
+          "bytes": 89,
+          "sha256": "14a2af47f45f882dc877111fba7f20188bcda08fd0fa33999c55f8eef230636a"
+        }
+      ]
+    },
+    {
+      "id": "683",
+      "packageName": "@reino-doce/dota-maps-data-683",
+      "files": [
+        {
+          "path": "data/683/elevation.json",
+          "bytes": 128488,
+          "sha256": "89e112b93e5b9c0d862f236c661157988f4f3f5626ccbc6550209034d2c1bced"
+        },
+        {
+          "path": "data/683/ent_fow_blocker_node.json",
+          "bytes": 7689,
+          "sha256": "455b0d85d2fb93e3b1e82c6b26bef7ac62e6d3f5633612c8c7b575182283561d"
+        },
+        {
+          "path": "data/683/fow_blockers.json",
+          "bytes": 5980,
+          "sha256": "74d54372d8d8e8ca3fb856b137d5f90bf8654f6606de891a369c9c08488af784"
+        },
+        {
+          "path": "data/683/gridnav.gnv",
+          "bytes": 63520,
+          "sha256": "90ccdce0a674551b4c1582549da305c83d8fa1eb25dd2901673125640cc1f376"
+        },
+        {
+          "path": "data/683/live_tree_index.json",
+          "bytes": 26068,
+          "sha256": "47f1cb0a38e9349f78ac90df13124cf7418e79974c5a02507a15cc846d282a6c"
+        },
+        {
+          "path": "data/683/mapdata.json",
+          "bytes": 99639,
+          "sha256": "5bed06948203c4dafeaffbb990e4cd6cd0b2407d22f1b0d85046c43e8d750d59"
+        },
+        {
+          "path": "data/683/no_wards.json",
+          "bytes": 26561,
+          "sha256": "32526d83550f75cda975cba1c4b96d631350ff4d0df08258593bb2dffb724787"
+        },
+        {
+          "path": "data/683/npc_dota_spawner.json",
+          "bytes": 681,
+          "sha256": "87f03b8b20cdaaf127e6aba492eb99fe88469fa3138390b65230513202a8d460"
+        },
+        {
+          "path": "data/683/overview.json",
+          "bytes": 408,
+          "sha256": "665393ad393665e9dfd7c6d50a8c1591fa3ed9a00ff3e2f27b37e198c96e2d09"
+        },
+        {
+          "path": "data/683/overview.txt",
+          "bytes": 330,
+          "sha256": "2719020be20862c94b69736fdbe44bc303e7594d48130b28d6d8810512421514"
+        },
+        {
+          "path": "data/683/path_corner.json",
+          "bytes": 1287,
+          "sha256": "15bc20c982e96b8c538ab42f055d889fdc30238fc7a96cf5d1644ea0ae27c37a"
+        },
+        {
+          "path": "data/683/source.json",
+          "bytes": 5257,
+          "sha256": "8b7501e6b1fda74fa56ec5340833f5e06a47bcebe61c9bd5a67d294cc3f21baa"
+        },
+        {
+          "path": "data/683/terrain_grid.json",
+          "bytes": 943847,
+          "sha256": "97501dedd1e914b5da332b00bb731807dce09cc9381ef6fa5e423f1d489bfdf0"
+        },
+        {
+          "path": "data/683/ward_grid.json",
+          "bytes": 10282,
+          "sha256": "a9e37399ad034c1b94ebdfb2fd1d1b5b072be0d78fb0b32861d33835f25b8dac"
+        },
+        {
+          "path": "data/683/ward_structures.json",
+          "bytes": 536,
+          "sha256": "7405529407625472ba7506079b9fe2bd2e5f3d523e82b3c3906c1dceb2b0f38f"
+        },
+        {
+          "path": "data/683/worlddata.json",
+          "bytes": 72,
+          "sha256": "883b23ca3263e1ed913e1814e248a87c4a63515a0f6c5536848b8e2c931e64f2"
+        }
+      ]
+    },
+    {
+      "id": "684",
+      "packageName": "@reino-doce/dota-maps-data-684",
+      "files": [
+        {
+          "path": "data/684/elevation.json",
+          "bytes": 173519,
+          "sha256": "5c6eed71f8863725686066779e5c488be368c5fcf2639cd491bf2f40f3b10b13"
+        },
+        {
+          "path": "data/684/ent_fow_blocker_node.json",
+          "bytes": 6347,
+          "sha256": "a0cbaeff4e7d310b27da53e2884a46323b05418da28f7ea2623f5dc98ddde529"
+        },
+        {
+          "path": "data/684/fow_blockers.json",
+          "bytes": 4994,
+          "sha256": "a5fcc1ca1573a9e1783d492cf19fa681734fdd239c854daf37d44ca400d79468"
+        },
+        {
+          "path": "data/684/gridnav.gnv",
+          "bytes": 66596,
+          "sha256": "8a938075d4a396ccdc0b754859a4bf8b9b575d76140a4cdb913c019b9b6f5adf"
+        },
+        {
+          "path": "data/684/live_tree_index.json",
+          "bytes": 24898,
+          "sha256": "8598632bc2a7409220fbfbf70c24154f5f45aa204ae7cf378ee5539cd41359a9"
+        },
+        {
+          "path": "data/684/mapdata.json",
+          "bytes": 92698,
+          "sha256": "78d108a70675df7a29919fbfaa995c2c38f8c4e7a7d47373c2003adfa3f81d4b"
+        },
+        {
+          "path": "data/684/no_wards.json",
+          "bytes": 81929,
+          "sha256": "5b4a11c88524b0dfa4d81bf01745b74258cae39cd93d321dcdfa7b8c0c778f50"
+        },
+        {
+          "path": "data/684/npc_dota_spawner.json",
+          "bytes": 681,
+          "sha256": "87f03b8b20cdaaf127e6aba492eb99fe88469fa3138390b65230513202a8d460"
+        },
+        {
+          "path": "data/684/overview.json",
+          "bytes": 385,
+          "sha256": "ea42266905635f73d5363b117d007dba0a138475b93289a4565d236b61b8aa6e"
+        },
+        {
+          "path": "data/684/overview.txt",
+          "bytes": 326,
+          "sha256": "b765c6541b62d6d0f948ebb41eb0414d05c7e7e8b5ff31a189e8470f67af2912"
+        },
+        {
+          "path": "data/684/path_corner.json",
+          "bytes": 1287,
+          "sha256": "15bc20c982e96b8c538ab42f055d889fdc30238fc7a96cf5d1644ea0ae27c37a"
+        },
+        {
+          "path": "data/684/source.json",
+          "bytes": 4737,
+          "sha256": "ac15c427b2d4a0c7389017e495e598b686b7dd5cc8c7fd18323f81d64af4ec9f"
+        },
+        {
+          "path": "data/684/terrain_grid.json",
+          "bytes": 1007518,
+          "sha256": "c0634def916adb69b9276228a8d60d611073bb06b61925c141e4fbf1af6cc064"
+        },
+        {
+          "path": "data/684/ward_grid.json",
+          "bytes": 20267,
+          "sha256": "a226f7651643865a112efb92db3cbc0f28868818422a64baf8900d6b28782fab"
+        },
+        {
+          "path": "data/684/ward_structures.json",
+          "bytes": 532,
+          "sha256": "34aa87a32aecfbefe2bce9c47911edfbd52fb82c2f85cc951570d5e6605cdb64"
+        },
+        {
+          "path": "data/684/worlddata.json",
+          "bytes": 72,
+          "sha256": "1657554a493d7602f3655dd89b8a3407ff77bf39b377d02068492d11aab7ead8"
+        }
+      ]
+    },
+    {
+      "id": "685",
+      "packageName": "@reino-doce/dota-maps-data-685",
+      "files": [
+        {
+          "path": "data/685/elevation.json",
+          "bytes": 147691,
+          "sha256": "4f0424ed020bc5231763686d5b06bd1c143232cc1c66ad606533b970050c5139"
+        },
+        {
+          "path": "data/685/ent_fow_blocker_node.json",
+          "bytes": 5308,
+          "sha256": "2a08d0f343295ba74374d80cbcee67950299923abcfec66c37f62d6f947ff1bd"
+        },
+        {
+          "path": "data/685/fow_blockers.json",
+          "bytes": 4581,
+          "sha256": "ace74ac70176a25158f6095501875d90541c1ed437770aa881face9062e6ec1a"
+        },
+        {
+          "path": "data/685/gridnav.gnv",
+          "bytes": 67632,
+          "sha256": "da05e5f1c49ae18fc0f8e927fef6c34abe0dfec2ff38c85f122ee6b508407c2b"
+        },
+        {
+          "path": "data/685/illustrated.png",
+          "bytes": 972357,
+          "sha256": "7aad030b8fef6e0303915657d6952f5362fbca546d46f24a358c4ab2745d0275"
+        },
+        {
+          "path": "data/685/live_tree_index.json",
+          "bytes": 25398,
+          "sha256": "f93e480d358fb777fe0454a9ef4e8c22f3d22a71ef199188487a50ea408cf214"
+        },
+        {
+          "path": "data/685/mapdata.json",
+          "bytes": 94573,
+          "sha256": "c283c049e2059a7e6945aec71dcc3a109b439ef30a338ff75be21f33e05fc88c"
+        },
+        {
+          "path": "data/685/no_wards.json",
+          "bytes": 33772,
+          "sha256": "88cbf582b74ddf62bb137dfa6ef9659fc8d360af45863a4b7a2ae79d2a53a371"
+        },
+        {
+          "path": "data/685/npc_dota_spawner.json",
+          "bytes": 681,
+          "sha256": "87f03b8b20cdaaf127e6aba492eb99fe88469fa3138390b65230513202a8d460"
+        },
+        {
+          "path": "data/685/overview.json",
+          "bytes": 408,
+          "sha256": "9b64491fdfdc8ac82137de13e11c00410507e0c71c00182d30c93bfde04fc170"
+        },
+        {
+          "path": "data/685/overview.txt",
+          "bytes": 330,
+          "sha256": "9ff005ad6069426fdbd23e3020fb0787398cd111904a74c2630f2eea90121209"
+        },
+        {
+          "path": "data/685/path_corner.json",
+          "bytes": 1287,
+          "sha256": "15bc20c982e96b8c538ab42f055d889fdc30238fc7a96cf5d1644ea0ae27c37a"
+        },
+        {
+          "path": "data/685/source.json",
+          "bytes": 4741,
+          "sha256": "b560b71ff556ccd024b3451e63f9f130c97766da8da3a47866783bdd2a071f1a"
+        },
+        {
+          "path": "data/685/terrain_grid.json",
+          "bytes": 1018223,
+          "sha256": "2959577eaf40504f8a5523152a825564dcc24f8ce088e9b119e0508d846d7fe2"
+        },
+        {
+          "path": "data/685/ward_grid.json",
+          "bytes": 10762,
+          "sha256": "3c9ad5f1c33329a4bbce0839e8e3f11923f9817605478e868b2142c91ae42520"
+        },
+        {
+          "path": "data/685/ward_structures.json",
+          "bytes": 532,
+          "sha256": "7fcf7588ed25ecfb05d71528b1362d9ca21c51194b2efee348bde8fdb5e5dde0"
+        },
+        {
+          "path": "data/685/worlddata.json",
+          "bytes": 72,
+          "sha256": "ae4b1830f0d579eafb2b045f42084046b318ba6e268292fd879bb0f5c9157b80"
+        }
+      ]
+    },
+    {
       "id": "688",
       "packageName": "@reino-doce/dota-maps-data-688",
       "files": [
         {
+          "path": "data/688/elevation.json",
+          "bytes": 145134,
+          "sha256": "2636cde0e968c91907144b134516732b26ae644d6e311fcbc50be46f12e45426"
+        },
+        {
+          "path": "data/688/ent_fow_blocker_node.json",
+          "bytes": 5086,
+          "sha256": "1d8ccf176cd9f38cb3d5243d9147cc190f1dbc80add4a82a1a1b31f4b525849e"
+        },
+        {
+          "path": "data/688/fow_blockers.json",
+          "bytes": 6465,
+          "sha256": "9b2be49e1ed3a0e5f69129ee0abb5190648b7d41069d6eda556e1849907d3496"
+        },
+        {
+          "path": "data/688/gridnav.gnv",
+          "bytes": 67632,
+          "sha256": "e68a8a55257921402b9b7d0ea03b9ac2d2902646b4433e0087537045c9410abf"
+        },
+        {
+          "path": "data/688/live_tree_index.json",
+          "bytes": 24218,
+          "sha256": "353cff3efbe14c103594b44776f288350b241bb16dd0dc6a782dc37d1d6c789c"
+        },
+        {
           "path": "data/688/mapdata.json",
-          "bytes": 67946,
-          "sha256": "b8a824a4947a2a386148576567ee3e48f761deecec1ae5f43f5d6e1e69186f46"
+          "bytes": 99316,
+          "sha256": "2bfcbb03ffbb74ead25d8b51d25d4a31ce41f4e9283fef70cc95793780cff677"
+        },
+        {
+          "path": "data/688/no_wards.json",
+          "bytes": 33403,
+          "sha256": "4ab70e70aaea5a09caf589dfce167108be0a1a39db5bb95d06c5c298d3e14505"
+        },
+        {
+          "path": "data/688/npc_dota_spawner.json",
+          "bytes": 723,
+          "sha256": "a685eede3274598bc5ea64b66210be25fe35323f635ff95efa51668accd08ae5"
+        },
+        {
+          "path": "data/688/overview.json",
+          "bytes": 408,
+          "sha256": "96d8d5c4a59605cc519f41a38b8ced3786865524d3f0dcd5da1a5045b701f7bc"
+        },
+        {
+          "path": "data/688/overview.txt",
+          "bytes": 412,
+          "sha256": "5aca7c56fe256551b1505fa4ac1e16a8a18d951657561e76e5600dd53935ecc2"
+        },
+        {
+          "path": "data/688/path_corner.json",
+          "bytes": 1830,
+          "sha256": "a39620e9e31c725703c532a95a1229eb841ba0da12c5b394125d628a217f1c0e"
+        },
+        {
+          "path": "data/688/source.json",
+          "bytes": 4741,
+          "sha256": "e656ac2bc12019e88e21f587c3b9dff4b00f1256a0e4cdddd1cdb2e64a4029a5"
+        },
+        {
+          "path": "data/688/terrain_grid.json",
+          "bytes": 1013043,
+          "sha256": "631faab1f10de6d7140fe46103917febed91e0df7916ad8055f8734bc70efbe7"
+        },
+        {
+          "path": "data/688/ward_grid.json",
+          "bytes": 10871,
+          "sha256": "75660ee5ab9f61668016a0a111ba565eacd9c053a585f0c1b70dc6bd117c75a2"
+        },
+        {
+          "path": "data/688/ward_structures.json",
+          "bytes": 532,
+          "sha256": "0f8f4b838e0b5fcefb5388e18d51ab42656dda6e94b84ebdd81bf79016a15c4e"
+        },
+        {
+          "path": "data/688/worlddata.json",
+          "bytes": 72,
+          "sha256": "ae4b1830f0d579eafb2b045f42084046b318ba6e268292fd879bb0f5c9157b80"
         }
       ]
     },
@@ -177,6 +905,11 @@
           "path": "data/700/path_corner.json",
           "bytes": 1812,
           "sha256": "185fb1dad58ec1b150f5fcdcdf6e70eb49aeb3db0a41bc893bf59337a9f1e942"
+        },
+        {
+          "path": "data/700/worlddata.json",
+          "bytes": 71,
+          "sha256": "4232528fc806768fa54e5a0667e8ed52d947b57cca89a96835211ef13c8f18b5"
         }
       ]
     },
@@ -186,33 +919,83 @@
       "files": [
         {
           "path": "data/706/elevation.json",
-          "bytes": 305980,
-          "sha256": "641947b37603766e5e80df74628a3f26a078417269f64d95ed64492440d0664a"
+          "bytes": 140709,
+          "sha256": "c8ab15394e6356f1b8cb31b1a681194bae0eade39fc83b928d31517e0f61f537"
         },
         {
           "path": "data/706/ent_fow_blocker_node.json",
-          "bytes": 9785,
-          "sha256": "9a2ef3492ca6152c3613daa0a926f19b833e0a6d99604e68be517889367d9b75"
+          "bytes": 5003,
+          "sha256": "59727195618d1da6245c412587d42a6585ef935b8322448eb28c6364364c2f3e"
+        },
+        {
+          "path": "data/706/fow_blockers.json",
+          "bytes": 6609,
+          "sha256": "0484e1aec79aa99e12d4529991d5dd6d89cc3614a9cf9e1108aa99992549d0e7"
+        },
+        {
+          "path": "data/706/gridnav.gnv",
+          "bytes": 67632,
+          "sha256": "b0298807809c70ef8343a3026739de2b0ebc54e4cd09dd9cd8cb5cb2efec7486"
+        },
+        {
+          "path": "data/706/live_tree_index.json",
+          "bytes": 22408,
+          "sha256": "ec8d10a40b97e7aa3342fe0e1a6a966f503cc9f54ff9af6026b17385a1623f93"
         },
         {
           "path": "data/706/mapdata.json",
-          "bytes": 63201,
-          "sha256": "65c3b980d68b002d130afdef47002bee1c65be0487b9fe2f463c355dd9f79523"
+          "bytes": 101743,
+          "sha256": "4f714cfb64f04932505ef753669f3570ef582626f6d91445e48454f652483959"
         },
         {
           "path": "data/706/no_wards.json",
-          "bytes": 82441,
-          "sha256": "66e0965bf78b25c4b063b191e95f3d5fb68fa56acbc50dcda8cc68f7cc75cb50"
+          "bytes": 32025,
+          "sha256": "8f0dcf71d36aea04699972b562522ea8462d1d72cdc13519a11b7a343c116644"
         },
         {
           "path": "data/706/npc_dota_spawner.json",
-          "bytes": 766,
-          "sha256": "4aa30cd5ed504c00d444a03b0e523ad28795da5f6fdcb18807ff7142f88e8b6f"
+          "bytes": 681,
+          "sha256": "388a00fe42c5005762d1d9eddd3b0d1eece8165063faf03f6d6124b3e67245f3"
+        },
+        {
+          "path": "data/706/overview.json",
+          "bytes": 408,
+          "sha256": "3af293b53da4a21ae83e6f86d63f372e753e40ca57b9395fd886783587d897cb"
+        },
+        {
+          "path": "data/706/overview.txt",
+          "bytes": 412,
+          "sha256": "228a0a59d09837aba91f887f55ce65daeba77fdb23014f0da97a1154939fde39"
         },
         {
           "path": "data/706/path_corner.json",
-          "bytes": 1831,
-          "sha256": "29dccb908f9dde390b31bdee8a004e54e2c3c95d2eaa2d97c83fe3d0a31cf703"
+          "bytes": 1422,
+          "sha256": "8e93e18bd446fdc2ef25487dec0835529a96bb4f173cbac1f091d230c6bc6b80"
+        },
+        {
+          "path": "data/706/source.json",
+          "bytes": 4742,
+          "sha256": "db282785ad69bdc1adca5cde099bf5f70ca3aae4bef244af04433cd4b8d44279"
+        },
+        {
+          "path": "data/706/terrain_grid.json",
+          "bytes": 1010034,
+          "sha256": "7decf557a44d0448c1622a8e620e79fc6e8c3537465803b01da3322fe4fcfb56"
+        },
+        {
+          "path": "data/706/ward_grid.json",
+          "bytes": 11129,
+          "sha256": "a522723d0b64ad1bfec160064511c584d4c940929e2a11842a9c2fd263c3b472"
+        },
+        {
+          "path": "data/706/ward_structures.json",
+          "bytes": 532,
+          "sha256": "ce44d62353d98c42172b8b31e9749c7065c91f0dfb73089f4c32b42d3da4a301"
+        },
+        {
+          "path": "data/706/worlddata.json",
+          "bytes": 72,
+          "sha256": "ae4b1830f0d579eafb2b045f42084046b318ba6e268292fd879bb0f5c9157b80"
         }
       ]
     },
@@ -249,6 +1032,11 @@
           "path": "data/707/path_corner.json",
           "bytes": 1832,
           "sha256": "daeee8410a2b33adc93f3e53422f2b163bf428efe5fc534a941dcc9beb08578b"
+        },
+        {
+          "path": "data/707/worlddata.json",
+          "bytes": 71,
+          "sha256": "4232528fc806768fa54e5a0667e8ed52d947b57cca89a96835211ef13c8f18b5"
         }
       ]
     },
@@ -285,6 +1073,11 @@
           "path": "data/709/path_corner.json",
           "bytes": 1832,
           "sha256": "daeee8410a2b33adc93f3e53422f2b163bf428efe5fc534a941dcc9beb08578b"
+        },
+        {
+          "path": "data/709/worlddata.json",
+          "bytes": 71,
+          "sha256": "4232528fc806768fa54e5a0667e8ed52d947b57cca89a96835211ef13c8f18b5"
         }
       ]
     },
@@ -321,6 +1114,11 @@
           "path": "data/715/path_corner.json",
           "bytes": 1832,
           "sha256": "daeee8410a2b33adc93f3e53422f2b163bf428efe5fc534a941dcc9beb08578b"
+        },
+        {
+          "path": "data/715/worlddata.json",
+          "bytes": 71,
+          "sha256": "4232528fc806768fa54e5a0667e8ed52d947b57cca89a96835211ef13c8f18b5"
         }
       ]
     },
@@ -330,33 +1128,83 @@
       "files": [
         {
           "path": "data/719/elevation.json",
-          "bytes": 302737,
-          "sha256": "ba9f8348c73a5e273fa135d282f2635748373a467d06e5dd0e8f4d7506f76be8"
+          "bytes": 139004,
+          "sha256": "93abb87cfbcf7efa1a12cc51c3458ac0b1aeec8e73c3cf5a8d8f2cfd3402a809"
         },
         {
           "path": "data/719/ent_fow_blocker_node.json",
-          "bytes": 9785,
-          "sha256": "9a2ef3492ca6152c3613daa0a926f19b833e0a6d99604e68be517889367d9b75"
+          "bytes": 5003,
+          "sha256": "59727195618d1da6245c412587d42a6585ef935b8322448eb28c6364364c2f3e"
+        },
+        {
+          "path": "data/719/fow_blockers.json",
+          "bytes": 6609,
+          "sha256": "607f90b5194112dd7bd947d155f2fd0b91a7d53e00d7bf0502e22b5648e71224"
+        },
+        {
+          "path": "data/719/gridnav.gnv",
+          "bytes": 67632,
+          "sha256": "ed2eb41db7b7313bab9899ac05576deb819165dfbe83c8c473a347817ba9ca91"
+        },
+        {
+          "path": "data/719/live_tree_index.json",
+          "bytes": 22558,
+          "sha256": "62fcecc53e50241f8143fde04c1b921c166f77a1f2394d2b2ab53142cdd4a8a6"
         },
         {
           "path": "data/719/mapdata.json",
-          "bytes": 63524,
-          "sha256": "0e1e56f4542239220190b9c7e6baff9025c1bacbdda67cc0ed94ca25a25c55aa"
+          "bytes": 102703,
+          "sha256": "291ca677fdd1c20544606a075ed8d171a0f015875b8b90b89c9196b809f37c2d"
         },
         {
           "path": "data/719/no_wards.json",
-          "bytes": 81749,
-          "sha256": "f345a33c2eb147011700d90fb8a327f007f6be5a0f21601ae3aca762f06b0f50"
+          "bytes": 32177,
+          "sha256": "088e6148e2273d497ac66175d69cba9bc073f6846e38c5ce0dfe66f4f8148d8f"
         },
         {
           "path": "data/719/npc_dota_spawner.json",
-          "bytes": 766,
-          "sha256": "4aa30cd5ed504c00d444a03b0e523ad28795da5f6fdcb18807ff7142f88e8b6f"
+          "bytes": 681,
+          "sha256": "388a00fe42c5005762d1d9eddd3b0d1eece8165063faf03f6d6124b3e67245f3"
+        },
+        {
+          "path": "data/719/overview.json",
+          "bytes": 408,
+          "sha256": "ff108d5169f38395720552e87cb97c46a82b12111d0cc863eedb0e59d349ac7d"
+        },
+        {
+          "path": "data/719/overview.txt",
+          "bytes": 412,
+          "sha256": "4824c9f40e25b35333adb69e1c7b82a8927e2285fbd7746b71f6c15c94aff8de"
         },
         {
           "path": "data/719/path_corner.json",
-          "bytes": 1832,
-          "sha256": "daeee8410a2b33adc93f3e53422f2b163bf428efe5fc534a941dcc9beb08578b"
+          "bytes": 1417,
+          "sha256": "603be1986a42fc05ecaac4155cfd8db9d2c8d5dd0428b9ef94c57491e08a3fd3"
+        },
+        {
+          "path": "data/719/source.json",
+          "bytes": 4742,
+          "sha256": "6a3f82739437edf9361d0f636250a6a07b19b84398ba68978551f05396dc4ae7"
+        },
+        {
+          "path": "data/719/terrain_grid.json",
+          "bytes": 1008099,
+          "sha256": "c9717a29d90ef7ef0df9001aa32db804079d15220833b111fdc498f65de22231"
+        },
+        {
+          "path": "data/719/ward_grid.json",
+          "bytes": 11159,
+          "sha256": "d98f547d70c7d7ed2114e3f025b80f3057e7306b905910f9fe48dcb3e821aa30"
+        },
+        {
+          "path": "data/719/ward_structures.json",
+          "bytes": 532,
+          "sha256": "5cc1bc20188d29a8cb30570a951ac901cd959ae594913df27b212fe7730291e8"
+        },
+        {
+          "path": "data/719/worlddata.json",
+          "bytes": 72,
+          "sha256": "ae4b1830f0d579eafb2b045f42084046b318ba6e268292fd879bb0f5c9157b80"
         }
       ]
     },
@@ -393,6 +1241,11 @@
           "path": "data/720/path_corner.json",
           "bytes": 1833,
           "sha256": "8e239c8c1b1df064006dc4fc10215fe397f8e71f85be0d36416b77a4f1cd6146"
+        },
+        {
+          "path": "data/720/worlddata.json",
+          "bytes": 71,
+          "sha256": "4232528fc806768fa54e5a0667e8ed52d947b57cca89a96835211ef13c8f18b5"
         }
       ]
     },
@@ -429,6 +1282,11 @@
           "path": "data/721/path_corner.json",
           "bytes": 1833,
           "sha256": "8e239c8c1b1df064006dc4fc10215fe397f8e71f85be0d36416b77a4f1cd6146"
+        },
+        {
+          "path": "data/721/worlddata.json",
+          "bytes": 71,
+          "sha256": "4232528fc806768fa54e5a0667e8ed52d947b57cca89a96835211ef13c8f18b5"
         }
       ]
     },
@@ -438,33 +1296,83 @@
       "files": [
         {
           "path": "data/722/elevation.json",
-          "bytes": 288792,
-          "sha256": "e4a49560c9f334488975efca3889608b102af150aaf62edd1c131661bacde9ce"
+          "bytes": 132621,
+          "sha256": "4b8d86f1f455516d0644aa942f6d29fa7106bd48d49969b6750d4a9f0db75585"
         },
         {
           "path": "data/722/ent_fow_blocker_node.json",
-          "bytes": 9785,
-          "sha256": "9a2ef3492ca6152c3613daa0a926f19b833e0a6d99604e68be517889367d9b75"
+          "bytes": 5003,
+          "sha256": "59727195618d1da6245c412587d42a6585ef935b8322448eb28c6364364c2f3e"
+        },
+        {
+          "path": "data/722/fow_blockers.json",
+          "bytes": 6609,
+          "sha256": "59ca4faf13877cec02b0689d847095b8fc9f10fab26f214db73d246a98bce206"
+        },
+        {
+          "path": "data/722/gridnav.gnv",
+          "bytes": 67632,
+          "sha256": "2a65fdbca58ca82b829476143447d0eae24652f7525de8905f746ba00751cba5"
+        },
+        {
+          "path": "data/722/live_tree_index.json",
+          "bytes": 22588,
+          "sha256": "a22decc681acffe7a71087e8138e9e56a8e82325e7c8fa1b267fce6d7c8eb5d1"
         },
         {
           "path": "data/722/mapdata.json",
-          "bytes": 63521,
-          "sha256": "4d68527829489efb9088e5d65ab8a4c30251f836ea7b845fbbda66fd9bb277c8"
+          "bytes": 102750,
+          "sha256": "dc33c6441329c980067b0adf9ad980ab159f23121da52afd460d08f2c71864da"
         },
         {
           "path": "data/722/no_wards.json",
-          "bytes": 76756,
-          "sha256": "2c36a9790584b9711835941b5c69b54ba5eca9861f2cd5451ea1759238700d84"
+          "bytes": 30129,
+          "sha256": "837856dd2206882d5e8b0737db6a0468ec2f06f3821d5d28768c9aa3f2dbe11e"
         },
         {
           "path": "data/722/npc_dota_spawner.json",
-          "bytes": 766,
-          "sha256": "4cd4c0a4415a6066c7297fcc7691c096e5532915920073ac67888978cfd01e11"
+          "bytes": 681,
+          "sha256": "388a00fe42c5005762d1d9eddd3b0d1eece8165063faf03f6d6124b3e67245f3"
+        },
+        {
+          "path": "data/722/overview.json",
+          "bytes": 408,
+          "sha256": "02de23452959cb99f5c9f0d1f3383094f209bef4ccdd8171d334114ae6df0e88"
+        },
+        {
+          "path": "data/722/overview.txt",
+          "bytes": 412,
+          "sha256": "1d46b8a213d1534b30414c743478f6fd8174c3aab1d9e5c8626f6c2329ff9d46"
         },
         {
           "path": "data/722/path_corner.json",
-          "bytes": 1833,
-          "sha256": "57b2f75153396c55bdea52a198d0fbbda95d5f2018a9bd817b318a8c04aef9e2"
+          "bytes": 1418,
+          "sha256": "374782804eec9c54c8174527544acd055561d9cd568f89f7ceb5332fedf9d188"
+        },
+        {
+          "path": "data/722/source.json",
+          "bytes": 4739,
+          "sha256": "26bd6763ef4fc1ec564dddef51ac045eeb6eea39626dfb8a9ebffaaf3e9575d4"
+        },
+        {
+          "path": "data/722/terrain_grid.json",
+          "bytes": 1001680,
+          "sha256": "6381c2a97a1a7b8dfb279ef02690d456ac2238d19fc945eb48d436ae5cca4095"
+        },
+        {
+          "path": "data/722/ward_grid.json",
+          "bytes": 10244,
+          "sha256": "e2c2cf7d3b2e0c1a847d3e97a1fe73a7e3a429cf20ab962e3e6a859d8161e3fa"
+        },
+        {
+          "path": "data/722/ward_structures.json",
+          "bytes": 532,
+          "sha256": "43e52fcf5186bd324c9712f9aa6e14944beab4a7572d413d81606ab928d38faf"
+        },
+        {
+          "path": "data/722/worlddata.json",
+          "bytes": 72,
+          "sha256": "ae4b1830f0d579eafb2b045f42084046b318ba6e268292fd879bb0f5c9157b80"
         }
       ]
     },
@@ -501,258 +1409,1502 @@
           "path": "data/723/path_corner.json",
           "bytes": 1833,
           "sha256": "f6d928ff7aef2cd22f0dbb6ccf7bf12a435f4bbaa7af5108a1b86acf71edb08b"
+        },
+        {
+          "path": "data/723/worlddata.json",
+          "bytes": 71,
+          "sha256": "4232528fc806768fa54e5a0667e8ed52d947b57cca89a96835211ef13c8f18b5"
         }
       ]
     },
     {
-      "id": "741f",
-      "packageName": "@reino-doce/dota-maps-data-741f",
+      "id": "728",
+      "packageName": "@reino-doce/dota-maps-data-728",
       "files": [
         {
-          "path": "data/741f/building_vision.json",
+          "path": "data/728/elevation.json",
+          "bytes": 213,
+          "sha256": "04f08083e87509d6a1dbc9ccf44911c608edda2aeae65b8b372a6bfd81caadfd"
+        },
+        {
+          "path": "data/728/ent_fow_blocker_node.json",
+          "bytes": 4786,
+          "sha256": "b9a39e6e5e9b7d76489327cd44ff1527cbe8299e2d8a9b655323f8c84db5e7f3"
+        },
+        {
+          "path": "data/728/fow_blockers.json",
+          "bytes": 5650,
+          "sha256": "2471fd48bde26d09d065c9ce624b984c2d7de1eb8d76511ff16c3b498c5f35d8"
+        },
+        {
+          "path": "data/728/live_tree_index.json",
+          "bytes": 20286,
+          "sha256": "eaa03c2db6faf2b7bff717bebd31e6ee17da7674c4edfe2b7d0e9ad4639c3167"
+        },
+        {
+          "path": "data/728/mapdata.json",
+          "bytes": 100962,
+          "sha256": "5b4296b362164173a619aa5493adeadf19aa334099fcf976d32d1379bf801aa7"
+        },
+        {
+          "path": "data/728/npc_dota_spawner.json",
+          "bytes": 681,
+          "sha256": "388a00fe42c5005762d1d9eddd3b0d1eece8165063faf03f6d6124b3e67245f3"
+        },
+        {
+          "path": "data/728/overview.json",
+          "bytes": 402,
+          "sha256": "3401c7ec63de46752afe103ae95dc576c8d4b39c93301651c5acd6ffe1a42226"
+        },
+        {
+          "path": "data/728/overview.txt",
+          "bytes": 404,
+          "sha256": "d0780d27ced1d0454040ffab74dee1a0673cd35e1825b26d13ec48102dbfe05c"
+        },
+        {
+          "path": "data/728/path_corner.json",
+          "bytes": 1418,
+          "sha256": "1e07d454f4930bb197e92a0ec01942fbb44f13b690e08b7e9070e00ebba074ff"
+        },
+        {
+          "path": "data/728/source.json",
+          "bytes": 5296,
+          "sha256": "b2493512cd6979f1339612dfebdd1fd0ad2adcf5e81c8d6d4d1e9a56f5df10cd"
+        },
+        {
+          "path": "data/728/terrain_grid.json",
+          "bytes": 1051720,
+          "sha256": "a9cc2cd0768ae3fafc055b64b08df5eead8f06cc155a8605335081191539a25f"
+        },
+        {
+          "path": "data/728/worlddata.json",
+          "bytes": 72,
+          "sha256": "ae4b1830f0d579eafb2b045f42084046b318ba6e268292fd879bb0f5c9157b80"
+        }
+      ]
+    },
+    {
+      "id": "732",
+      "packageName": "@reino-doce/dota-maps-data-732",
+      "files": [
+        {
+          "path": "data/732/elevation.json",
+          "bytes": 132908,
+          "sha256": "d15732a1362f0140409ec7725b615c8eb962e0cffdd78ad1aa69c6c14ba46d97"
+        },
+        {
+          "path": "data/732/ent_fow_blocker_node.json",
+          "bytes": 4786,
+          "sha256": "b9a39e6e5e9b7d76489327cd44ff1527cbe8299e2d8a9b655323f8c84db5e7f3"
+        },
+        {
+          "path": "data/732/fow_blockers.json",
+          "bytes": 5646,
+          "sha256": "5bd2482bd7463a0e9648f397f2f360c3c42dd5575f0091cc502299bd0cc338e3"
+        },
+        {
+          "path": "data/732/gridnav.gnv",
+          "bytes": 67632,
+          "sha256": "2a7daadb69211695109ed52bfa5bac7972cebdefb1395c4d53ff61b3bf7b5b41"
+        },
+        {
+          "path": "data/732/live_tree_index.json",
+          "bytes": 23538,
+          "sha256": "49734e726a13413b653e7ee8efa9e6a694a3d885e5d8cc2d694fd4ed6e17c031"
+        },
+        {
+          "path": "data/732/mapdata.json",
+          "bytes": 101639,
+          "sha256": "77b037037b6cc3734e8ef9e720aed8196343d95025a78ed6233a511c01774e2e"
+        },
+        {
+          "path": "data/732/no_wards.json",
+          "bytes": 43839,
+          "sha256": "84cdc1926e91179ef52757f36cedab91e4fd4e73f628fbd2cd3c5b96dacd324c"
+        },
+        {
+          "path": "data/732/npc_dota_spawner.json",
+          "bytes": 681,
+          "sha256": "388a00fe42c5005762d1d9eddd3b0d1eece8165063faf03f6d6124b3e67245f3"
+        },
+        {
+          "path": "data/732/overview.json",
+          "bytes": 408,
+          "sha256": "31cd8afd64dc35c9d037220b807d6c47e64a54d32c374add6895e2922f4c16fd"
+        },
+        {
+          "path": "data/732/overview.txt",
+          "bytes": 412,
+          "sha256": "e035ccc6869e51e8e077b88b8a40406b2334d4173c23791a793d80d1cb5216c6"
+        },
+        {
+          "path": "data/732/path_corner.json",
+          "bytes": 1418,
+          "sha256": "61c8c5cd5a110bc69d03e877d4fa00b4e9e73b2855a109f00c256c6433abddb1"
+        },
+        {
+          "path": "data/732/source.json",
+          "bytes": 4738,
+          "sha256": "820b26e9584c0bb360164149771233995231ca95bf206e85e55ccf237aab5a0b"
+        },
+        {
+          "path": "data/732/terrain_grid.json",
+          "bytes": 997978,
+          "sha256": "f9d8b11bf3e7816c4590015bdc03657f6fd761ee8ee228bb5abea2b6554409aa"
+        },
+        {
+          "path": "data/732/ward_grid.json",
+          "bytes": 14542,
+          "sha256": "a48bdead465ce74e53b82463a3e39d6d68314c610e81738e9f9b79ead633b152"
+        },
+        {
+          "path": "data/732/ward_structures.json",
+          "bytes": 23027,
+          "sha256": "510039cd2e04264fb3968fa9f11d1ab8593b4eef99d8c25c047da8e1952dbdc6"
+        },
+        {
+          "path": "data/732/worlddata.json",
+          "bytes": 72,
+          "sha256": "ae4b1830f0d579eafb2b045f42084046b318ba6e268292fd879bb0f5c9157b80"
+        }
+      ]
+    },
+    {
+      "id": "737",
+      "packageName": "@reino-doce/dota-maps-data-737",
+      "files": [
+        {
+          "path": "data/737/elevation.json",
+          "bytes": 160932,
+          "sha256": "96ef69fcfd78a5f1ed1bcaff915e5c2041d69f5c0c5ac2cceb9916a85fc67634"
+        },
+        {
+          "path": "data/737/ent_fow_blocker_node.json",
+          "bytes": 5776,
+          "sha256": "8a83a9ea03c62109144905ce9cb0b20f65991d446b01d6f325d656920139695c"
+        },
+        {
+          "path": "data/737/fow_blockers.json",
+          "bytes": 7920,
+          "sha256": "5ca01274c17195619c7bb64b43c9428cbd9d72f5bd7df9e9f16fbf379f592ec7"
+        },
+        {
+          "path": "data/737/gridnav.gnv",
+          "bytes": 104992,
+          "sha256": "d15f90d23b59fd35d3b52569be72c10474bbb01466839e413cd2820078b8099a"
+        },
+        {
+          "path": "data/737/live_tree_index.json",
+          "bytes": 25818,
+          "sha256": "181c824457860cb7ad5e4026950fe09755bd8d1e42bbb23573ea1d5d50c855c7"
+        },
+        {
+          "path": "data/737/mapdata.json",
+          "bytes": 134290,
+          "sha256": "8c0af87cc5e3fd43693bd3802fd1cbe9abb4926f55424991b3f2f82bac76de61"
+        },
+        {
+          "path": "data/737/no_wards.json",
+          "bytes": 84264,
+          "sha256": "5df5d12e2329309cc0ca51fefc41d46ff81ef22ff038d24f843183dcf852334b"
+        },
+        {
+          "path": "data/737/npc_dota_spawner.json",
+          "bytes": 681,
+          "sha256": "388a00fe42c5005762d1d9eddd3b0d1eece8165063faf03f6d6124b3e67245f3"
+        },
+        {
+          "path": "data/737/overview.json",
+          "bytes": 410,
+          "sha256": "d27a8950f3ac9ae67eb07cbec591670359a8464dd12697a4cdf2fb5fde8662c6"
+        },
+        {
+          "path": "data/737/overview.txt",
+          "bytes": 203,
+          "sha256": "97fb3e9bc2be82ac0e901cf21acd3b24217204e491b207fc9f3d01c94bd7e992"
+        },
+        {
+          "path": "data/737/path_corner.json",
+          "bytes": 1418,
+          "sha256": "8ed75393b314ba1903d8d00685a8a2564e35f6215b65769b06fc1d5fdf03d764"
+        },
+        {
+          "path": "data/737/source.json",
+          "bytes": 4740,
+          "sha256": "fe90357bf1781568691353f43ed1b1faeb5a6d4c59d5ef8d4b6be3c84d14198d"
+        },
+        {
+          "path": "data/737/terrain_grid.json",
+          "bytes": 1522098,
+          "sha256": "118101ccce536267a8714e51976501d50e6482273e4cd314c2c9aff26b837859"
+        },
+        {
+          "path": "data/737/ward_grid.json",
+          "bytes": 27505,
+          "sha256": "052d036fc6373015c864f53cc10c5441c54f036ebbc59b511f2fdb6e80d2dab4"
+        },
+        {
+          "path": "data/737/ward_structures.json",
+          "bytes": 66746,
+          "sha256": "52d4170ce97920ff0c22ef2b20d2a698faac7bb7de41f89302e7d6c7ab5fa13d"
+        },
+        {
+          "path": "data/737/worlddata.json",
+          "bytes": 76,
+          "sha256": "46561493a55718ab47f1002ffaca50581914829a7822c6296cdc65fd25323a45"
+        }
+      ]
+    },
+    {
+      "id": "741",
+      "packageName": "@reino-doce/dota-maps-data-741",
+      "files": [
+        {
+          "path": "data/741/building_vision.json",
           "bytes": 19410,
           "sha256": "0fb4bf5f4328da7b624025fe52974389cfdf177a0e7a34e80d515d26f6762e3c"
         },
         {
-          "path": "data/741f/elevation.json",
-          "bytes": 170069,
-          "sha256": "93cd9e8ea08d5bc0abd9c83a496cfc9047982640d254808bf6450df20e6b5ad3"
+          "path": "data/741/elevation.json",
+          "bytes": 170070,
+          "sha256": "90993a0da265040994169a6d7da23dd6deb59ff960f0b64df5926cb5b5f9679d"
         },
         {
-          "path": "data/741f/ent_fow_blocker_node.json",
-          "bytes": 6004,
-          "sha256": "d8f67c610988d2bc701aeef2c534bc186d7f7b3b7ed46c0b2c51f6de40bf0a22"
+          "path": "data/741/ent_fow_blocker_node.json",
+          "bytes": 6005,
+          "sha256": "21ad884df47fd3e7743bec59b8fe3ab5004fe673f15d1dd8b48a864efede2d9a"
         },
         {
-          "path": "data/741f/eyes_vision.json",
+          "path": "data/741/eyes_vision.json",
           "bytes": 191365,
           "sha256": "c9329fe71eb360e5d4e1de7b04bc560f226b28dd725892adddf04dbdfbe54ea0"
         },
         {
-          "path": "data/741f/fow_blockers.json",
-          "bytes": 12619,
-          "sha256": "cc9670886f20101f6bc9d66327a8ad91dfdf5ac8232ab3978d5e9293594c5954"
+          "path": "data/741/fow_blockers.json",
+          "bytes": 10349,
+          "sha256": "0adf94a576a2cfd74ee4d63f4a8aec1873a5b9711810b9d439f825e4eef514a4"
         },
         {
-          "path": "data/741f/gridnav.gnv",
+          "path": "data/741/gridnav.gnv",
           "bytes": 104992,
           "sha256": "be66c5b5ff0d87d69b376622f1161e8f4a6f61433bf0f25f5ff986d70beac77c"
         },
         {
-          "path": "data/741f/live_tree_index.json",
-          "bytes": 11425,
-          "sha256": "352528dc51cb45125c856827f6770aaac30c6ef97fa7d5be1d1a95c7ddc2e197"
+          "path": "data/741/live_tree_index.json",
+          "bytes": 24058,
+          "sha256": "0dc6c11f36fb8de97d86b8e6d318e498934043a23d5a0f1a08f8210409c254d7"
         },
         {
-          "path": "data/741f/mapdata.json",
-          "bytes": 116871,
-          "sha256": "9bc8f793a85222410c2bf34a945bb25c18046c72055334ffb4b4ef26873346ff"
+          "path": "data/741/mapdata.json",
+          "bytes": 129715,
+          "sha256": "86779df5ac35499b366617870417971d6fbc05a54e710c6aafde457a06b462f9"
         },
         {
-          "path": "data/741f/no_wards.json",
+          "path": "data/741/no_wards.json",
           "bytes": 105235,
           "sha256": "11d8d789b88879868ad0c836a1813abfd0ecbc47e178f01a6dfe5e661e2382ee"
         },
         {
-          "path": "data/741f/npc_dota_spawner.json",
-          "bytes": 776,
-          "sha256": "0f73e6569eb5d18f702fb06862a1bf2ffc172e8ae4c1e5914c736aeeef9bd442"
+          "path": "data/741/npc_dota_spawner.json",
+          "bytes": 681,
+          "sha256": "c8a070070a3f9420aee7a7178fb1e6f94c475a7d84296752553f1ee52b7d0812"
         },
         {
-          "path": "data/741f/overview.json",
+          "path": "data/741/overview.json",
           "bytes": 400,
           "sha256": "0f63479c5ff860fd2942135350c0353a5ed9cc79d60250f3c38eee9493747253"
         },
         {
-          "path": "data/741f/overview.txt",
+          "path": "data/741/overview.txt",
           "bytes": 153,
           "sha256": "fc31a7979950863f262afd2f0c8d7a8bf5ec6ffbdc48c465aa5495cd41d4cc1d"
         },
         {
-          "path": "data/741f/path_corner.json",
-          "bytes": 1618,
-          "sha256": "07778dfe67f8ce11a29a439163004c378ad63d8809dc4cfadd413443d3da700a"
+          "path": "data/741/path_corner.json",
+          "bytes": 1498,
+          "sha256": "2335e0f81940cebdcb1fe6f1ec50b6635412ca25500f80207e8f38d7b9af8d7d"
         },
         {
-          "path": "data/741f/screenshot-controls.json",
+          "path": "data/741/screenshot-controls.json",
           "bytes": 1709,
           "sha256": "cafa4e494462d3f4e1f83559332d2ae7d019146b18ce01fad95fd51d23355052"
         },
         {
-          "path": "data/741f/screenshot.json",
-          "bytes": 1705,
-          "sha256": "918ee7b8d801cef05bf6a19cb3377c5d125ad650550a41d63c72a2281f27771d"
+          "path": "data/741/screenshot.json",
+          "bytes": 1639,
+          "sha256": "7de771494de5739cc8f14112662675b5a122d70b21e7ff2553384c7b14ce6563"
         },
         {
-          "path": "data/741f/skins.json",
-          "bytes": 43762,
-          "sha256": "4265e1d91ea4aa9e196abb11534295853f73b11958e45292d408e522dbc1e785"
+          "path": "data/741/skins.json",
+          "bytes": 41743,
+          "sha256": "46930732935aafe8656b11ce9c0f118a06d6597d5f3b7f79f63dbdc24b0051fe"
         },
         {
-          "path": "data/741f/terrain_grid.json",
-          "bytes": 738709,
-          "sha256": "bfb3eeac8797009ef5a8805b090664167bc4c88088f02f0c7ec2d169b378c0f3"
+          "path": "data/741/source.json",
+          "bytes": 4756,
+          "sha256": "316c38042b18bc9c84237032f97e186fcee9b2f41de4d20172ae7730a560025f"
         },
         {
-          "path": "data/741f/ward_grid.json",
+          "path": "data/741/terrain_grid.json",
+          "bytes": 1560989,
+          "sha256": "9a0e8cc542901e221bb69588e1fcf3a8f5451450a5bb075f39d7b65b29af8410"
+        },
+        {
+          "path": "data/741/ward_grid.json",
           "bytes": 42127,
           "sha256": "7726303e58dd879a71e082df2a9e9cdcd24cc908fadf046082964f11f4ea60ee"
         },
         {
-          "path": "data/741f/ward_structures.json",
-          "bytes": 25877,
-          "sha256": "38658c15796a217f832d5167be4eaf0d14a04675a4280bb32382672a248d9124"
+          "path": "data/741/ward_structures.json",
+          "bytes": 141510,
+          "sha256": "8d32a0e331eb627dc611af2b727cc51ed890f4213b6f7ebe1fc7ab906048f842"
         },
         {
-          "path": "data/741f/watchers.json",
+          "path": "data/741/watchers.json",
           "bytes": 1116,
           "sha256": "c9fbde25d154f1502011dc942549e4b9f3c892f8b493c851f136a294bfe2f28f"
         },
         {
-          "path": "data/741f/worlddata.json",
-          "bytes": 75,
-          "sha256": "3035c2c2308b81015ba260581f7209406dae49e68dc92b80e1fd4f71d8ba8170"
+          "path": "data/741/worlddata.json",
+          "bytes": 76,
+          "sha256": "46561493a55718ab47f1002ffaca50581914829a7822c6296cdc65fd25323a45"
         }
       ]
     }
   ],
-  "shared": [
+  "minimaps": [
     {
-      "path": "data/legacy/worlddata.json",
-      "bytes": 71,
-      "sha256": "4232528fc806768fa54e5a0667e8ed52d947b57cca89a96835211ef13c8f18b5"
+      "patch": "670",
+      "sourceFile": {
+        "path": "provenance/minimaps/670.json",
+        "bytes": 1353,
+        "sha256": "14274b8bb49275c75d6f576906c6efe5976da8a327f7df2e63a7061e21ce8cb7"
+      },
+      "source": {
+        "engine": "Source 1",
+        "appId": "570",
+        "patchVersion": "37",
+        "mapBsp": "dota/maps/dota.bsp",
+        "mapBspSha256": "93de6395e6c8290b2517ba0c25fc705907c00ce8c738297b015ecee15b71822b",
+        "archive": "dota/pak01_dir.vpk",
+        "archiveSha256": "6b7015095a8c61f06adf532d428f5c6660a56bfc9c5ed18f06575d59bf043d61",
+        "archiveChunk": "dota/pak01_001.vpk",
+        "archiveChunkSha256": "45a59979c0a8c516abf2c536ad068a748e88e573b5101392231e6d17163f8428",
+        "sourceMaterial": "materials/overviews/dota.vmt",
+        "materialSha256": "b76792d29e5a9566bb13d7ef4d4ff7fdc7e2046a8233cd54a467e25b10ea7198",
+        "textureResource": "materials/overviews/dota.vtf",
+        "textureSha256": "dc04d0b13a3b6ffd92cb1453749d0aec0a780dd03837f2a4bc9177f2423797cb",
+        "textureFormat": "DXT1",
+        "converter": "Valve vtf2tga.exe and lossless TGA-to-PNG conversion"
+      },
+      "images": {
+        "detailed": {
+          "path": "img/670/minimaps/detailed.png",
+          "sourceMaterial": "materials/overviews/dota.vmt",
+          "textureResource": "materials/overviews/dota.vtf",
+          "textureSha256": "dc04d0b13a3b6ffd92cb1453749d0aec0a780dd03837f2a4bc9177f2423797cb",
+          "sha256": "dbc527544420d5d09a8cc9e0ac6c8f23168d70b5b666984002960e96a1341b39",
+          "bytes": 1204536,
+          "width": 1024,
+          "height": 1024
+        }
+      }
+    },
+    {
+      "patch": "681",
+      "sourceFile": {
+        "path": "provenance/minimaps/681.json",
+        "bytes": 1037,
+        "sha256": "fef652f9e100f2e77a9f2442dcb8d7c7cb96625b330cc0cbd2249d98f548bc7f"
+      },
+      "source": {
+        "archive": "dota/pak01_dir.vpk",
+        "overviewConfig": "resource/overviews/dota_681.txt",
+        "overviewConfigSha256": "dfa87880b99e02b302733afc1a873a50313caa8610f913b1516c4fdd2b37b5e0",
+        "clientBuild": 6962,
+        "vpkIndexesScanned": 746,
+        "source2Viewer": "Source2Viewer-CLI"
+      },
+      "images": {
+        "detailed": {
+          "path": "img/681/minimaps/detailed.png",
+          "sourceMaterial": "materials/overviews/dota_681.vmat",
+          "resolvedMaterial": "materials/overviews/dota_681.vmat",
+          "materialResource": "materials/overviews/dota_681.vmat_c",
+          "materialSha256": "c35ed598ba48ef76a0e5ed6211edbb2ef07d2776fe69adfc8bc5a89db1bb63ad",
+          "textureResource": "materials/overviews/dota_681_psd_4e73e769.vtex_c",
+          "textureSha256": "10b45b9393452aaac93bcccc08eb732b76a392f49e0dc37070b74aafe8a74b91",
+          "sha256": "4ab6fa75e5ea5c0140d177d677a8091f6556df91ef3935694f51faeb3adb6ac8",
+          "bytes": 1216728,
+          "width": 1024,
+          "height": 1024
+        }
+      }
+    },
+    {
+      "patch": "683",
+      "sourceFile": {
+        "path": "provenance/minimaps/683.json",
+        "bytes": 1038,
+        "sha256": "07974563b0a21d2b81daf90af36da9393e5c1d5d38d716439244603145370c02"
+      },
+      "source": {
+        "archive": "dota/pak01_dir.vpk",
+        "overviewConfig": "resource/overviews/dota_683.txt",
+        "overviewConfigSha256": "2719020be20862c94b69736fdbe44bc303e7594d48130b28d6d8810512421514",
+        "clientBuild": 6962,
+        "vpkIndexesScanned": 746,
+        "source2Viewer": "Source2Viewer-CLI"
+      },
+      "images": {
+        "simple": {
+          "path": "img/683/minimaps/simple.png",
+          "sourceMaterial": "materials/overviews/dota_683.vmat",
+          "resolvedMaterial": "materials/overviews/dotamap683.vmat",
+          "materialResource": "materials/overviews/dotamap683.vmat_c",
+          "materialSha256": "f7b364b90c682e608213a434395e44b8f9666a419447a11317b2c8c929fac9f8",
+          "textureResource": "materials/overviews/dotamap683_psd_70d656bf.vtex_c",
+          "textureSha256": "532f6fdecc5b0ead78b5aa1d7b77e21f92b3004293275dd1bec2dc3a0c69d971",
+          "sha256": "14ebec7ecd6ea7ad5528118eeffc7a1b96358e382b475bd2a8cdcf8dcfcf8146",
+          "bytes": 310013,
+          "width": 1024,
+          "height": 1024
+        }
+      }
+    },
+    {
+      "patch": "684",
+      "sourceFile": {
+        "path": "provenance/minimaps/684.json",
+        "bytes": 1024,
+        "sha256": "303ee692a0b29bed68052fdd731ec00757a54fe337f2f81b4936f656d8d8e7a7"
+      },
+      "source": {
+        "archive": "dota_imported/pak01_dir.vpk",
+        "overviewConfig": "resource/overviews/dota.txt",
+        "overviewConfigSha256": "b765c6541b62d6d0f948ebb41eb0414d05c7e7e8b5ff31a189e8470f67af2912",
+        "clientBuild": 903,
+        "vpkIndexesScanned": 31,
+        "source2Viewer": "Source2Viewer-CLI"
+      },
+      "images": {
+        "detailed": {
+          "path": "img/684/minimaps/detailed.png",
+          "sourceMaterial": "materials/overviews/dota.vmat",
+          "resolvedMaterial": "materials/overviews/dota.vmat",
+          "materialResource": "materials/overviews/dota.vmat_c",
+          "materialSha256": "66e5d7c7f6c71ce59f19ecf34a31b0433a31c4807509c30f240e36734cff94da",
+          "textureResource": "materials/overviews/dota_psd_8b4a9409.vtex_c",
+          "textureSha256": "91da324eef0d10499f0874112512d2cf7b6add3cfe7e6287bafaeab921d2d64e",
+          "sha256": "f1b1a8acd461ebce2af01982eb4bffea4db3f8ef28ec00cc17b4506c6cf04a80",
+          "bytes": 1217932,
+          "width": 1024,
+          "height": 1024
+        }
+      }
+    },
+    {
+      "patch": "685",
+      "sourceFile": {
+        "path": "provenance/minimaps/685.json",
+        "bytes": 1037,
+        "sha256": "ec4b09f54fd0ec3fc0bab823868b5e939b8aebdf79a79422ddb12fbe4b15f8c3"
+      },
+      "source": {
+        "archive": "dota/pak01_dir.vpk",
+        "overviewConfig": "resource/overviews/dota_685.txt",
+        "overviewConfigSha256": "9ff005ad6069426fdbd23e3020fb0787398cd111904a74c2630f2eea90121209",
+        "clientBuild": 6962,
+        "vpkIndexesScanned": 746,
+        "source2Viewer": "Source2Viewer-CLI"
+      },
+      "images": {
+        "detailed": {
+          "path": "img/685/minimaps/detailed.png",
+          "sourceMaterial": "materials/overviews/dota_685.vmat",
+          "resolvedMaterial": "materials/overviews/dota_685.vmat",
+          "materialResource": "materials/overviews/dota_685.vmat_c",
+          "materialSha256": "a8d2ac3b6b70a14c88ece80e2306420528178cb82d59145a022bdd04a7c38141",
+          "textureResource": "materials/overviews/dota_685_psd_9b960f5a.vtex_c",
+          "textureSha256": "2add0dc6946aa934426dc651b727b208a4656254599c466e7c1a1ccbc85ba12c",
+          "sha256": "f1b1a8acd461ebce2af01982eb4bffea4db3f8ef28ec00cc17b4506c6cf04a80",
+          "bytes": 1217932,
+          "width": 1024,
+          "height": 1024
+        }
+      }
+    },
+    {
+      "patch": "686",
+      "sourceFile": {
+        "path": "provenance/minimaps/686.json",
+        "bytes": 1222,
+        "sha256": "c9dd55e23196552e425c7266f9d4de40679efea867c9c4577b45f01608c6f5c0"
+      },
+      "source": {
+        "repository": "Liquipedia Commons",
+        "categoryUrl": "https://liquipedia.net/commons/Category:Dota_2_minimap_images",
+        "skins": {
+          "desert": {
+            "file": "Gamemap_6.86-Desert_minimap_dota2_gameasset.png",
+            "url": "https://liquipedia.net/commons/File:Gamemap_6.86-Desert_minimap_dota2_gameasset.png",
+            "sha256": "406fc65650dec42c1802671ce4e4e41311dac598a0d33b6f2f45543d2e3d7310",
+            "bytes": 226810
+          },
+          "winter": {
+            "file": "Gamemap_6.86-Winter_minimap_dota2_gameasset.png",
+            "url": "https://liquipedia.net/commons/File:Gamemap_6.86-Winter_minimap_dota2_gameasset.png",
+            "sha256": "be8f659aae25a1d8d50530d1b20a7f499c444f85c0d2d05f8f2fc7225949e1f2",
+            "bytes": 1107226
+          }
+        }
+      },
+      "images": {
+        "detailed": {
+          "path": "img/686/minimaps/detailed.png",
+          "sourceFile": "Gamemap_6.86_minimap_dota2_gameasset.png",
+          "sourcePage": "https://liquipedia.net/commons/File:Gamemap_6.86_minimap_dota2_gameasset.png",
+          "sha256": "3aa4d2e0f561c69a02335d7fd48c69220715758a9795f1f1005655f77e575637",
+          "bytes": 891408,
+          "width": 1024,
+          "height": 1024
+        }
+      }
+    },
+    {
+      "patch": "688",
+      "sourceFile": {
+        "path": "provenance/minimaps/688.json",
+        "bytes": 1735,
+        "sha256": "fd6eb94676d63a8e8bfc41457d072646e1d0ac25e493724372344dd9f5f0f0bf"
+      },
+      "source": {
+        "archive": "dota/pak01_dir.vpk",
+        "overviewConfig": "resource/overviews/dota_688.txt",
+        "overviewConfigSha256": "5aca7c56fe256551b1505fa4ac1e16a8a18d951657561e76e5600dd53935ecc2",
+        "clientBuild": 6962,
+        "vpkIndexesScanned": 746,
+        "source2Viewer": "Source2Viewer-CLI"
+      },
+      "images": {
+        "detailed": {
+          "path": "img/688/minimaps/detailed.png",
+          "sourceMaterial": "materials/overviews/dota_688.vmat",
+          "resolvedMaterial": "materials/overviews/dota_688.vmat",
+          "materialResource": "materials/overviews/dota_688.vmat_c",
+          "materialSha256": "682635cda8adf04966d4f37286dbf545113a2c77d263dd0e425522fbd0038b2d",
+          "textureResource": "materials/overviews/dota_688_psd_e672f5b6.vtex_c",
+          "textureSha256": "cc0d2168a47e679067ea50c380c6e5ea380159763d27faee80f1899a6c7f2bef",
+          "sha256": "78f578548311f3ebc843b30bfd0e4ca9d067f4653e73b9c4fea2b06a39d2616f",
+          "bytes": 1220792,
+          "width": 1024,
+          "height": 1024
+        },
+        "simple": {
+          "path": "img/688/minimaps/simple.png",
+          "sourceMaterial": "materials/overviews/dota_minimal_688.vmat",
+          "resolvedMaterial": "materials/overviews/dota_minimal_688.vmat",
+          "materialResource": "materials/overviews/dota_minimal_688.vmat_c",
+          "materialSha256": "b8383e21c350af5f07ef80f9ea5042b09c3c2354b8fe1ecac6f650de1961be95",
+          "textureResource": "materials/overviews/dota_minimal_688_psd_475276bd.vtex_c",
+          "textureSha256": "407501cdcb3b0d31bd010d3898baa2357ade765a2727e786f31e080a804c6644",
+          "sha256": "f7331d71503ec0faeb51bb8ce8196abe917623f1cd5e05e23c55453a5c76192a",
+          "bytes": 355809,
+          "width": 1024,
+          "height": 1024
+        }
+      }
+    },
+    {
+      "patch": "706",
+      "sourceFile": {
+        "path": "provenance/minimaps/706.json",
+        "bytes": 1735,
+        "sha256": "672cf2fc4093f8b4b0bc53966869b717c35da103915df15a36dfb66ad2f245e7"
+      },
+      "source": {
+        "archive": "dota/pak01_dir.vpk",
+        "overviewConfig": "resource/overviews/dota_706.txt",
+        "overviewConfigSha256": "228a0a59d09837aba91f887f55ce65daeba77fdb23014f0da97a1154939fde39",
+        "clientBuild": 6962,
+        "vpkIndexesScanned": 746,
+        "source2Viewer": "Source2Viewer-CLI"
+      },
+      "images": {
+        "detailed": {
+          "path": "img/706/minimaps/detailed.png",
+          "sourceMaterial": "materials/overviews/dota_706.vmat",
+          "resolvedMaterial": "materials/overviews/dota_706.vmat",
+          "materialResource": "materials/overviews/dota_706.vmat_c",
+          "materialSha256": "ac463b28bf8e7c228d3bc369232fa2bd14869ebc1d65c327f0aa7f91263b7798",
+          "textureResource": "materials/overviews/dota_706_psd_6e2dad9d.vtex_c",
+          "textureSha256": "dd8198abf35a4516864ca38abee22ae5ddc6d77b1e71f398f0e288a50b7e1d39",
+          "sha256": "d2a07f73abe013fb1f1985ba391ab10c6b8efe351a4f7a248e1dad2c80daed8a",
+          "bytes": 1176837,
+          "width": 1024,
+          "height": 1024
+        },
+        "simple": {
+          "path": "img/706/minimaps/simple.png",
+          "sourceMaterial": "materials/overviews/dota_minimal_706.vmat",
+          "resolvedMaterial": "materials/overviews/dota_minimal_706.vmat",
+          "materialResource": "materials/overviews/dota_minimal_706.vmat_c",
+          "materialSha256": "be3e721cec364e8ca4d6836ff9cce22bd46cf5ba3531228317b634bc154ccead",
+          "textureResource": "materials/overviews/dota_minimal_706_psd_c001dd87.vtex_c",
+          "textureSha256": "2e74d52664ba8a75c8de9b8c66867182057239faec46d8aeb70221acf7e44782",
+          "sha256": "dd38e9286b53a668c86f5b27862910b4650e0f0b315453cc003434accf7109ad",
+          "bytes": 392705,
+          "width": 1024,
+          "height": 1024
+        }
+      }
+    },
+    {
+      "patch": "719",
+      "sourceFile": {
+        "path": "provenance/minimaps/719.json",
+        "bytes": 1735,
+        "sha256": "084fb1aa0d619ed01baf0977a38be717bb7177adb831f3da891ce01c75574ee2"
+      },
+      "source": {
+        "archive": "dota/pak01_dir.vpk",
+        "overviewConfig": "resource/overviews/dota_719.txt",
+        "overviewConfigSha256": "4824c9f40e25b35333adb69e1c7b82a8927e2285fbd7746b71f6c15c94aff8de",
+        "clientBuild": 6962,
+        "vpkIndexesScanned": 746,
+        "source2Viewer": "Source2Viewer-CLI"
+      },
+      "images": {
+        "detailed": {
+          "path": "img/719/minimaps/detailed.png",
+          "sourceMaterial": "materials/overviews/dota_719.vmat",
+          "resolvedMaterial": "materials/overviews/dota_719.vmat",
+          "materialResource": "materials/overviews/dota_719.vmat_c",
+          "materialSha256": "8d569507883e75711ace8f09887260d4d4f3466af6e918f7c0f73f3c2ece1667",
+          "textureResource": "materials/overviews/dota_719_psd_32c9f530.vtex_c",
+          "textureSha256": "cba60f5e1fbe271cb2ee457a264f790de0026383543a2229504891a5a87315fe",
+          "sha256": "6aefdbcd3073d1579f87403c55ece13f760741b8633fe3e2de3a77bb210d34cf",
+          "bytes": 1168680,
+          "width": 1024,
+          "height": 1024
+        },
+        "simple": {
+          "path": "img/719/minimaps/simple.png",
+          "sourceMaterial": "materials/overviews/dota_minimal_719.vmat",
+          "resolvedMaterial": "materials/overviews/dota_minimal_719.vmat",
+          "materialResource": "materials/overviews/dota_minimal_719.vmat_c",
+          "materialSha256": "f6c92a8c13a3470e341e3ef6d625330196825be300d75a6463a569324f500bd1",
+          "textureResource": "materials/overviews/dota_minimal_719_psd_c5b00607.vtex_c",
+          "textureSha256": "1056b3cbf1cb6124a3a407dde687153ee9c6ab72747a3897c904391d7b4a8e59",
+          "sha256": "5f2823b1a034ea0f0c27bb501b1add20af5fc05f5d8d2082c3e5c5b27f6b43ae",
+          "bytes": 384672,
+          "width": 1024,
+          "height": 1024
+        }
+      }
+    },
+    {
+      "patch": "722",
+      "sourceFile": {
+        "path": "provenance/minimaps/722.json",
+        "bytes": 1731,
+        "sha256": "995bb4d753e0c139c3e3d49f393758270b3679b9cf0fc0005a5867b104cabaf9"
+      },
+      "source": {
+        "archive": "dota/pak01_dir.vpk",
+        "overviewConfig": "resource/overviews/dota_722.txt",
+        "overviewConfigSha256": "1d46b8a213d1534b30414c743478f6fd8174c3aab1d9e5c8626f6c2329ff9d46",
+        "clientBuild": 6962,
+        "vpkIndexesScanned": 746,
+        "source2Viewer": "Source2Viewer-CLI"
+      },
+      "images": {
+        "detailed": {
+          "path": "img/722/minimaps/detailed.png",
+          "sourceMaterial": "materials/overviews/dota_722.vmat",
+          "resolvedMaterial": "materials/overviews/dota_722.vmat",
+          "materialResource": "materials/overviews/dota_722.vmat_c",
+          "materialSha256": "c6a95b8834dadd03ae084ba637446662fd2ca8bf8071853c76c7ef11c07a1682",
+          "textureResource": "materials/overviews/dota_psd_8b4a9409.vtex_c",
+          "textureSha256": "3a5e1797cad79fa8d8b144ba2e315c9f52a6ed5bc45cf1471ebd8ca2ec6b9419",
+          "sha256": "a50c903f2507f9ddab00cb74c8855a6d3fd13a45f9be3f351255d624ebe66584",
+          "bytes": 1231516,
+          "width": 1024,
+          "height": 1024
+        },
+        "simple": {
+          "path": "img/722/minimaps/simple.png",
+          "sourceMaterial": "materials/overviews/dota_minimal_722.vmat",
+          "resolvedMaterial": "materials/overviews/dota_minimal_722.vmat",
+          "materialResource": "materials/overviews/dota_minimal_722.vmat_c",
+          "materialSha256": "d472f701433bcebcbc68a5a02f53e7e487d9de6a07563c6655c0805ba8c92580",
+          "textureResource": "materials/overviews/dota_minimal_719_psd_c5b00607.vtex_c",
+          "textureSha256": "1056b3cbf1cb6124a3a407dde687153ee9c6ab72747a3897c904391d7b4a8e59",
+          "sha256": "5f2823b1a034ea0f0c27bb501b1add20af5fc05f5d8d2082c3e5c5b27f6b43ae",
+          "bytes": 384672,
+          "width": 1024,
+          "height": 1024
+        }
+      }
+    },
+    {
+      "patch": "728",
+      "sourceFile": {
+        "path": "provenance/minimaps/728.json",
+        "bytes": 3167,
+        "sha256": "85f8fb284fbabd654a9378e1921f948a1812e52f7eceb270bb71d55243ec2c5e"
+      },
+      "source": {
+        "archive": "dota/pak01_dir.vpk",
+        "overviewConfig": "resource/overviews/dota_728.txt",
+        "overviewConfigSha256": "d0780d27ced1d0454040ffab74dee1a0673cd35e1825b26d13ec48102dbfe05c",
+        "clientBuild": 6962,
+        "vpkIndexesScanned": 746,
+        "source2Viewer": "Source2Viewer-CLI",
+        "source2ViewerSha256": "ef9f6fb3943c30b73f0991bce6654128727b0807968f7997a6bb014efbec8830"
+      },
+      "images": {},
+      "omittedImages": {
+        "simple": {
+          "path": "img/728/minimaps/simple.png",
+          "configuredMaterial": "materials/overviews/dota_minimal.vmat",
+          "reason": "The config selects a generic material, and no authenticated 7.28 simple minimap source is available."
+        },
+        "detailed": {
+          "path": "img/728/minimaps/detailed.png",
+          "configuredMaterial": "materials/overviews/dota.vmat",
+          "reason": "The previously included candidate was rejected after visual review. The config selects a generic material, and no authenticated 7.28 detailed minimap source is available."
+        }
+      },
+      "rejectedCandidates": {
+        "simple": {
+          "path": "img/728/minimaps/simple.png",
+          "sha256": "459e5a8953a0f7f4396bc5c8a1e81f809f7635edfff0894fadfc0250402f0354",
+          "bytes": 450507,
+          "reason": "Earlier candidate retained for audit; its bytes match the 741 simple minimap and it is not a verified 728 image.",
+          "auditPath": "map-captures/default-image-sweep/728/rejected-minimaps/simple.png"
+        },
+        "detailedPrior": {
+          "path": "img/728/minimaps/detailed.png",
+          "sha256": "54555b9d9a9533ab3d39b0719b941ff9ce4b37b9b2777718ef9d87fbc7a12914",
+          "bytes": 508016,
+          "reason": "Earlier candidate retained for audit; its bytes match the 741 detailed minimap and it is not a verified 728 image.",
+          "auditPath": "map-captures/default-image-sweep/728/rejected-minimaps/detailed.png"
+        },
+        "detailed": {
+          "path": "img/728/minimaps/detailed.png",
+          "sha256": "a50c903f2507f9ddab00cb74c8855a6d3fd13a45f9be3f351255d624ebe66584",
+          "bytes": 1231516,
+          "width": 1024,
+          "height": 1024,
+          "sourceMaterial": "materials/overviews/dota_728.vmat",
+          "configuredMaterial": "materials/overviews/dota.vmat",
+          "materialResource": "materials/overviews/dota_728.vmat_c",
+          "materialArchive": "dota/pak01_dir.vpk",
+          "materialSha256": "662841aa5c0b762dbaf9e5640217f4e3f49eb11e93266f1a8ce9bda659a23170",
+          "textureResource": "materials/overviews/dota_psd_8b4a9409.vtex_c",
+          "textureArchive": "dota/pak01_dir.vpk",
+          "textureSha256": "3a5e1797cad79fa8d8b144ba2e315c9f52a6ed5bc45cf1471ebd8ca2ec6b9419",
+          "reason": "Rejected after visual review because it does not depict the correct 7.28 minimap.",
+          "historicalReason": "This was extracted from a retained patch-named material that resource/overviews/dota_728.txt does not select. Its image bytes are identical to the 722 detailed minimap. The client VPK scan and patch-named resource do not authenticate this image to the 7.28 release.",
+          "auditPath": "map-captures/default-image-sweep/728/rejected-minimaps/detailed-patch-named-client-build-6962.png"
+        }
+      }
+    },
+    {
+      "patch": "732",
+      "sourceFile": {
+        "path": "provenance/minimaps/732.json",
+        "bytes": 1735,
+        "sha256": "7c2c0801c188f61c97c00782d651e871977e9296aafe51b91a81fce19aca3cba"
+      },
+      "source": {
+        "archive": "dota/pak01_dir.vpk",
+        "overviewConfig": "resource/overviews/dota_732.txt",
+        "overviewConfigSha256": "e035ccc6869e51e8e077b88b8a40406b2334d4173c23791a793d80d1cb5216c6",
+        "clientBuild": 6962,
+        "vpkIndexesScanned": 746,
+        "source2Viewer": "Source2Viewer-CLI"
+      },
+      "images": {
+        "detailed": {
+          "path": "img/732/minimaps/detailed.png",
+          "sourceMaterial": "materials/overviews/dota_732.vmat",
+          "resolvedMaterial": "materials/overviews/dota_732.vmat",
+          "materialResource": "materials/overviews/dota_732.vmat_c",
+          "materialSha256": "b2d6886256585571088412e7a2ddace4da5b96b6dc796f7a7e18ef719df3bfb5",
+          "textureResource": "materials/overviews/dota_732_psd_2cfc442d.vtex_c",
+          "textureSha256": "f650e24ad02725c6b5c5f32ed82015870c5d666a0a6386a5ce76ecc914dd2e1d",
+          "sha256": "206f779809ae6322cee4cfec628f6b75bc57d4c829c28e45ab498c51eb8a6045",
+          "bytes": 1455520,
+          "width": 1024,
+          "height": 1024
+        },
+        "simple": {
+          "path": "img/732/minimaps/simple.png",
+          "sourceMaterial": "materials/overviews/dota_minimal_732.vmat",
+          "resolvedMaterial": "materials/overviews/dota_minimal_732.vmat",
+          "materialResource": "materials/overviews/dota_minimal_732.vmat_c",
+          "materialSha256": "99f946d017864a74c0591b3d46b3b833a285c003322f0bbfbb02208a30b697d0",
+          "textureResource": "materials/overviews/dota_minimal_732_psd_5a636a72.vtex_c",
+          "textureSha256": "776bf401f2e04900acb6b98fac05922b73ec3ce4389c9b578c8952e45a991dc6",
+          "sha256": "99b0c215e3e9c932fe5c99b0678940f0f0fecd72c61f9b19fedf9a11a3c5db64",
+          "bytes": 460572,
+          "width": 1024,
+          "height": 1024
+        }
+      }
+    },
+    {
+      "patch": "737",
+      "sourceFile": {
+        "path": "provenance/minimaps/737.json",
+        "bytes": 1735,
+        "sha256": "d7960e650db95ade1f22b30bfcec93c861c3ae48c4e3e5f9c061e9960ff692f1"
+      },
+      "source": {
+        "archive": "dota/pak01_dir.vpk",
+        "overviewConfig": "resource/overviews/dota_737.txt",
+        "overviewConfigSha256": "97fb3e9bc2be82ac0e901cf21acd3b24217204e491b207fc9f3d01c94bd7e992",
+        "clientBuild": 6962,
+        "vpkIndexesScanned": 746,
+        "source2Viewer": "Source2Viewer-CLI"
+      },
+      "images": {
+        "detailed": {
+          "path": "img/737/minimaps/detailed.png",
+          "sourceMaterial": "materials/overviews/dota_737.vmat",
+          "resolvedMaterial": "materials/overviews/dota_737.vmat",
+          "materialResource": "materials/overviews/dota_737.vmat_c",
+          "materialSha256": "6230c8c2caaf54e579a94221864aa5fc36091b5a86df7ad054c052e1fdc8ba89",
+          "textureResource": "materials/overviews/dota_737_psd_28d44696.vtex_c",
+          "textureSha256": "23cafdca6e59cdbc4f4a1770d6253af02420cd5b728650a42a4b0c4ee1bf3966",
+          "sha256": "f7a521955f68853a658767488a6268a8987e8a6eebf677f680556c881863ef4f",
+          "bytes": 1241519,
+          "width": 1024,
+          "height": 1024
+        },
+        "simple": {
+          "path": "img/737/minimaps/simple.png",
+          "sourceMaterial": "materials/overviews/dota_minimal_737.vmat",
+          "resolvedMaterial": "materials/overviews/dota_minimal_737.vmat",
+          "materialResource": "materials/overviews/dota_minimal_737.vmat_c",
+          "materialSha256": "88a0ae46cb73daf261b200de6a505ca22b4a527552442f3970313994d6b0f9b9",
+          "textureResource": "materials/overviews/dota_minimal_737_psd_cc590ee0.vtex_c",
+          "textureSha256": "78721c156d2c90412930f5d95e1a4b3175ccd07e966bc554391916e30ee194d9",
+          "sha256": "1d950508125a62d90e5064d164bf9e338037f524b8b15ec732f9cc7a99419e4d",
+          "bytes": 477005,
+          "width": 1024,
+          "height": 1024
+        }
+      }
+    },
+    {
+      "patch": "741",
+      "sourceFile": {
+        "path": "provenance/minimaps/741.json",
+        "bytes": 1696,
+        "sha256": "13091e014f13049b53b868aea87fe3adba9e3f139f305104b2910db955bc3f34"
+      },
+      "source": {
+        "archive": "dota/pak01_dir.vpk",
+        "overviewConfig": "resource/overviews/dota.txt",
+        "overviewConfigSha256": "fc31a7979950863f262afd2f0c8d7a8bf5ec6ffbdc48c465aa5495cd41d4cc1d",
+        "clientBuild": 6962,
+        "vpkIndexesScanned": 746,
+        "source2Viewer": "Source2Viewer-CLI"
+      },
+      "images": {
+        "detailed": {
+          "path": "img/741/minimaps/detailed.png",
+          "sourceMaterial": "materials/overviews/dota.vmat",
+          "resolvedMaterial": "materials/overviews/dota.vmat",
+          "materialResource": "materials/overviews/dota.vmat_c",
+          "materialSha256": "ad739758ebb3500ade16b19e8cf20902833525cda9a4b36e8b96d33535d9387d",
+          "textureResource": "materials/overviews/dota_tga_d8178876.vtex_c",
+          "textureSha256": "1ea55acc8b50b26a9a6e456b8746101c994f4c6b664b40c2385f4fc51cc58f2c",
+          "sha256": "54555b9d9a9533ab3d39b0719b941ff9ce4b37b9b2777718ef9d87fbc7a12914",
+          "bytes": 508016,
+          "width": 512,
+          "height": 512
+        },
+        "simple": {
+          "path": "img/741/minimaps/simple.png",
+          "sourceMaterial": "materials/overviews/dota_minimal.vmat",
+          "resolvedMaterial": "materials/overviews/dota_minimal.vmat",
+          "materialResource": "materials/overviews/dota_minimal.vmat_c",
+          "materialSha256": "0b9aff4e0e9fa99a1ce5cdbc541d16842078331d17bc96d247dc09bde6e06720",
+          "textureResource": "materials/overviews/dota_minimal_psd_f4e53729.vtex_c",
+          "textureSha256": "b26095e80e8cd72ea609c30fb489475b59eea03504270c00d5ec7a0c7e1aea5c",
+          "sha256": "459e5a8953a0f7f4396bc5c8a1e81f809f7635edfff0894fadfc0250402f0354",
+          "bytes": 450507,
+          "width": 1024,
+          "height": 1024
+        }
+      }
     }
   ],
+  "shared": [],
   "images": [
     {
-      "path": "img/dota-game-map-741f.jpg",
-      "bytes": 9473659,
-      "sha256": "84e6b8bd0f8a06548e45dbed94fb734ee280f3465bafef908f27889ccdd4d0b2"
+      "path": "img/670/minimaps/detailed.png",
+      "bytes": 1204536,
+      "sha256": "dbc527544420d5d09a8cc9e0ac6c8f23168d70b5b666984002960e96a1341b39"
     },
     {
-      "path": "img/dota-map-741f.png",
-      "bytes": 508016,
-      "sha256": "54555b9d9a9533ab3d39b0719b941ff9ce4b37b9b2777718ef9d87fbc7a12914"
+      "path": "img/681/default.jpg",
+      "bytes": 3629109,
+      "sha256": "d265e62a7e07547f5932425a43fb368bec600c8e72b3c4d1074cf91429b2e7bb"
     },
     {
-      "path": "img/map_data_700.png",
+      "path": "img/681/minimaps/autumn.png",
+      "bytes": 240585,
+      "sha256": "a7ecd0485a84aa49729c1abc83161e2dcb4a87e9a44c5b5be9f339a75da06357"
+    },
+    {
+      "path": "img/681/minimaps/detailed.png",
+      "bytes": 1216728,
+      "sha256": "4ab6fa75e5ea5c0140d177d677a8091f6556df91ef3935694f51faeb3adb6ac8"
+    },
+    {
+      "path": "img/681/minimaps/winter.png",
+      "bytes": 1227196,
+      "sha256": "8eeaa682858ba5aff0d3608267517c9bf2582df1ba718d7451918d0acb41a5b9"
+    },
+    {
+      "path": "img/682/default_small.jpg",
+      "bytes": 1104010,
+      "sha256": "bf7cef9630ea920cdd9a9a102087be7adb1a0bb72c6d5e9534eaf980c8e10e5d"
+    },
+    {
+      "path": "img/682/default.jpg",
+      "bytes": 9223666,
+      "sha256": "8ed5a663c7bede05540e6e70f3dae4d47b7e6272a9c8b78e0b6f69ed323e7eaa"
+    },
+    {
+      "path": "img/682/minimaps/detailed.png",
+      "bytes": 895382,
+      "sha256": "81dfae33e6f328c9eb38a9891f42c5a522741950005b9e80a336a244b6a29791"
+    },
+    {
+      "path": "img/682/minimaps/winter.png",
+      "bytes": 1190467,
+      "sha256": "e8031653fb5b9861421262b0e301f42342bd856bc9acdbe61bfc45d67b5fdf0a"
+    },
+    {
+      "path": "img/683/default.jpg",
+      "bytes": 33346023,
+      "sha256": "beb27a598b7ed8828d0281dd9983fa8b36c858093fd99853966b77a0cdaed0d2"
+    },
+    {
+      "path": "img/683/map_data.png",
+      "bytes": 34448,
+      "sha256": "cb25825a9d75d01aa28cd2d475a68b79ab3b1708293e1b0ddfad6ff659fdf2a7"
+    },
+    {
+      "path": "img/683/minimaps/detailed.png",
+      "bytes": 1083494,
+      "sha256": "d76bd7b8b694f1927a75955f6bc66e690bd0c8ec5136900320484bb0157b886a"
+    },
+    {
+      "path": "img/683/minimaps/simple.png",
+      "bytes": 310013,
+      "sha256": "14ebec7ecd6ea7ad5528118eeffc7a1b96358e382b475bd2a8cdcf8dcfcf8146"
+    },
+    {
+      "path": "img/684/default.jpg",
+      "bytes": 39747339,
+      "sha256": "ef8e3db0f7154cf83819e4b5ae1c182c603d2a236c759a6d46ef2958fdae192c"
+    },
+    {
+      "path": "img/684/map_data.png",
+      "bytes": 42586,
+      "sha256": "3dd97b62a41d97e9bb0c966599ef4701aafecedaa0975d38480950b588e201e9"
+    },
+    {
+      "path": "img/684/minimaps/detailed.png",
+      "bytes": 1217932,
+      "sha256": "f1b1a8acd461ebce2af01982eb4bffea4db3f8ef28ec00cc17b4506c6cf04a80"
+    },
+    {
+      "path": "img/684/overview.png",
+      "bytes": 1217932,
+      "sha256": "f1b1a8acd461ebce2af01982eb4bffea4db3f8ef28ec00cc17b4506c6cf04a80"
+    },
+    {
+      "path": "img/685/default.jpg",
+      "bytes": 36784958,
+      "sha256": "bcc4dc0836890c17976d6536113cd8d2a24e9f0e19c78d016c10b8c1dc86c3ff"
+    },
+    {
+      "path": "img/685/map_data.png",
+      "bytes": 36186,
+      "sha256": "7c4bb0a164d9de12e7848aeadddd04ea766424632a705269d79f6f40e401ec0f"
+    },
+    {
+      "path": "img/685/minimaps/detailed.png",
+      "bytes": 1217932,
+      "sha256": "f1b1a8acd461ebce2af01982eb4bffea4db3f8ef28ec00cc17b4506c6cf04a80"
+    },
+    {
+      "path": "img/686/minimaps/desert.png",
+      "bytes": 226810,
+      "sha256": "406fc65650dec42c1802671ce4e4e41311dac598a0d33b6f2f45543d2e3d7310"
+    },
+    {
+      "path": "img/686/minimaps/detailed.png",
+      "bytes": 891408,
+      "sha256": "3aa4d2e0f561c69a02335d7fd48c69220715758a9795f1f1005655f77e575637"
+    },
+    {
+      "path": "img/686/minimaps/winter.png",
+      "bytes": 1107226,
+      "sha256": "be8f659aae25a1d8d50530d1b20a7f499c444f85c0d2d05f8f2fc7225949e1f2"
+    },
+    {
+      "path": "img/687/default.jpg",
+      "bytes": 1210295,
+      "sha256": "673671e7b90824ba3501a5e9ecfdfa606b616ca8496734d75bacd5872b0745c1"
+    },
+    {
+      "path": "img/688/default.jpg",
+      "bytes": 39515687,
+      "sha256": "d0d6a0e7620b889599d1dcfc6d716ef24951af2aae03a54abe8cd57e76237bd1"
+    },
+    {
+      "path": "img/688/map_data.png",
+      "bytes": 36003,
+      "sha256": "da29598f606dec6c4473dbf23007e5e9726ec9223fd3c1a044797082daaa0768"
+    },
+    {
+      "path": "img/688/minimaps/autumn.png",
+      "bytes": 244150,
+      "sha256": "20fdf88b93337f9112ee9488d043893d49a6dd92b317bdbdc79bd9947e2f4e1b"
+    },
+    {
+      "path": "img/688/minimaps/desert.png",
+      "bytes": 349529,
+      "sha256": "9e82dd0e0382e68d4b3e531d691a8106d91248fdfa7860613ee122b01298df37"
+    },
+    {
+      "path": "img/688/minimaps/detailed.png",
+      "bytes": 1220792,
+      "sha256": "78f578548311f3ebc843b30bfd0e4ca9d067f4653e73b9c4fea2b06a39d2616f"
+    },
+    {
+      "path": "img/688/minimaps/simple.png",
+      "bytes": 355809,
+      "sha256": "f7331d71503ec0faeb51bb8ce8196abe917623f1cd5e05e23c55453a5c76192a"
+    },
+    {
+      "path": "img/688/minimaps/winter.png",
+      "bytes": 1232114,
+      "sha256": "bcd7f334fee80c0678fc3aa0b782efa0f4fadb6d7b5e7223ad7fb8b7635b4060"
+    },
+    {
+      "path": "img/700/default_smaller.jpg",
+      "bytes": 2288181,
+      "sha256": "0cac17ad601a8744e6493453b1882076136938c57117775d16352742e2cb4b77"
+    },
+    {
+      "path": "img/700/default.jpg",
+      "bytes": 25065348,
+      "sha256": "ea6803659dca58a64b9bda05593e4a2a20bff8db1bada7e2576ea8a7eab83430"
+    },
+    {
+      "path": "img/700/map_data.png",
       "bytes": 19105,
       "sha256": "ecbf7e99ea0927a91a98397f680435a867a58b7c121468974c6537bb89884e24"
     },
     {
-      "path": "img/map_data_706.png",
-      "bytes": 19105,
-      "sha256": "ecbf7e99ea0927a91a98397f680435a867a58b7c121468974c6537bb89884e24"
+      "path": "img/700/minimaps/detailed.png",
+      "bytes": 836596,
+      "sha256": "35c779f7677c983cf95a14e46bcf92a3dfa0c744ebb03a143e5540c4712484ff"
     },
     {
-      "path": "img/map_data_707.png",
+      "path": "img/700/minimaps/simple.png",
+      "bytes": 284707,
+      "sha256": "9048e04b74fa5e39df3e28ecbb366153128b4f5a4406887ffe9508ba1d5683e8"
+    },
+    {
+      "path": "img/706/autumn.jpg",
+      "bytes": 31334105,
+      "sha256": "38e8c18191448b481e34d8acdb091a4ca6ccaa9c812ae469aa7fee0422e1e08f"
+    },
+    {
+      "path": "img/706/default_smaller.jpg",
+      "bytes": 5163458,
+      "sha256": "4b263e81f8ddcb52a44dd98bf164222be7dff728ac2eec0d770f36ddc092034c"
+    },
+    {
+      "path": "img/706/default.jpg",
+      "bytes": 39280661,
+      "sha256": "0cd49592abea5141f5e8d7a20a9f449cace848dd28e37143efaba74063231820"
+    },
+    {
+      "path": "img/706/desert.jpg",
+      "bytes": 30643077,
+      "sha256": "13b6348564aa7c24a8bca3f466ac56c81b7ce4a5f8ba5eb49862a05ce628573a"
+    },
+    {
+      "path": "img/706/immortalgardens.jpg",
+      "bytes": 36749050,
+      "sha256": "1f07c3acf80cbd6345fab5e6b29ed122b8e0571267e5450ed6833be15a8aad52"
+    },
+    {
+      "path": "img/706/journey.jpg",
+      "bytes": 31020648,
+      "sha256": "6d79bdad48dc1233c6a9f532e1a26ea5784737998ee0e0b89bc3856b8a67b3d9"
+    },
+    {
+      "path": "img/706/map_data.png",
+      "bytes": 34297,
+      "sha256": "5d59be68d4baac0c6062132b76e81dc124697647c45e053fb08b6e28c9bd8bc1"
+    },
+    {
+      "path": "img/706/minimaps/detailed.png",
+      "bytes": 1176837,
+      "sha256": "d2a07f73abe013fb1f1985ba391ab10c6b8efe351a4f7a248e1dad2c80daed8a"
+    },
+    {
+      "path": "img/706/minimaps/simple.png",
+      "bytes": 392705,
+      "sha256": "dd38e9286b53a668c86f5b27862910b4650e0f0b315453cc003434accf7109ad"
+    },
+    {
+      "path": "img/706/reef.jpg",
+      "bytes": 34799576,
+      "sha256": "8bd77967e3ffe802e8a2c16cb2a5cdab84a62005f11ba958a4b569b3e8f4de9c"
+    },
+    {
+      "path": "img/706/spring.jpg",
+      "bytes": 32766816,
+      "sha256": "0042b10148410a307d50944bceb6c8b67451ea5b181d67d78b804204b883ad0a"
+    },
+    {
+      "path": "img/706/winter.jpg",
+      "bytes": 31014751,
+      "sha256": "7997303e843bea8f9cb5787a4222c4bed8cc5ecb5f294262ee24e1d5994c41b2"
+    },
+    {
+      "path": "img/707/default.jpg",
+      "bytes": 25297991,
+      "sha256": "dd7b2d161a5396c50825371f5b12e7e00ee6fe9b2b83f8950227525fff5c74b5"
+    },
+    {
+      "path": "img/707/map_data.png",
       "bytes": 22497,
       "sha256": "28d8d25c8dd72bfcd03c79fbd260682d6a6836ff9687f42bed8c9cd354f14bc6"
     },
     {
-      "path": "img/map_data_709.png",
+      "path": "img/707/minimaps/detailed.png",
+      "bytes": 831612,
+      "sha256": "da632e218b150c018efd75ce4948902b216d6e3c331c5c5e2686553f198c4bf5"
+    },
+    {
+      "path": "img/707/minimaps/simple.png",
+      "bytes": 384672,
+      "sha256": "5f2823b1a034ea0f0c27bb501b1add20af5fc05f5d8d2082c3e5c5b27f6b43ae"
+    },
+    {
+      "path": "img/709/default.jpg",
+      "bytes": 24702318,
+      "sha256": "198aa990b333713f9eb900e86ede14ca588bf62215a97c66f80c600977f1e807"
+    },
+    {
+      "path": "img/709/map_data.png",
       "bytes": 20778,
       "sha256": "138c27dd4c9b4006af4fe38f0868e658c164f9859a836c191326ba1cb822dd05"
     },
     {
-      "path": "img/map_data_715.png",
+      "path": "img/715/default.jpg",
+      "bytes": 24693613,
+      "sha256": "1b00b9bba265f20d71b9752c25d0aee6184a7ad79a7c42c9269f18d3fd0de258"
+    },
+    {
+      "path": "img/715/map_data.png",
       "bytes": 20763,
       "sha256": "46fc356b413ce647a7b084e9b55b25f0bd0b26552dfcdb21df5ed358a5ecbd84"
     },
     {
-      "path": "img/map_data_719.png",
-      "bytes": 22517,
-      "sha256": "196907b8485560d5e4e8f1689b5385e9913920a426d8da27e6ed070cf086f68d"
+      "path": "img/719/default.jpg",
+      "bytes": 38063346,
+      "sha256": "d3e654083928c6727843e9441c0971f63538acd135db8261d9034f6bbf6e7382"
     },
     {
-      "path": "img/map_data_720.png",
+      "path": "img/719/map_data.png",
+      "bytes": 34617,
+      "sha256": "97b07e0b6adc7b548f3dcb071c8502eb5f45da44470bcaf74e89729887220027"
+    },
+    {
+      "path": "img/719/minimaps/detailed.png",
+      "bytes": 1168680,
+      "sha256": "6aefdbcd3073d1579f87403c55ece13f760741b8633fe3e2de3a77bb210d34cf"
+    },
+    {
+      "path": "img/719/minimaps/simple.png",
+      "bytes": 384672,
+      "sha256": "5f2823b1a034ea0f0c27bb501b1add20af5fc05f5d8d2082c3e5c5b27f6b43ae"
+    },
+    {
+      "path": "img/720/default.jpg",
+      "bytes": 24732648,
+      "sha256": "c747e8400413e1c98d58621f6a77205bb05f749a53894a6749445fb776d85357"
+    },
+    {
+      "path": "img/720/map_data.png",
       "bytes": 22133,
       "sha256": "4e12dba5af8e2f1f1a3f1d3b74cb815589631c362e6a0129da4bf152293fd631"
     },
     {
-      "path": "img/map_data_721.png",
+      "path": "img/720/minimaps/detailed.png",
+      "bytes": 1070969,
+      "sha256": "15089dda23032eac4588d2484e48b672174f1fc80d6c817e5d942e04314f1a2f"
+    },
+    {
+      "path": "img/720/minimaps/simple.png",
+      "bytes": 250697,
+      "sha256": "99f7f1351fc45059718d1f1658831e7222937a6679474a222142873d6242a74c"
+    },
+    {
+      "path": "img/721/map_data.png",
       "bytes": 22139,
       "sha256": "544277864566f8c81fe449e92183458fec88a4a4d4d2d871a7f4094639c388e6"
     },
     {
-      "path": "img/map_data_722.png",
-      "bytes": 18959,
-      "sha256": "9cac89d90ccf5a049994a88faa208606440f24cd474f9c7dbc3092cb0e79029f"
+      "path": "img/722/default.jpg",
+      "bytes": 37774465,
+      "sha256": "859acf5feed31ade531b4f295cfb74d1fdc2feca5d26eb0018df251ff1342e48"
     },
     {
-      "path": "img/map_data_723.png",
+      "path": "img/722/map_data.png",
+      "bytes": 33110,
+      "sha256": "a92d0ad81531aac49f8f3ecfac0893b9c7a62637a212fb690106eac1a275582c"
+    },
+    {
+      "path": "img/722/minimaps/detailed.png",
+      "bytes": 1231516,
+      "sha256": "a50c903f2507f9ddab00cb74c8855a6d3fd13a45f9be3f351255d624ebe66584"
+    },
+    {
+      "path": "img/722/minimaps/simple.png",
+      "bytes": 384672,
+      "sha256": "5f2823b1a034ea0f0c27bb501b1add20af5fc05f5d8d2082c3e5c5b27f6b43ae"
+    },
+    {
+      "path": "img/723/default.jpg",
+      "bytes": 3747531,
+      "sha256": "74fe8151930ce04ae4faef2657c0c427a1a5b193572192d1109843c2a063c056"
+    },
+    {
+      "path": "img/723/map_data.png",
       "bytes": 19001,
       "sha256": "47fb5d130fc495458338ff05e3f7db1ab8f6f585e40b72cf6712769dcfc144aa"
     },
     {
-      "path": "img/map_data_741f.png",
+      "path": "img/723/minimaps/detailed.png",
+      "bytes": 1020596,
+      "sha256": "6f9bd372e064f33a21e7d82143eee1987bd946af89146e6b910981e3141125ec"
+    },
+    {
+      "path": "img/727/default.jpg",
+      "bytes": 2626547,
+      "sha256": "4cf507f92971515335e4bd5c60c770fba941d74f5875b69df523a4785c79c786"
+    },
+    {
+      "path": "img/728/default.jpg",
+      "bytes": 38368129,
+      "sha256": "049372f001e39e5f90da19e3d19e7bc2df1bb55c8554634aa7f7c1e6ad01bea4"
+    },
+    {
+      "path": "img/729/default.jpg",
+      "bytes": 4875636,
+      "sha256": "8c759607169027854f500971c3f32ae70a89d3aebabf6cbd26d48e1f83d2b391"
+    },
+    {
+      "path": "img/729/minimaps/detailed.png",
+      "bytes": 1213956,
+      "sha256": "c60f6b21c9ba834662047ed3a714144fd712f1d621925ddbc244bc25d757613e"
+    },
+    {
+      "path": "img/729/minimaps/simple.png",
+      "bytes": 317891,
+      "sha256": "69b649cf1a3fe0d05b0dfb2f99f9502010a02abddb1f74cfe46d150f93f0ea6a"
+    },
+    {
+      "path": "img/732/default.jpg",
+      "bytes": 38323011,
+      "sha256": "fc4f8d7b89b343bbdbc9fa7bfb3d23660afff3fcb6d9feac3ceacfca1d4c6d59"
+    },
+    {
+      "path": "img/732/map_data.png",
+      "bytes": 33090,
+      "sha256": "32ae90a633a19a4d9548dddb968daf78592ca1f7429c75ffe37a76e264123272"
+    },
+    {
+      "path": "img/732/minimaps/detailed.png",
+      "bytes": 1455520,
+      "sha256": "206f779809ae6322cee4cfec628f6b75bc57d4c829c28e45ab498c51eb8a6045"
+    },
+    {
+      "path": "img/732/minimaps/simple.png",
+      "bytes": 460572,
+      "sha256": "99b0c215e3e9c932fe5c99b0678940f0f0fecd72c61f9b19fedf9a11a3c5db64"
+    },
+    {
+      "path": "img/733/minimaps/detailed.png",
+      "bytes": 1177279,
+      "sha256": "b0f92b8a46102994a46c7b6b6fbf1a48111baf9f975235039e69e6131c2ed67d"
+    },
+    {
+      "path": "img/733/minimaps/simple.png",
+      "bytes": 312277,
+      "sha256": "e2775606aacba81f6473beb15187d081c0f1bb7c2c537d232caa0e05fc093f8f"
+    },
+    {
+      "path": "img/737/default.jpg",
+      "bytes": 39027844,
+      "sha256": "900b78c625f7dcdeb0968b6a79b19b766d3e6d2846c75ae1a9fb64882c7e56bb"
+    },
+    {
+      "path": "img/737/map_data.png",
+      "bytes": 42856,
+      "sha256": "471d6a89dc282324fe59cd19766ca5a4b0a7542b3e1c666a56cb07a19f4c7ee9"
+    },
+    {
+      "path": "img/737/minimaps/detailed.png",
+      "bytes": 1241519,
+      "sha256": "f7a521955f68853a658767488a6268a8987e8a6eebf677f680556c881863ef4f"
+    },
+    {
+      "path": "img/737/minimaps/simple.png",
+      "bytes": 477005,
+      "sha256": "1d950508125a62d90e5064d164bf9e338037f524b8b15ec732f9cc7a99419e4d"
+    },
+    {
+      "path": "img/738/default.jpeg",
+      "bytes": 20736789,
+      "sha256": "ea4e0f60a85451382c887d4ea26c928a19d680c9557211211f4a0385e98ff5c2"
+    },
+    {
+      "path": "img/738/minimaps/detailed.png",
+      "bytes": 983588,
+      "sha256": "f9f9abb3225b11fe5aae05899b3620ecc1326376edf70e14d6919d6026e0fb8c"
+    },
+    {
+      "path": "img/738/minimaps/simple.png",
+      "bytes": 305239,
+      "sha256": "1a34994080ac71278e6fb18f88d74ef7c6d4663f60a635a8a5005cc5817e12ec"
+    },
+    {
+      "path": "img/739/default.jpeg",
+      "bytes": 20805440,
+      "sha256": "b0869c04918895dfe1470521804dd3e855bf42cf0108f88754f829a284f084f8"
+    },
+    {
+      "path": "img/739/minimaps/detailed.png",
+      "bytes": 1441552,
+      "sha256": "a920e7742d988d4d7b17895ae1bc2877c0bf729b9a24a895475eeb8559cd7b2c"
+    },
+    {
+      "path": "img/739/minimaps/simple.png",
+      "bytes": 323101,
+      "sha256": "d05315b736d7b6164fbb6484ab1ff3ed6266189d122c0f8e4ad8bd9fc7d909c3"
+    },
+    {
+      "path": "img/740/default.jpeg",
+      "bytes": 23648862,
+      "sha256": "d64f0afee255a600cbc46344251ebd9cadea3064b09b60ec3ea4cdf25f7851e9"
+    },
+    {
+      "path": "img/740/minimaps/detailed.png",
+      "bytes": 1169689,
+      "sha256": "8ae0f76ee4d3238af58283a8657c272b1b6b7b6f65e4cf86cb6cc458dff86443"
+    },
+    {
+      "path": "img/740/minimaps/simple.png",
+      "bytes": 333396,
+      "sha256": "6900915e3dc07f3aad10729a9409f39d9a1b3aedb0d40c9543934262b3215b8d"
+    },
+    {
+      "path": "img/741/autumn.jpg",
+      "bytes": 6696956,
+      "sha256": "8435660f9fad7bc1e09edf203e0d6bbf8612ed65ab92de3dbc043fcbb816c3a0"
+    },
+    {
+      "path": "img/741/cavern.jpg",
+      "bytes": 7392392,
+      "sha256": "18ba81f8b4fdadedf4aec2a0ae8e9e856700782882823fccabdbc2bb71ef607a"
+    },
+    {
+      "path": "img/741/coloseum.jpg",
+      "bytes": 7039302,
+      "sha256": "f5e40a0bcc92343ae091b2552dd8f640515edaba2cd42cb319c57bf7d9272a8c"
+    },
+    {
+      "path": "img/741/default.jpg",
+      "bytes": 34932112,
+      "sha256": "852d13d8b3364e1c41bde5f7597296cf991297c9bd53873edff04b1308d3b2ab"
+    },
+    {
+      "path": "img/741/desert.jpg",
+      "bytes": 6701625,
+      "sha256": "1f1df0e903b7d6808db9ee9afa87257051f332e065ce7ee2871a8136fb91eeb1"
+    },
+    {
+      "path": "img/741/journey.jpg",
+      "bytes": 6507852,
+      "sha256": "5cb2a616602bd7cac0abfaa6803f8a15256719451e41b6f202d1e9aa6fea7d27"
+    },
+    {
+      "path": "img/741/jungle.jpg",
+      "bytes": 7614508,
+      "sha256": "c9f8455fd7a647710fc5e8df133d4d7c664c76b3200ca32416d7eac87f78cbee"
+    },
+    {
+      "path": "img/741/map_data.png",
       "bytes": 45558,
       "sha256": "dd80a52c80e5dddaeea6b9d447d49424ea81340e698bdffdb8b5fe6a246ee1da"
     },
     {
-      "path": "img/map_data.png",
-      "bytes": 20772,
-      "sha256": "1c5454eb6d8b0daae040b9eb07e31b91c6dc0ba68209dd52bc93dd4b355b530e"
+      "path": "img/741/minimaps/detailed.png",
+      "bytes": 508016,
+      "sha256": "54555b9d9a9533ab3d39b0719b941ff9ce4b37b9b2777718ef9d87fbc7a12914"
     },
     {
-      "path": "img/skins/741f/dota_autumn.png",
-      "bytes": 26251485,
-      "sha256": "74dbf32c0bfb1fbcbedf5fe43c1572639ab84a277e19f2f948249a4a46f4438d"
+      "path": "img/741/minimaps/simple.png",
+      "bytes": 450507,
+      "sha256": "459e5a8953a0f7f4396bc5c8a1e81f809f7635edfff0894fadfc0250402f0354"
     },
     {
-      "path": "img/skins/741f/dota_cavern.png",
-      "bytes": 26900811,
-      "sha256": "4b700533672c95d790f95196f0cda93a52dcc3cc7ead711d89de6b29eb16c9aa"
+      "path": "img/741/reef.jpg",
+      "bytes": 8559965,
+      "sha256": "6df541ccb32f691d85a41f88ce3694adfa3d5af8aa6781a3d3ef4389de5d2d75"
     },
     {
-      "path": "img/skins/741f/dota_coloseum.png",
-      "bytes": 26823622,
-      "sha256": "f1caeb8ba9413a9418510cacbe2545e3e037a3fa6a523cf1f2db819009750b32"
+      "path": "img/741/screenshot.jpg",
+      "bytes": 9473659,
+      "sha256": "84e6b8bd0f8a06548e45dbed94fb734ee280f3465bafef908f27889ccdd4d0b2"
     },
     {
-      "path": "img/skins/741f/dota_desert.png",
-      "bytes": 26043462,
-      "sha256": "838e5743f594314ad31be8503f98d99208df706d332631499acf44aa492f52da"
+      "path": "img/741/spring.jpg",
+      "bytes": 6381429,
+      "sha256": "26a2230d55751127b8dee137f814417a459ce929bee59258bcf07546bb916993"
     },
     {
-      "path": "img/skins/741f/dota_journey.png",
-      "bytes": 25938304,
-      "sha256": "9782f17bea2dc678b0cde61f03935939ac779b3536b01749163de52c57233825"
+      "path": "img/741/summer.jpg",
+      "bytes": 6595427,
+      "sha256": "1da8eec4719178115583a955e0f06910b893b3af55936e11fe00a6ebb90038bb"
     },
     {
-      "path": "img/skins/741f/dota_jungle.png",
-      "bytes": 27685364,
-      "sha256": "53d20c190493abba9c092251b9de6149640db2cf926807adfcee29d9dd130b7b"
+      "path": "img/741/ti10.jpg",
+      "bytes": 5885570,
+      "sha256": "9078e34a5eb769ca173ca5503ecbb1562867bc23abd96a2ae51e216462008aea"
     },
     {
-      "path": "img/skins/741f/dota_reef.png",
-      "bytes": 30190852,
-      "sha256": "080772debe860ba7788930f869bea7f2ea49923c4183972f106b7025eb90ef56"
-    },
-    {
-      "path": "img/skins/741f/dota_spring.png",
-      "bytes": 25471513,
-      "sha256": "14b73ccf5ee3a0e36ae0ce2d122a55e2ed3ea4a073b89f186a8bf101c01632ee"
-    },
-    {
-      "path": "img/skins/741f/dota_summer.png",
-      "bytes": 25346940,
-      "sha256": "4b9f2ad45d4193388fe390c76f839962bb7ca4812ef4306e8bfc57a40a41e137"
-    },
-    {
-      "path": "img/skins/741f/dota_ti10.png",
-      "bytes": 24211829,
-      "sha256": "c20f1f6900503d353e2c9842f93d1620bd062ba5e7e5278bd6e6b442e250e8ac"
-    },
-    {
-      "path": "img/skins/741f/dota_winter.png",
-      "bytes": 25374637,
-      "sha256": "d1f6273815278a4a5260b45fdbce3992d437f7f26b0b4710310e11437c89c252"
-    },
-    {
-      "path": "img/skins/741f/dota.png",
-      "bytes": 23793134,
-      "sha256": "660c5f6edfba7026a7b95c71626bafdd3bfc9d7b5580814939ed7172b8e62c3d"
+      "path": "img/741/winter.jpg",
+      "bytes": 6752976,
+      "sha256": "fccaa8dd9b327ca7d88518c436bc22d714df489569dc8e1c7faabdff077273ba"
     }
   ]
 }

@@ -3,6 +3,7 @@ export { openVpk, parseKeyValues, terrainItems, discoverTerrains, resolveGameDir
 export { resolveAssetPath, readMapData, readMapManifest } from './map-assets.mjs';
 export { readPreparedWorldData } from './patch-inputs.mjs';
 export { importLiveTrees, mapTreeIds } from '../../scripts/import-live-trees.mjs';
+export { importSource1MapData, parseSource1EntityLump, parseSource1Models } from '../../scripts/import-source1-mapdata.mjs';
 export { importNeutralSpawnBoxes } from '../../scripts/import-neutral-spawn-boxes.mjs';
 export { verifyNativeNeutralSpawnGeometry } from '../../scripts/neutral-spawn-boxes.mjs';
 export { importBuildingVision, readBuildings } from '../../scripts/import-building-vision.mjs';
@@ -13,6 +14,7 @@ export { generateVisionAssets } from '../../scripts/import-vision-grid.mjs';
 export { importWardGrid } from '../../scripts/import-ward-grid.mjs';
 export { importOverview, createOverviewMetadata } from '../../scripts/import-overview.mjs';
 export { importScreenshot, createScreenshotMetadata } from '../../scripts/import-screenshot.mjs';
+export { planTileGrid, reconstructDefaultMapImage, runDefaultImageCommand } from '../../scripts/reconstruct-default-images.mjs';
 export { importSkin, scanTerrainSkin, captureTerrainSkin, prepareSkinControls, runMapSkinCommand } from '../../scripts/map-skins.mjs';
 export { captureGameGrid } from '../../scripts/capture-game-grid.mjs';
 export { generateLegacyGeoJSON } from '../../scripts/generate-legacy-geojson.mjs';

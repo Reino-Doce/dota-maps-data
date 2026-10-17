@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import mapdata from '../assets/data/741f/mapdata.json' with { type: 'json' };
+import mapdata from '../assets/data/741/mapdata.json' with { type: 'json' };
 import { buildStructureRules } from '../src/structureRules.mjs';
 
 const records = Object.entries(mapdata.data).flatMap(([id, entries]) => {

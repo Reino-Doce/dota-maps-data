@@ -5,8 +5,7 @@ function ExportInteractiveMapGrid()
     -- A console connection and a Lua VM can exist before the map entities.
     -- Returning without BEGIN makes the caller retry after loading completes.
     local trees = Entities:FindAllByClassname("ent_dota_tree")
-    local pools = Entities:FindAllByClassname("npc_dota_lotus_pool")
-    if #trees == 0 or #pools == 0 then return end
+    if #trees == 0 then return end
     local options = INTERACTIVE_MAP_EXPORT or {}
     local width, height, cell = options.width or 320, options.height or 328, options.cellSize or 64
     local minX, minY = options.minX or -10240, options.minY or -10752
@@ -24,6 +23,12 @@ function ExportInteractiveMapGrid()
     for _, entity in ipairs(trees) do
         local p = entity:GetAbsOrigin()
         print('[MAP_GRID_TREE]' .. string.format("[%.9g,%.9g,%.9g]", p.x, p.y, p.z))
+        if GetTreeIdForEntityIndex then
+            local id = GetTreeIdForEntityIndex(entity:GetEntityIndex())
+            if id ~= nil then
+                print('[MAP_GRID_TREE_ID]' .. string.format("[%d,%.9g,%.9g,%.9g]", id, p.x, p.y, p.z))
+            end
+        end
     end
     -- NPC movement hulls do not describe the visible structure. Retain the
     -- model and its placement so the importer can project its actual meshes.

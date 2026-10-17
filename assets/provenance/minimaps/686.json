@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "patch": "686",
+  "source": {
+    "repository": "Liquipedia Commons",
+    "categoryUrl": "https://liquipedia.net/commons/Category:Dota_2_minimap_images",
+    "skins": {
+      "desert": {
+        "file": "Gamemap_6.86-Desert_minimap_dota2_gameasset.png",
+        "url": "https://liquipedia.net/commons/File:Gamemap_6.86-Desert_minimap_dota2_gameasset.png",
+        "sha256": "406fc65650dec42c1802671ce4e4e41311dac598a0d33b6f2f45543d2e3d7310",
+        "bytes": 226810
+      },
+      "winter": {
+        "file": "Gamemap_6.86-Winter_minimap_dota2_gameasset.png",
+        "url": "https://liquipedia.net/commons/File:Gamemap_6.86-Winter_minimap_dota2_gameasset.png",
+        "sha256": "be8f659aae25a1d8d50530d1b20a7f499c444f85c0d2d05f8f2fc7225949e1f2",
+        "bytes": 1107226
+      }
+    }
+  },
+  "images": {
+    "detailed": {
+      "path": "img/686/minimaps/detailed.png",
+      "sourceFile": "Gamemap_6.86_minimap_dota2_gameasset.png",
+      "sourcePage": "https://liquipedia.net/commons/File:Gamemap_6.86_minimap_dota2_gameasset.png",
+      "sha256": "3aa4d2e0f561c69a02335d7fd48c69220715758a9795f1f1005655f77e575637",
+      "bytes": 891408,
+      "width": 1024,
+      "height": 1024
+    }
+  }
+}

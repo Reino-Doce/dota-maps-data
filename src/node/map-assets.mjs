@@ -12,32 +12,20 @@ const safePath = value => typeof value === 'string' && value.length > 0
     && !path.isAbsolute(value) && !value.split(/[\\/]+/u).includes('..');
 
 function patchForAsset(relativePath) {
-    const dataMatch = /^data\/([a-z0-9]+)\//iu.exec(relativePath);
+    const dataMatch = /^data\/([0-9]+(?:_[0-9]+)?[a-z]*)\//iu.exec(relativePath);
     if (dataMatch) return dataMatch[1];
-    const skinMatch = /^img\/skins\/([a-z0-9]+)\//iu.exec(relativePath);
-    if (skinMatch) return skinMatch[1];
-    const imageMatch = /^img\/(?:map_data_|dota-map-|dota-game-map-)([a-z0-9]+)\./iu.exec(relativePath);
-    if (imageMatch) return imageMatch[1];
-    if (relativePath === 'img/map_data.png') return '688';
-    return null;
+    const imageMatch = /^img\/([0-9]+(?:_[0-9]+)?[a-z]*)\//iu.exec(relativePath);
+    return imageMatch?.[1] ?? null;
 }
 
 function latestImagePath(filename) {
     const patch = manifest.currentPatch;
-    const aliases = new Map([
-        ['map_data.png', patch === '688' ? 'img/map_data.png' : 'img/map_data_' + patch + '.png'],
-        ['dota-map.png', 'img/dota-map-' + patch + '.png'],
-        ['dota-game-map.jpg', 'img/dota-game-map-' + patch + '.jpg'],
-    ]);
-    const assetPath = aliases.get(filename) ?? 'img/' + filename;
-    const allowedPaths = new Set([
-        patch === '688' ? 'img/map_data.png' : 'img/map_data_' + patch + '.png',
-        'img/dota-map-' + patch + '.png',
-        'img/dota-game-map-' + patch + '.jpg',
-    ]);
-    return allowedPaths.has(assetPath) && manifest.images.some(image => image.path === assetPath)
-        ? assetPath
-        : null;
+    const candidatePaths = [`img/${patch}/${filename}`, `img/${patch}/minimaps/${filename}`];
+    const coreImages = new Set(['map_data.png', 'illustrated.jpg', 'screenshot.jpg', 'simple.png', 'detailed.png']);
+    if (coreImages.has(filename)) {
+        return candidatePaths.find(assetPath => manifest.images.some(image => image.path === assetPath)) ?? null;
+    }
+    return null;
 }
 
 function resolveAssetRequest(relativePath) {
@@ -52,10 +40,20 @@ function resolveAssetRequest(relativePath) {
         return { assetPath: 'data/' + manifest.currentPatch + '/mapdata.json', packageSelector: 'latest' };
     }
 
+    const latestMinimap = /^latest\/minimaps\/(simple|detailed)\.png$/iu.exec(relativePath);
+    if (latestMinimap) {
+        const imageName = `${latestMinimap[1]}.png`;
+        const assetPath = `img/${manifest.currentPatch}/minimaps/${imageName}`;
+        if (!manifest.images.some(image => image.path === assetPath)) {
+            throw new Error('Unknown latest map image ' + relativePath + '.');
+        }
+        return { assetPath, packageSelector: 'latest' };
+    }
+
     const latestSkin = /^latest\/([a-z0-9]+)\/([^/]+)$/iu.exec(relativePath);
     if (latestSkin) {
         const [skinId, filename] = latestSkin.slice(1);
-        const skin = manifest.skinPackages.find(entry => entry.id === skinId);
+        const skin = manifest.skinPackages.find(entry => entry.patchId === manifest.currentPatch && entry.id === skinId);
         if (!skin || path.posix.basename(skin.file.path) !== filename) {
             throw new Error('Unknown latest skin image ' + relativePath + '.');
         }
@@ -68,6 +66,7 @@ function resolveAssetRequest(relativePath) {
         if (!assetPath) throw new Error('Unknown latest map image ' + relativePath + '.');
         return { assetPath, packageSelector: 'latest' };
     }
+
     return { assetPath: relativePath };
 }
 
@@ -88,14 +87,13 @@ function installedPatchAssets(patch) {
 }
 
 function installedSkinAsset(relativePath, requestedSkinId = null) {
-    const match = /^img\/skins\/[a-z0-9]+\/(dota(?:_[a-z0-9]+)?\.png)$/iu.exec(relativePath);
+    const match = /^img\/([0-9]+(?:_[0-9]+)?[a-z]*)\/([a-z0-9_-]+\.jpg)$/iu.exec(relativePath);
     if (!match) return null;
-    const filename = match[1];
-    const stem = filename.replace(/\.png$/iu, '');
-    const skinId = requestedSkinId
-        ?? (stem === 'dota' ? 'base' : stem.replace(/^dota_/iu, ''));
-    const skin = manifest.skinPackages.find(entry => entry.id === skinId);
-    if (!skin || path.posix.basename(skin.file.path) !== filename) return null;
+    const [patchId, filename] = match.slice(1);
+    const skin = manifest.skinPackages.find(entry => entry.patchId === patchId
+        && (!requestedSkinId || entry.id === requestedSkinId)
+        && path.posix.basename(entry.file.path) === filename);
+    if (!skin) return null;
     try {
         const packageFile = require.resolve(skin.packageName + '/package.json');
         return path.join(path.dirname(packageFile), 'assets', relativePath);
@@ -120,11 +118,16 @@ export function resolveAssetPath(relativePath) {
     const localPath = path.join(assetRoot, request.assetPath);
     if (fs.existsSync(localPath)) return localPath;
 
-    if (request.skinId || request.assetPath.startsWith('img/skins/')) {
+    if (request.skinId || manifest.skinPackages.some(skin => skin.file.path === request.assetPath)) {
         const skinPath = installedSkinAsset(request.assetPath, request.skinId ?? null);
         if (skinPath && fs.existsSync(skinPath)) return skinPath;
-        const skinId = request.skinId ?? (path.posix.basename(request.assetPath, '.png').replace(/^dota_?/iu, '') || 'base');
-        throw new Error('Map skin asset ' + relativePath + ' is not installed. Add @reino-doce/dota-map-skin-' + skinId + ' or @reino-doce/dota-map-skins-latest.');
+        const skin = manifest.skinPackages.find(entry => entry.file.path === request.assetPath)
+            ?? manifest.skinPackages.find(entry => entry.patchId === manifest.currentPatch && entry.id === request.skinId);
+        if (skin) {
+            throw new Error('Map skin asset ' + relativePath + ' is not installed. Add ' + skin.packageName
+                + ' or ' + (skin.patchId === manifest.currentPatch ? manifest.latestSkinsPackageName
+                    : manifest.skinSetPackages[skin.patchId]) + '.');
+        }
     }
 
     const patch = request.packageSelector ?? patchForAsset(request.assetPath);
@@ -140,7 +143,7 @@ export function resolveAssetPath(relativePath) {
 }
 
 export function readMapData(patch, name = 'mapdata.json') {
-    if (typeof patch !== 'string' || !/^(?:latest|[a-z0-9]+)$/iu.test(patch) || !safePath(name)) {
+    if (typeof patch !== 'string' || !/^(?:latest|[0-9]+(?:_[0-9]+)?[a-z]*)$/iu.test(patch) || !safePath(name)) {
         throw new TypeError('A patch ID and package-relative map data path are required.');
     }
     return JSON.parse(fs.readFileSync(resolveAssetPath(path.join('data', patch, name)), 'utf8'));

@@ -7,6 +7,7 @@ import { execFile, spawn } from 'node:child_process';
 import { parseArgs, promisify } from 'node:util';
 import { setTimeout as delay } from 'node:timers/promises';
 import { PNG } from 'pngjs';
+import sharp from 'sharp';
 import { discoverTerrains, openVpk, resolveGameDirectory } from '../src/node/game-files.mjs';
 import { readGridNav } from './ward-grid.mjs';
 import { compareTerrain, scanConsole } from './game-scan.mjs';
@@ -31,7 +32,7 @@ const help = `Usage: npm run map:skins -- <command> [options]
        --scan <scan-directory> --image <PNG> --controls <JSON>
 
   --game <directory>           Dota's game directory (or DOTA_GAME_DIR)
-  --patch <id>                 Repository patch data, default 741f
+  --patch <id>                 Repository patch data, default 741
   --output <new-directory>     Capture/scan output; default map-captures/<patch>/<skin>/<run>
 
 Capture requires Workshop Tools. Export the generated session with File > Export
@@ -193,7 +194,7 @@ export function prepareSkinControls({ captureDirectory, image, patchDirectory })
     console.log('Fill each pixel in controls.json with its measured [x, y] in the original image, starting at the top left.');
 }
 
-export function importSkin({ terrain, image, controls, scanDirectory, patchDirectory, patch, repositoryRoot = root }) {
+export async function importSkin({ terrain, image, controls, scanDirectory, patchDirectory, patch, repositoryRoot = root }) {
     if (!image || !controls || !scanDirectory) throw new Error('Import requires --image, --controls and --scan.');
     const scanMetadata = json(path.join(scanDirectory, 'scan.json'));
     const gridBytes = fs.readFileSync(path.join(scanDirectory, 'terrain_grid.json'));
@@ -222,10 +223,14 @@ export function importSkin({ terrain, image, controls, scanDirectory, patchDirec
     const skins = fs.existsSync(file) ? json(file) : [];
     const id = `skin-${terrain.map}`;
     if (skins.some(skin => skin.id === id)) throw new Error('This skin is already registered; review the existing entry before replacing it.');
-    const imagePath = `img/skins/${patch}/${terrain.map}.png`;
+    const imageId = terrain.map === 'dota' ? 'default' : terrain.map.replace(/^dota_/u, '');
+    const imagePath = `img/${patch}/${imageId}.jpg`;
     const destination = path.join(repositoryRoot, 'assets', imagePath);
     fs.mkdirSync(path.dirname(destination), { recursive: true });
-    fs.writeFileSync(destination, bytes, { flag: 'wx' });
+    if (fs.existsSync(destination)) {
+        throw new Error(`Skin image already exists for ${imageId}; review it before replacing.`);
+    }
+    const jpegBytes = await sharp(bytes).jpeg({ quality: 92, chromaSubsampling: '4:4:4', mozjpeg: true }).toBuffer();
     const metadata = {
         id, name: terrain.name, image: imagePath, worldExtent: registration.worldExtent,
         source: { map: terrain.map, itemId: terrain.itemId, sha256: hash(bytes), navigationSha256: hash(nav),
@@ -237,14 +242,16 @@ export function importSkin({ terrain, image, controls, scanDirectory, patchDirec
     // Only explicit publication writes map assets. Scan/render commands write
     // ignored capture directories and cannot change the accepted default map.
     const pending = `${file}.${randomBytes(8).toString('hex')}.tmp`;
+    let wroteImage = false;
     try {
+        fs.writeFileSync(destination, jpegBytes, { flag: 'wx' });
+        wroteImage = true;
         save(pending, [...skins, metadata]);
         fs.renameSync(pending, file);
     }
     catch (error) {
-        // Both files were created by this call; leave the existing registry
-        // intact and make a failed import safe to retry.
-        fs.unlinkSync(destination);
+        // Leave the existing registry intact and make a failed import safe to retry.
+        if (wroteImage && fs.existsSync(destination)) fs.unlinkSync(destination);
         if (fs.existsSync(pending)) fs.unlinkSync(pending);
         throw error;
     }
@@ -253,7 +260,7 @@ export function importSkin({ terrain, image, controls, scanDirectory, patchDirec
 
 export async function runMapSkinCommand(argv = process.argv.slice(2)) {
     const { values, positionals } = parseArgs({ args: argv, allowPositionals: true, options: {
-        game: { type: 'string' }, skin: { type: 'string' }, patch: { type: 'string', default: '741f' },
+        game: { type: 'string' }, skin: { type: 'string' }, patch: { type: 'string', default: '741' },
         output: { type: 'string' }, port: { type: 'string', default: '29009' }, size: { type: 'string', default: '4096' },
         launch: { type: 'boolean' }, help: { type: 'boolean' }, image: { type: 'string' },
         controls: { type: 'string' }, scan: { type: 'string' }, capture: { type: 'string' },
@@ -281,7 +288,7 @@ export async function runMapSkinCommand(argv = process.argv.slice(2)) {
     const port = Number(values.port);
     if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('Invalid console port.');
     if (command === 'import') {
-        importSkin({ terrain, image: values.image, controls: values.controls, scanDirectory: values.scan, patchDirectory, patch: values.patch });
+        await importSkin({ terrain, image: values.image, controls: values.controls, scanDirectory: values.scan, patchDirectory, patch: values.patch });
         return;
     }
     const output = path.resolve(values.output || path.join(root, 'map-captures', values.patch, terrain.map,

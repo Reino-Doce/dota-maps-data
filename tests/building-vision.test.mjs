@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { test } from 'node:test';
 import { readBuildings } from '../scripts/import-building-vision.mjs';
 
-const directory = new URL('../assets/data/741f/', import.meta.url);
+const directory = new URL('../assets/data/741/', import.meta.url);
 const read = file => fs.readFileSync(new URL(file, directory));
 const data = JSON.parse(read('building_vision.json'));
 

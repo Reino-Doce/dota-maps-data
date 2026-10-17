@@ -5,7 +5,7 @@ import { test } from 'node:test';
 import { createEyesCollector } from '../scripts/eyes-scan.mjs';
 import { createEyesVisionLookup } from '../src/eyesVision.mjs';
 
-const directory = new URL('../assets/data/741f/', import.meta.url);
+const directory = new URL('../assets/data/741/', import.meta.url);
 const read = name => fs.readFileSync(new URL(name, directory));
 const data = JSON.parse(read('eyes_vision.json'));
 const inRing = ([x, y], ring) => {
